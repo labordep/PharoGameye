@@ -14,6 +14,8 @@ GameyeExamples class >> loadExportedSpreadsheet [
 	fileReference := UIManager default chooseExistingFileReference: nil extensions: #('csv') path: FileSystem workingDirectory.
 	(fileReference isNil or:[fileReference isFile not]) ifTrue:[ ^ self ].
 	
+	self flag:'PLA : recover the date into the file (if not rename)'.
+	
 	neoCSVReader := NeoCSVReader on: (fileReference readStream).
 	array := neoCSVReader 
 		separator: $,; 
