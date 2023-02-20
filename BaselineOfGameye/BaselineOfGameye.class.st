@@ -25,6 +25,6 @@ BaselineOfGameye >> baseline: spec [
 { #category : #baselines }
 BaselineOfGameye >> dependencies: spec [
 
-	"do dependencies"
-
+	"NeoCSV to read CSV exported files"
+	spec baseline: 'NeoCSV' with: [ spec repository: 'github://svenvc/NeoCSV/repository' ].
 ]
