@@ -1,0 +1,97 @@
+"
+GameyeCollection is a collection of GameyeCollectible
+"
+Class {
+	#name : #GameyeCollection,
+	#superclass : #Object,
+	#instVars : [
+		'peripherals',
+		'systems',
+		'toysToLife',
+		'videoGames',
+		'unknowns'
+	],
+	#category : #'Gameye-Model'
+}
+
+{ #category : #'add-remove' }
+GameyeCollection >> addCollectible: aCollectible [
+
+	aCollectible isVideoGame ifTrue: [
+		self videoGames add: aCollectible.
+		^ self ].
+	
+	aCollectible isSystem ifTrue: [
+		self systems add: aCollectible.
+		^ self ].
+	
+	aCollectible isPeripheral ifTrue: [
+		self peripherals add: aCollectible.
+		^ self ].
+	
+	aCollectible isToyToLife ifTrue: [ 
+		self toysToLife add: aCollectible.
+		^ self ].
+	
+	self unknowns add: aCollectible
+]
+
+{ #category : #accessing }
+GameyeCollection >> peripherals [
+
+	^ peripherals ifNil: [ peripherals := Set new ]
+]
+
+{ #category : #accessing }
+GameyeCollection >> peripherals: anObject [
+
+	peripherals := anObject
+]
+
+{ #category : #accessing }
+GameyeCollection >> systems [
+
+	^ systems ifNil: [ systems := Set new ]
+]
+
+{ #category : #accessing }
+GameyeCollection >> systems: anObject [
+
+	systems := anObject
+]
+
+{ #category : #accessing }
+GameyeCollection >> toysToLife [
+
+	^ toysToLife ifNil: [ toysToLife := Set new ]
+]
+
+{ #category : #accessing }
+GameyeCollection >> toysToLife: anObject [
+
+	toysToLife := anObject
+]
+
+{ #category : #accessing }
+GameyeCollection >> unknowns [
+
+	^ unknowns ifNil: [ unknowns := Set new ]
+]
+
+{ #category : #accessing }
+GameyeCollection >> unknowns: anObject [
+
+	unknowns := anObject
+]
+
+{ #category : #accessing }
+GameyeCollection >> videoGames [
+
+	^ videoGames ifNil: [ videoGames := Set new ]
+]
+
+{ #category : #accessing }
+GameyeCollection >> videoGames: anObject [
+
+	videoGames := anObject
+]
