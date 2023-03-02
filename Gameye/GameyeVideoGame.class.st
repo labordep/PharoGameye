@@ -4,14 +4,14 @@ Class {
 	#category : #'Gameye-Model'
 }
 
-{ #category : #testing }
-GameyeVideoGame class >> isVideoGame [ 
-
-	^ true
-]
-
 { #category : #accessing }
 GameyeVideoGame class >> type [
 
 	^ #VideoGame
+]
+
+{ #category : #testing }
+GameyeVideoGame >> isVideoGame [ 
+
+	^ true
 ]

@@ -4,14 +4,14 @@ Class {
 	#category : #'Gameye-Model'
 }
 
-{ #category : #testing }
-GameyePeripheral class >> isPeripheral [
-
-	^ true
-]
-
 { #category : #accessing }
 GameyePeripheral class >> type [
 
 	^ #Peripherals
+]
+
+{ #category : #testing }
+GameyePeripheral >> isPeripheral [
+
+	^ true
 ]

@@ -4,14 +4,14 @@ Class {
 	#category : #'Gameye-Model'
 }
 
-{ #category : #testing }
-GameyeSystem class >> isSystem [
-
-	^ true
-]
-
 { #category : #accessing }
 GameyeSystem class >> type [
 
 	^ #Systems
+]
+
+{ #category : #testing }
+GameyeSystem >> isSystem [
+
+	^ true
 ]

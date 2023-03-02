@@ -12,30 +12,6 @@ Class {
 	#category : #'Gameye-Model'
 }
 
-{ #category : #testing }
-GameyeCollectible class >> isPeripheral [
-
-	^ false
-]
-
-{ #category : #testing }
-GameyeCollectible class >> isSystem [
-
-	^ false
-]
-
-{ #category : #testing }
-GameyeCollectible class >> isToyToLife [
-
-	^ false
-]
-
-{ #category : #testing }
-GameyeCollectible class >> isVideoGame [
-
-	^ false
-]
-
 { #category : #accessing }
 GameyeCollectible class >> type [
 
@@ -83,6 +59,30 @@ GameyeCollectible >> isOwned [
 GameyeCollectible >> isOwned: anObject [
 
 	isOwned := anObject
+]
+
+{ #category : #testing }
+GameyeCollectible >> isPeripheral [
+
+	^ false
+]
+
+{ #category : #testing }
+GameyeCollectible >> isSystem [
+
+	^ false
+]
+
+{ #category : #testing }
+GameyeCollectible >> isToyToLife [
+
+	^ false
+]
+
+{ #category : #testing }
+GameyeCollectible >> isVideoGame [
+
+	^ false
 ]
 
 { #category : #accessing }

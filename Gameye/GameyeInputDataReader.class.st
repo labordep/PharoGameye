@@ -42,7 +42,7 @@ GameyeInputDataReader class >> readExportedSpreadsheet: aFileReference [
 	self flag:'PLA : problem with : "Ivan "Ironman" Stewart''s Super Off Road"'.
 	
 	readStream := aFileReference readStream.
-	readStream := GameyeInputDataFormatter formatExportedSpreadsheet: readStream.
+	"readStream := GameyeInputDataFormatter formatExportedSpreadsheet: readStream."
 	
 	neoCSVReader := NeoCSVReader on: readStream.
 	array := neoCSVReader 
