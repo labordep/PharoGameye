@@ -36,6 +36,21 @@ GameyeCollection >> addCollectible: aCollectible [
 	self unknowns add: aCollectible
 ]
 
+{ #category : #testing }
+GameyeCollection >> haveUnknowns [
+
+	^ self unknowns notEmpty
+]
+
+{ #category : #statistics }
+GameyeCollection >> numberOfCollectibles [
+
+	^ self videoGames size 
+	+ self peripherals size 
+	+ self toysToLife size
+	+ self unknowns size
+]
+
 { #category : #accessing }
 GameyeCollection >> peripherals [
 

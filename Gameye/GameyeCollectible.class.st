@@ -80,6 +80,12 @@ GameyeCollectible >> isToyToLife [
 ]
 
 { #category : #testing }
+GameyeCollectible >> isUnknown [
+
+	^ false
+]
+
+{ #category : #testing }
 GameyeCollectible >> isVideoGame [
 
 	^ false

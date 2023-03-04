@@ -13,7 +13,7 @@ GameyeExamples class >> loadExportedSpreadsheet [
 	"Cannot known to open a native OS file dialog, so use the pharo not very praticle file dialog :("
 	fileReference := UIManager default chooseExistingFileReference: nil extensions: #('csv') path: FileSystem workingDirectory.
 
-	(GameyeInputDataReader readExportedSpreadsheet: fileReference) inspect.
+	(GameyeCollectionFactory createCollectionFromExportedSpreadsheet: fileReference) inspect.
 ]
 
 { #category : #'see class side' }

@@ -3,13 +3,13 @@ This class read datas exported from Gameye.
 Data can be a file reference.
 "
 Class {
-	#name : #GameyeInputDataReader,
+	#name : #GameyeCollectionFactory,
 	#superclass : #Object,
 	#category : #'Gameye-Core'
 }
 
 { #category : #private }
-GameyeInputDataReader class >> createCollectionFromDataArray: anArray [
+GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
 	| collection |
 	
 	collection := GameyeCollection new.
@@ -32,7 +32,7 @@ GameyeInputDataReader class >> createCollectionFromDataArray: anArray [
 ]
 
 { #category : #reading }
-GameyeInputDataReader class >> readExportedSpreadsheet: aFileReference [
+GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
 
 	| readStream neoCSVReader array |
 	aFileReference ifNil:[ ^ nil ].
