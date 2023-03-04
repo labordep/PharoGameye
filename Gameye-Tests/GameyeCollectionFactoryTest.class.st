@@ -26,7 +26,13 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1Periphera
 GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReference [
 	<script:'self exportedSpreadsheetSampleFileReference inspect'>
 
-	^self exportedSpreadsheetSampleFileReference: '2_20_2023_ge_collection' content: self exportedSpreadsheetSampleContent
+	^self exportedSpreadsheetSampleFileReference: self exportedSpreadsheetSampleContent
+]
+
+{ #category : #utils }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReference: aString [
+	
+	^self exportedSpreadsheetSampleFileReference: nil content: aString
 ]
 
 { #category : #utils }
@@ -34,9 +40,15 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReference: aFi
 	
 	| system file |
 	system := FileSystem memory workingDirectory.
-	file := system / (aFileName asString, 'csv').
+	file := system / ((aFileName ifNil:[self exportedSpreadsheetSampleFilename]) asString, 'csv').
 	file writeStreamDo: [ :stream | stream nextPutAll: aString asString ].
 	^file
+]
+
+{ #category : #accessing }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFilename [
+
+	^'2_20_2023_ge_collection'
 ]
 
 { #category : #accessing }
@@ -51,8 +63,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 
 	| collection |
 	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class 
-		exportedSpreadsheetSampleFileReference: '2_20_2023_ge_collection' 
-		content: self class exportedSpreadsheetSampleContent_1PeripheralAsAUnknownCollectible).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1PeripheralAsAUnknownCollectible).
 	
 	self assert: collection haveUnknowns.
 	self assert: collection numberOfCollectibles equals: 1.
