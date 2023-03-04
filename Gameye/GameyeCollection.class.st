@@ -14,25 +14,27 @@ Class {
 	#category : #'Gameye-Model'
 }
 
-{ #category : #'add-remove' }
+{ #category : #'collectibles - add-remove' }
 GameyeCollection >> addCollectible: aCollectible [
+
+	aCollectible ifNil:[ ^ self ].
 
 	aCollectible isVideoGame ifTrue: [
 		self videoGames add: aCollectible.
 		^ self ].
-	
+
 	aCollectible isSystem ifTrue: [
 		self systems add: aCollectible.
 		^ self ].
-	
+
 	aCollectible isPeripheral ifTrue: [
 		self peripherals add: aCollectible.
 		^ self ].
-	
-	aCollectible isToyToLife ifTrue: [ 
+
+	aCollectible isToyToLife ifTrue: [
 		self toysToLife add: aCollectible.
 		^ self ].
-	
+
 	self unknowns add: aCollectible
 ]
 
@@ -40,6 +42,30 @@ GameyeCollection >> addCollectible: aCollectible [
 GameyeCollection >> haveUnknowns [
 
 	^ self unknowns notEmpty
+]
+
+{ #category : #'collectibles - get' }
+GameyeCollection >> includesCollectible: aCollectible [
+
+	aCollectible ifNil:[ ^ false ].
+
+	aCollectible isVideoGame ifTrue: [
+		^ self videoGames includes: aCollectible.
+	].
+
+	aCollectible isSystem ifTrue: [
+		^ self systems includes: aCollectible.
+	].
+
+	aCollectible isPeripheral ifTrue: [
+		^ self peripherals includes: aCollectible.
+	].
+
+	aCollectible isToyToLife ifTrue: [
+		^ self toysToLife includes: aCollectible.
+	].
+
+	^ self unknowns includes: aCollectible
 ]
 
 { #category : #statistics }
@@ -67,6 +93,30 @@ GameyeCollection >> peripherals: anObject [
 GameyeCollection >> peripheralsCollectibles [
 
 	^self peripherals asOrderedCollection
+]
+
+{ #category : #'collectibles - add-remove' }
+GameyeCollection >> removeCollectible: aCollectible [
+
+	aCollectible ifNil:[ ^ self ].
+
+	aCollectible isVideoGame ifTrue: [
+		self videoGames remove: aCollectible ifAbsent:[nil].
+		^ self ].
+
+	aCollectible isSystem ifTrue: [
+		self systems remove: aCollectible ifAbsent:[nil].
+		^ self ].
+
+	aCollectible isPeripheral ifTrue: [
+		self peripherals remove: aCollectible ifAbsent:[nil].
+		^ self ].
+
+	aCollectible isToyToLife ifTrue: [
+		self toysToLife remove: aCollectible ifAbsent:[nil].
+		^ self ].
+
+	self unknowns remove: aCollectible ifAbsent:[nil]
 ]
 
 { #category : #accessing }

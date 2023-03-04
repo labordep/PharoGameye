@@ -81,6 +81,20 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 ]
 
 { #category : #tests }
+GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues [
+
+	| collection collectible |
+	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1VideoGameWitComplexeStringValues).
+
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection videoGamesCollectibles first.
+	self assert: collectible isVideoGame
+]
+
+{ #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_Empty [
 
 	| collection |
