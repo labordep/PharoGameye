@@ -11,23 +11,30 @@ Class {
 { #category : #private }
 GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
 	| collection |
-	
+
 	collection := GameyeCollection new.
 	anArray ifNil: [ ^ collection ].
-	
+
 	anArray do:[ :e | | collectible |
-		e size = 21 ifTrue:[
+		e size = self numberOfExportedSpreadsheetColumns ifTrue:[
+
+			"Create the collectible"
 			collectible := GameyeCollectible type: (e at: 2).
 			collectible platform: (e at: 1).
 			collectible isOwned: (e at: 3).
 			collectible isForSale: (e at: 4).
 			collectible isOnWishList: (e at: 5).
 			collectible title: (e at: 6).
-			
+
+			"Processing for unknown collectible : conserve original datas to have a post analyse"
+			collectible isUnknown ifTrue:[
+				collectible rawDatas: e.
+			].
+
 			collection addCollectible: collectible.
-		].	
+		].
 	].
-	
+
 	^collection
 ]
 
@@ -74,4 +81,10 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 		upToEnd.
 	
 	^self createCollectionFromDataArray: array
+]
+
+{ #category : #accessing }
+GameyeCollectionFactory class >> numberOfExportedSpreadsheetColumns [
+
+	^ 21
 ]

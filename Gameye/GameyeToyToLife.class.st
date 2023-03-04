@@ -15,9 +15,3 @@ GameyeToyToLife >> isToyToLife [
 
 	^ true
 ]
-
-{ #category : #testing }
-GameyeToyToLife >> isUnknown [
-
-	^ true
-]

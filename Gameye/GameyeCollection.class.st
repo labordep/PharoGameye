@@ -63,6 +63,12 @@ GameyeCollection >> peripherals: anObject [
 	peripherals := anObject
 ]
 
+{ #category : #'collectibles - get' }
+GameyeCollection >> peripheralsCollectibles [
+
+	^self peripherals asOrderedCollection
+]
+
 { #category : #accessing }
 GameyeCollection >> systems [
 
@@ -73,6 +79,12 @@ GameyeCollection >> systems [
 GameyeCollection >> systems: anObject [
 
 	systems := anObject
+]
+
+{ #category : #'collectibles - get' }
+GameyeCollection >> systemsCollectibles [
+
+	^self systems asOrderedCollection
 ]
 
 { #category : #accessing }
@@ -99,6 +111,12 @@ GameyeCollection >> unknowns: anObject [
 	unknowns := anObject
 ]
 
+{ #category : #'collectibles - get' }
+GameyeCollection >> unknownsCollectibles [
+
+	^self unknowns asOrderedCollection
+]
+
 { #category : #accessing }
 GameyeCollection >> videoGames [
 
@@ -109,4 +127,10 @@ GameyeCollection >> videoGames [
 GameyeCollection >> videoGames: anObject [
 
 	videoGames := anObject
+]
+
+{ #category : #'collectibles - get' }
+GameyeCollection >> videoGamesCollectibles [
+
+	^self videoGames asOrderedCollection
 ]
