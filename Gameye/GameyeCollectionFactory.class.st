@@ -84,7 +84,7 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 	(('##_##_####_*.csv' match: name) or:[('#_##_####_*.csv' match: name) or:[('#_#_####_*.csv' match: name)]]) ifTrue:[
 		| a |
 		a := (name substrings: '_').
-		collection date: (Date fromString: (a at: 1), (a at: 2), (a at: 3)).
+		collection date: (Date newDay: (a at: 2) asInteger month: (a at: 1) asInteger year: (a at: 3) asInteger).
 	].
 
 	^ collection
