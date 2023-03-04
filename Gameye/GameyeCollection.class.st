@@ -5,6 +5,7 @@ Class {
 	#name : #GameyeCollection,
 	#superclass : #Object,
 	#instVars : [
+		'date',
 		'peripherals',
 		'systems',
 		'toysToLife',
@@ -36,6 +37,18 @@ GameyeCollection >> addCollectible: aCollectible [
 		^ self ].
 
 	self unknowns add: aCollectible
+]
+
+{ #category : #accessing }
+GameyeCollection >> date [
+
+	^ date
+]
+
+{ #category : #accessing }
+GameyeCollection >> date: aDate [
+
+	date := aDate
 ]
 
 { #category : #testing }

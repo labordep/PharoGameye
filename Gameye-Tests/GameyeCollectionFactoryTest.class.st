@@ -38,9 +38,10 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReference: aSt
 { #category : #utils }
 GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReference: aFileName content: aString [
 	
-	| system file |
-	system := FileSystem memory workingDirectory.
-	file := system / ((aFileName ifNil:[self exportedSpreadsheetSampleFilename]) asString, 'csv').
+	| fileSystem file |
+	fileSystem := FileSystem memory.
+	fileSystem createDirectory: 'gameye-samples'.
+	file := fileSystem workingDirectory / 'gameye-samples' / ((aFileName ifNil:[self exportedSpreadsheetSampleFilename]) asString, '.csv').
 	file writeStreamDo: [ :stream | stream nextPutAll: aString asString ].
 	^file
 ]
@@ -72,6 +73,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1PeripheralAsAUnknownCollectible).
 
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns.
 	self assert: collection numberOfCollectibles equals: 1.
 
@@ -87,6 +89,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Vide
 	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1VideoGameWitComplexeStringValues).
 
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
 	self assert: collection numberOfCollectibles equals: 1.
 
@@ -101,5 +104,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_Empty
 	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_Empty).
 
-	self assert: collection numberOfCollectibles equals: 0
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection numberOfCollectibles equals: 0.
+	 
 ]

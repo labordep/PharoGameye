@@ -3,24 +3,24 @@ This class format Gameye input files (as exported .csv sheet) to be correct for 
 Exported files are not supported in a lot of cases and this utils class have the job to make the file readeable and fix all exporting problems.
 "
 Class {
-	#name : #GameyeInputDataFormatter,
+	#name : #GameyeInputDataUtils,
 	#superclass : #Object,
 	#category : #'Gameye-Core'
 }
 
 { #category : #formatting }
-GameyeInputDataFormatter class >> formatExportedSpreadsheet: aReadstream [
-	"Take and return a readstream of an exported spreadsheet and format it with fixing all knowns generation problems"
-	
-	| line formattedReadStream |
-	self flag:'PLA : problem with : "Ivan "Ironman" Stewart''s Super Off Road"'.
+GameyeInputDataUtils class >> prepareExportedSpreadsheet: aReadstream [
+	"Return a readstream of an exported spreadsheet with fixing all knowns generation knowns problems"
 
+	| line formattedReadStream |
 	formattedReadStream := ReadWriteStream on: (String new: aReadstream size).
 
-	"ignore first line (column head)"
+	"Check if the first line (column head) have all requested columns"
 	line := aReadstream nextLine.
-	formattedReadStream nextPutAll: line; cr.
+	(line substrings: ',') size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifFalse: [ ^ nil ]. 
 	
+	formattedReadStream nextPutAll: line; cr.
+
 	self flag:'PLA inverser le whiletrue'.
 	[ line notNil ] whileTrue:[ | cells |
 		line := aReadstream nextLine.
@@ -29,13 +29,13 @@ GameyeInputDataFormatter class >> formatExportedSpreadsheet: aReadstream [
 			cells do:[ :c | | formattedCell |
 				"Cell processing"
 				"Remove not necessary spaces at the start or the end"
-				formattedCell := c withBlanksCondensed withoutQuoting.	
+				formattedCell := c withBlanksCondensed withoutQuoting.
 				formattedCell := formattedCell copyReplaceAll: '"' with: '""'.
 				formattedReadStream nextPutAll: formattedCell.
 			] separatedBy:[ formattedReadStream nextPut: $, ].
 			formattedReadStream cr.
 		].
 	].
-	
+
 	^formattedReadStream
 ]

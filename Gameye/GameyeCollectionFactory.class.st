@@ -41,20 +41,17 @@ GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
 { #category : #reading }
 GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
 
-	| readStream neoCSVReader array |
+	| readStream neoCSVReader array collection |
 	aFileReference ifNil:[ ^ nil ].
 	aFileReference isFile ifFalse:[ ^ nil ].
 	
-	self flag:'PLA : recover the date into the file (if not rename)'.
-	self flag:'PLA : problem with : "Ivan "Ironman" Stewart''s Super Off Road"'.
-	
 	readStream := aFileReference readStream.
-	"readStream := GameyeInputDataFormatter formatExportedSpreadsheet: readStream."
-	
+	readStream := GameyeInputDataUtils prepareExportedSpreadsheet: readStream.
 	neoCSVReader := NeoCSVReader on: readStream.
-	array := neoCSVReader 
-		separator: $,; 
-		skipHeader; 
+	
+	array := neoCSVReader
+		separator: $,;
+		skipHeader;
 		addField; "Platform"
 		addSymbolField; "Type"
 		addFieldConverter: [ :string | string = '1' ]; "Owned"
@@ -79,8 +76,18 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 		addField; "PlayedCompletion"
 		addField; "Notes"
 		upToEnd.
+
+	collection := (self createCollectionFromDataArray: array) ifNil:[ ^ nil ].
 	
-	^self createCollectionFromDataArray: array
+	"Check if the date is on the filename and add it to the collection data"
+	name := aFileReference path basename.
+	(('##_##_####_*.csv' match: name) or:[('#_##_####_*.csv' match: name) or:[('#_#_####_*.csv' match: name)]]) ifTrue:[
+		| a |
+		a := (name substrings: '_').
+		collection date: (Date fromString: (a at: 1), (a at: 2), (a at: 3)).
+	].
+
+	^ collection
 ]
 
 { #category : #accessing }

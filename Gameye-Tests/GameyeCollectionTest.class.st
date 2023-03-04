@@ -43,6 +43,7 @@ GameyeCollectionTest >> testInitialize [
 
 	| collection |
 	collection := GameyeCollection new.
+	self assert: collection date isNil.
 	self assert: collection haveUnknowns equals: false.
 	self assert: collection numberOfCollectibles equals: 0
 ]
