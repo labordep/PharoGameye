@@ -41,7 +41,7 @@ GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
 { #category : #reading }
 GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
 
-	| readStream neoCSVReader array collection |
+	| readStream neoCSVReader array collection fileName |
 	aFileReference ifNil:[ ^ nil ].
 	aFileReference isFile ifFalse:[ ^ nil ].
 	
@@ -80,10 +80,10 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 	collection := (self createCollectionFromDataArray: array) ifNil:[ ^ nil ].
 	
 	"Check if the date is on the filename and add it to the collection data"
-	name := aFileReference path basename.
-	(('##_##_####_*.csv' match: name) or:[('#_##_####_*.csv' match: name) or:[('#_#_####_*.csv' match: name)]]) ifTrue:[
+	fileName := aFileReference path basename.
+	(('##_##_####_*.csv' match: fileName) or:[('#_##_####_*.csv' match: fileName) or:[('#_#_####_*.csv' match: fileName)]]) ifTrue:[
 		| a |
-		a := (name substrings: '_').
+		a := (fileName substrings: '_').
 		collection date: (Date newDay: (a at: 2) asInteger month: (a at: 1) asInteger year: (a at: 3) asInteger).
 	].
 

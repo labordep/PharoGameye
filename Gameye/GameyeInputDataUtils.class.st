@@ -8,33 +8,50 @@ Class {
 	#category : #'Gameye-Core'
 }
 
+{ #category : #private }
+GameyeInputDataUtils class >> extractCellsFromLine: aString [
+
+	| cells index |
+	cells := aString substrings: ','.
+	cells size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifTrue:[ ^ cells ].
+
+	"A comma is inside datas, probably editor name or comment, try to cut manually and format the comma into HTML code &#44;"
+	cells := OrderedCollection new.
+	index := aString findString: '"'.
+	
+	^cells asArray
+]
+
 { #category : #formatting }
 GameyeInputDataUtils class >> prepareExportedSpreadsheet: aReadstream [
 	"Return a readstream of an exported spreadsheet with fixing all knowns generation knowns problems"
 
 	| line formattedReadStream |
-	formattedReadStream := ReadWriteStream on: (String new: aReadstream size).
-
 	"Check if the first line (column head) have all requested columns"
 	line := aReadstream nextLine.
 	(line substrings: ',') size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifFalse: [ ^ nil ]. 
 	
+	"Build the new stream"
+	formattedReadStream := ZnCharacterWriteStream on: (String new: aReadstream size) encoding: (aReadstream encoder).
+	"formattedReadStream := ReadWriteStream on: (String new: aReadstream size)."
 	formattedReadStream nextPutAll: line; cr.
 
-	self flag:'PLA inverser le whiletrue'.
-	[ line notNil ] whileTrue:[ | cells |
+	line := aReadstream nextLine.
+
+	[ line notNil ] whileTrue:[  | cells |
+
+		cells := self extractCellsFromLine: line.
+		cells do:[ :c | | formattedCell |
+			"Cell processing"
+			"Remove not necessary spaces at the start or the end"
+			formattedCell := c withBlanksCondensed withoutQuoting.
+			formattedCell := formattedCell copyReplaceAll: '"' with: '""'.
+			formattedReadStream nextPutAll: formattedCell.
+		] separatedBy:[ formattedReadStream nextPut: $, ].
+	
+		formattedReadStream cr.
+		
 		line := aReadstream nextLine.
-		line ifNotNil:[
-			cells := line substrings: ','. self flag:'ça ne suffit pas car des fois il y a des virgules dans le titre, developpeur ou le commentaire ? A verifier si ce cas existe dans le fichier a l export'.
-			cells do:[ :c | | formattedCell |
-				"Cell processing"
-				"Remove not necessary spaces at the start or the end"
-				formattedCell := c withBlanksCondensed withoutQuoting.
-				formattedCell := formattedCell copyReplaceAll: '"' with: '""'.
-				formattedReadStream nextPutAll: formattedCell.
-			] separatedBy:[ formattedReadStream nextPut: $, ].
-			formattedReadStream cr.
-		].
 	].
 
 	^formattedReadStream
