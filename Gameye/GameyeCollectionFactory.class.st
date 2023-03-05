@@ -41,14 +41,13 @@ GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
 { #category : #reading }
 GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
 
-	| readStream neoCSVReader array collection fileName |
+	| readStream neoCSVReader array collection date |
 	aFileReference ifNil:[ ^ nil ].
 	aFileReference isFile ifFalse:[ ^ nil ].
-	
+
 	readStream := aFileReference readStream.
-	readStream := GameyeInputDataUtils prepareExportedSpreadsheet: readStream.
-	neoCSVReader := NeoCSVReader on: readStream.
-	
+	neoCSVReader := NeoCSVReader on: (GameyeInputDataUtils prepareExportedSpreadsheet: readStream).
+
 	array := neoCSVReader
 		separator: $,;
 		skipHeader;
@@ -78,16 +77,25 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 		upToEnd.
 
 	collection := (self createCollectionFromDataArray: array) ifNil:[ ^ nil ].
-	
+
 	"Check if the date is on the filename and add it to the collection data"
-	fileName := aFileReference path basename.
-	(('##_##_####_*.csv' match: fileName) or:[('#_##_####_*.csv' match: fileName) or:[('#_#_####_*.csv' match: fileName)]]) ifTrue:[
-		| a |
-		a := (fileName substrings: '_').
-		collection date: (Date newDay: (a at: 2) asInteger month: (a at: 1) asInteger year: (a at: 3) asInteger).
-	].
+	date := self getDateFromFilename: (aFileReference path basename).
+	collection date: date.
 
 	^ collection
+]
+
+{ #category : #reading }
+GameyeCollectionFactory class >> getDateFromFilename: aString [
+
+	| a |
+	aString ifNil:[ ^ nil ].
+
+	"Check if the date is on the filename and add it to the collection data"
+	(('##_##_####_*.csv' match: aString) or:[('#_##_####_*.csv' match: aString) or:[('#_#_####_*.csv' match: aString)]]) ifFalse:[ ^ nil ].
+
+	a := (aString substrings: '_').
+	^ Date newDay: (a at: 2) asInteger month: (a at: 1) asInteger year: (a at: 3) asInteger
 ]
 
 { #category : #accessing }
