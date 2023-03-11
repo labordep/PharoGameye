@@ -7,7 +7,7 @@ GAMEYE.app tools for Pharo.
 ## Functionnalities
 
 - Complete Gameye App model : ```Collection```, ```VideoGame```, ```System```, ```Peripheral```, ```ToyToLife``` and ```PrintMedia```.
-- Exported spreadsheet parsing (.csv) for collection, wish list and for sell list.
+- Exported spreadsheet parsing (.csv) for owned list, wish list and for sell list.
 
 A ```Collection``` is composed of ```Collectible``` which can be ```VideoGame```, ```System```, ```Peripheral```, etc.
 Each ```Collectible``` have properties as Title, Type, Platform, etc.
@@ -27,7 +27,7 @@ Metacello new
 
 To parse an existing exported spreadsheet file run ```GameyeExamples loadExportedSpreadsheet``` example.
 This example use parsing methods to return three collections : 
-- The main collection
+- The "Owned" collection
 - The "Wish List" collection 
 - The "For Sell" collection
 
