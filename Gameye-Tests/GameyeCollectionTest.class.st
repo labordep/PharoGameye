@@ -43,9 +43,19 @@ GameyeCollectionTest >> testInitialize [
 
 	| collection |
 	collection := GameyeCollection new.
+	self assert: collection name isNil.
 	self assert: collection date isNil.
 	self assert: collection haveUnknowns equals: false.
 	self assert: collection numberOfCollectibles equals: 0
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testName [
+
+	| collection |
+	collection := GameyeCollection new.
+	collection name: 'MyCollection'.
+	self assert: collection name equals: 'MyCollection'.
 ]
 
 { #category : #tests }

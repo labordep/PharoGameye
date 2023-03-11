@@ -8,12 +8,32 @@ Class {
 	#category : #'Gameye-Core'
 }
 
-{ #category : #private }
-GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
-	| collection |
+{ #category : #'create collection' }
+GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
+	"Return just the collectibles collection (not for sell and wish list collections)"
+	
+	| collections |
+	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
+	collections ifNil:[ ^ nil ].
+	
+	^ collections at: #collection
+]
 
+{ #category : #private }
+GameyeCollectionFactory class >> createCollectionsFromDataArray: anArray [
+	"Return collections from array : collectibles, wishlist and for sell"
+	| collection collections wishListCollection forSellCollection |
+
+	collections := Dictionary new.
 	collection := GameyeCollection new.
-	anArray ifNil: [ ^ collection ].
+	wishListCollection := GameyeCollection new.
+	forSellCollection := GameyeCollection new.
+
+	collections at: #collection put: collection.
+	collections at: #wishList put: wishListCollection.
+	collections at: #forSell put: forSellCollection.
+
+	anArray ifNil: [ ^ collections ].	
 
 	anArray do:[ :e | | collectible |
 		e size = self numberOfExportedSpreadsheetColumns ifTrue:[
@@ -30,17 +50,22 @@ GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
 			collectible isUnknown ifTrue:[
 				collectible rawDatas: e.
 			].
-
-			collection addCollectible: collectible.
+			
+			collectible isForSale ifTrue:[ forSellCollection addCollectible: collectible ] ifFalse:[
+				collectible isOnWishList ifTrue:[ wishListCollection addCollectible: collectible ] ifFalse:[
+					collection addCollectible: collectible.	
+				].
+			].
 		].
 	].
 
-	^collection
+	^ collections
 ]
 
-{ #category : #reading }
-GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
-	| readStream array collection date |
+{ #category : #'create collection' }
+GameyeCollectionFactory class >> createCollectionsFromExportedSpreadsheet: aFileReference [
+	"Return all collections from a file : collectibles, for sell and wish list"
+	| readStream array date collections fileName |
 
 	aFileReference ifNil:[ ^ nil ].
 	aFileReference isFile ifFalse:[ ^ nil ].
@@ -48,13 +73,41 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 	readStream := GameyeInputDataUtils prepareExportedSpreadsheetReadStream: aFileReference readStream.
 	array := self parseExportedSpreadsheetReadStream: readStream.
 
-	collection := (self createCollectionFromDataArray: array) ifNil:[ ^ nil ].
+	collections := (self createCollectionsFromDataArray: array) ifNil:[ ^ nil ].
 
 	"Check if the date is on the filename and add it to the collection data"
-	date := self getDateFromExportedSpreadsheetFilename: (aFileReference path basename).
-	collection date: date.
+	fileName := aFileReference path basename.
+	date := self getDateFromExportedSpreadsheetFilename: fileName.
 
-	^ collection
+	fileName := aFileReference path basenameWithoutExtension.
+	collections keysAndValuesDo:[ :k :collection | 
+		collection name: fileName, (k = #wishList ifTrue:['_wishList'] ifFalse:[k = #forSell ifTrue:['_forSell'] ifFalse:['']]).
+		collection date: date. 
+	].
+	
+	^ collections
+]
+
+{ #category : #'create collection' }
+GameyeCollectionFactory class >> createForSellCollectionFromExportedSpreadsheet: aFileReference [
+	"Return just the for seell collection (not collection and wish list collections)"
+	
+	| collections |
+	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
+	collections ifNil:[ ^ nil ].
+	
+	^ collections at: #forSell
+]
+
+{ #category : #'create collection' }
+GameyeCollectionFactory class >> createWishListCollectionFromExportedSpreadsheet: aFileReference [
+	"Return just the wish list collection (not collection and for sell collections)"
+	
+	| collections |
+	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
+	collections ifNil:[ ^ nil ].
+	
+	^ collections at: #wishList
 ]
 
 { #category : #accessing }
@@ -63,7 +116,7 @@ GameyeCollectionFactory class >> exportedSpreadsheetColumn01Title [
 	^ 'Platform'
 ]
 
-{ #category : #reading }
+{ #category : #private }
 GameyeCollectionFactory class >> getDateFromExportedSpreadsheetFilename: aString [
 
 	| a |

@@ -5,13 +5,14 @@ Class {
 	#name : #GameyeCollection,
 	#superclass : #Object,
 	#instVars : [
+		'name',
 		'date',
 		'peripherals',
 		'systems',
 		'toysToLife',
 		'videoGames',
-		'unknowns',
-		'printMedias'
+		'printMedias',
+		'unknowns'
 	],
 	#category : #'Gameye-Model'
 }
@@ -85,6 +86,18 @@ GameyeCollection >> includesCollectible: aCollectible [
 	].
 
 	^ false
+]
+
+{ #category : #accessing }
+GameyeCollection >> name [
+
+	^ name
+]
+
+{ #category : #accessing }
+GameyeCollection >> name: anObject [
+
+	name := anObject
 ]
 
 { #category : #statistics }
