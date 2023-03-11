@@ -37,6 +37,10 @@ GameyeCollection >> addCollectible: aCollectible [
 		self toysToLife add: aCollectible.
 		^ self ].
 
+	aCollectible isPrintMedia ifTrue: [
+		self printMedias add: aCollectible.
+		^ self ].
+
 	self unknowns add: aCollectible
 ]
 
@@ -85,9 +89,10 @@ GameyeCollection >> includesCollectible: aCollectible [
 { #category : #statistics }
 GameyeCollection >> numberOfCollectibles [
 
-	^ self videoGames size 
-	+ self peripherals size 
+	^ self videoGames size
+	+ self peripherals size
 	+ self toysToLife size
+	+ self printMedias size
 	+ self unknowns size
 ]
 
@@ -146,6 +151,10 @@ GameyeCollection >> removeCollectible: aCollectible [
 
 	aCollectible isToyToLife ifTrue: [
 		self toysToLife remove: aCollectible ifAbsent:[nil].
+		^ self ].
+
+	aCollectible isPrintMedia ifTrue: [
+		self printMedias remove: aCollectible ifAbsent:[nil].
 		^ self ].
 
 	self unknowns remove: aCollectible ifAbsent:[nil]

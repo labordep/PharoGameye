@@ -41,16 +41,27 @@ GameyeInputDataUtils class >> prepareExportedSpreadsheetReadStream: aReadstream 
 
 	line := aReadstream nextLine.
 
-	[ line notNil ] whileTrue:[  | cells |
-
+	[ line notNil ] whileTrue:[  | cells columnId |
 		cells := self extractCellsFromLine: line.
-		cells do:[ :c | | formattedCell |
-			"Cell processing"
-			"Remove not necessary spaces at the start or the end"
-			formattedCell := c withBlanksCondensed withoutQuoting.
-			formattedCell := formattedCell copyReplaceAll: '"' with: '""'.
+		columnId := 1.
+		"Cell content processing"
+		cells do:[ :cell | | formattedCell |
+
+			"Print media type as a symbol without space"
+			(columnId = 2 and:[cell = '"Print Media"']) ifTrue:[
+				formattedCell := '"PrintMedia"'.
+			] ifFalse:[
+				"Remove not necessary spaces at the start or the end"
+				formattedCell := cell withBlanksCondensed withoutQuoting.
+				formattedCell := formattedCell copyReplaceAll: '"' with: '""'.
+			].
+
 			fixedStream nextPutAll: formattedCell.
-		] separatedBy:[ fixedStream nextPut: $, ].
+
+		] separatedBy:[
+			fixedStream nextPut: $,.
+			columnId := columnId + 1
+		].
 
 		fixedStream cr.
 
