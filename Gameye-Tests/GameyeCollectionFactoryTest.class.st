@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #samples }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1Peripheral [
+
+	^self exportedSpreadsheetSampleHeadContent, '
+"N64","Peripherals",1,0,0,"Expansion Pak","Missing Field","Missing Field","10/07/2021","CIB","46.63","77.35","112.19","77.35","51.85","10","10","10"," "," ",""'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1PeripheralAsAUnknownCollectible [
 
 	^self exportedSpreadsheetSampleHeadContent, '
@@ -20,6 +27,22 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1PrintMedi
 
 	^self exportedSpreadsheetSampleHeadContent, '
 "N Power","Print Media",1,0,0,"[Vol. 145] Mario Advance","Missing Field","Missing Field","11/03/2023","Loose","9.49","14.23","?","9.49","1.90","?","?","10"," "," ",""'
+]
+
+{ #category : #samples }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1System [
+	"1 System sample"
+
+	^self exportedSpreadsheetSampleHeadContent, '
+"Saturn","Systems",1,0,0,"Sega Saturn Console (PAL)","Missing Field","Missing Field","18/07/2022","Boxed","88.91","169.46","381.99","156.75","139.92","10","?","10"," "," ",""'
+]
+
+{ #category : #samples }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1ToyToLife [
+	"1 System sample"
+
+	^self exportedSpreadsheetSampleHeadContent, '
+"amiibo","ToysToLife",1,0,0,"Zelda - Breath of Wild","Missing Field","Missing Field","19/04/2022","Loose","26.11","26.11","36.44","26.11","13.99","?","?","10"," "," ",""'
 ]
 
 { #category : #samples }
@@ -75,6 +98,21 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleHeadContent [
 ]
 
 { #category : #tests }
+GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peripheral [
+
+	| collection collectible |
+	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1Peripheral).
+
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection peripheralsCollectibles first.
+	self assert: collectible isPeripheral
+]
+
+{ #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1PeripheralAsAUnknownCollectible [
 
 	| collection collectible |
@@ -103,6 +141,36 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Prin
 
 	collectible := collection printMediasCollectibles first.
 	self assert: collectible isPrintMedia
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1System [
+
+	| collection collectible |
+	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1System).
+
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection systemsCollectibles first.
+	self assert: collectible isSystem.
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1ToyToLife [
+
+	| collection collectible |
+	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1ToyToLife).
+
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection toysToLifeCollectibles first.
+	self assert: collectible isToyToLife
 ]
 
 { #category : #tests }

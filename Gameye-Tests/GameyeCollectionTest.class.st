@@ -103,6 +103,17 @@ GameyeCollectionTest >> testSystemsCollectibles [
 	self assert: collection systemsCollectibles first equals: collectible
 ]
 
+{ #category : #test }
+GameyeCollectionTest >> testToysToLifeCollectibles [
+
+	| collectible collection |
+	collectible := GameyeToyToLife new.
+	collection := GameyeCollection new.
+	collection addCollectible: collectible.
+	self assert: collection toysToLifeCollectibles size equals: 1.
+	self assert: collection toysToLifeCollectibles first equals: collectible
+]
+
 { #category : #tests }
 GameyeCollectionTest >> testUnknownsCollectibles [
 

@@ -92,6 +92,7 @@ GameyeCollection >> numberOfCollectibles [
 	"Cannot return errors collectibles to detect errors when counting"
 
 	^ self videoGames size
+	+ self systems size
 	+ self peripherals size
 	+ self toysToLife size
 	+ self printMedias size
@@ -187,6 +188,12 @@ GameyeCollection >> toysToLife [
 GameyeCollection >> toysToLife: anObject [
 
 	toysToLife := anObject
+]
+
+{ #category : #'collectibles - get' }
+GameyeCollection >> toysToLifeCollectibles [
+
+	^self toysToLife asOrderedCollection
 ]
 
 { #category : #accessing }
