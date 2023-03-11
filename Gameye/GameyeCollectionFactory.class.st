@@ -51,7 +51,7 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 	collection := (self createCollectionFromDataArray: array) ifNil:[ ^ nil ].
 
 	"Check if the date is on the filename and add it to the collection data"
-	date := self getDateFromFilename: (aFileReference path basename).
+	date := self getDateFromExportedSpreadsheetFilename: (aFileReference path basename).
 	collection date: date.
 
 	^ collection
@@ -64,7 +64,7 @@ GameyeCollectionFactory class >> exportedSpreadsheetColumn01Title [
 ]
 
 { #category : #reading }
-GameyeCollectionFactory class >> getDateFromFilename: aString [
+GameyeCollectionFactory class >> getDateFromExportedSpreadsheetFilename: aString [
 
 	| a |
 	aString ifNil:[ ^ nil ].
@@ -82,7 +82,7 @@ GameyeCollectionFactory class >> numberOfExportedSpreadsheetColumns [
 	^ 21
 ]
 
-{ #category : #reading }
+{ #category : #private }
 GameyeCollectionFactory class >> parseExportedSpreadsheetReadStream: aReadStream [
 	"Parse a CSV readstream as an array"
 	| neoCSVReader array |
