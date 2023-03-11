@@ -45,6 +45,7 @@ GameyeCollectionFactory class >> createCollectionsFromDataArray: anArray [
 			collectible isForSale: (e at: 4).
 			collectible isOnWishList: (e at: 5).
 			collectible title: (e at: 6).
+			collectible dateAdded: (e at: 9).
 
 			"Processing for unknown collectible : conserve original datas to have a post analyse"
 			collectible isUnknown ifTrue:[
@@ -170,4 +171,8 @@ GameyeCollectionFactory class >> parseExportedSpreadsheetReadStream: aReadStream
 		upToEnd.
 
 	^array
+]
+
+{ #category : #'see class side' }
+GameyeCollectionFactory >> seeClassSide [
 ]

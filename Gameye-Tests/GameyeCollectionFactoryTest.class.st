@@ -172,6 +172,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 
 	collectible := collection peripheralsCollectibles first.
 	self assert: collectible isPeripheral.
+	self assert: collectible dateAdded equals: (Date newDay: 10 month: 7 year: 2021).
 
 	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
@@ -195,6 +196,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 
 	collectible := collection unknownsCollectibles first.
 	self assert: collectible isUnknown.
+	self assert: collectible dateAdded equals: (Date newDay: 13 month: 9 year: 2021).
 	self assert: collectible rawDatas size equals: GameyeCollectionFactory numberOfExportedSpreadsheetColumns.
 
 	self assertWishAndForSellCollectionsAreEmpty: collections
@@ -218,6 +220,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Prin
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection printMediasCollectibles first.
+	self assert: collectible dateAdded equals: (Date newDay: 11 month: 3 year: 2023).
 	self assert: collectible isPrintMedia.
 
 	self assertWishAndForSellCollectionsAreEmpty: collections
@@ -241,6 +244,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Syst
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection systemsCollectibles first.
+	self assert: collectible dateAdded equals: (Date newDay: 18 month: 7 year: 2022).
 	self assert: collectible isSystem.
 
 	self assertWishAndForSellCollectionsAreEmpty: collections
@@ -264,6 +268,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1ToyT
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection toysToLifeCollectibles first.
+	self assert: collectible dateAdded equals: (Date newDay: 19 month: 4 year: 2022).
 	self assert: collectible isToyToLife.
 
 	self assertWishAndForSellCollectionsAreEmpty: collections
@@ -285,7 +290,9 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Vide
 	self assert: collection haveToyToLife equals: false.
 	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 1.
+
 	collectible := collection videoGamesCollectibles first.
+	self assert: collectible dateAdded equals: (Date newDay: 22 month: 3 year: 2021).
 	self assert: collectible isVideoGame.
 
 	self assertWishAndForSellCollectionsAreEmpty: collections

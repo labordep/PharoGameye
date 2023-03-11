@@ -130,3 +130,7 @@ GameyeInputDataUtils class >> rebuildCells: aCellsArray [
 	
 	^newCells asArray
 ]
+
+{ #category : #'see class side' }
+GameyeInputDataUtils >> seeClassSide [
+]
