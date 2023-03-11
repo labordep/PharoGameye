@@ -23,19 +23,21 @@ GameyeInputDataUtils class >> extractCellsFromLine: aString [
 ]
 
 { #category : #formatting }
-GameyeInputDataUtils class >> prepareExportedSpreadsheet: aReadstream [
-	"Return a readstream of an exported spreadsheet with fixing all knowns generation knowns problems"
+GameyeInputDataUtils class >> prepareExportedSpreadsheetReadStream: aReadstream [
+	"Return a ReadStream of an exported SpreadSheet file with fixing all knowns generation knowns problems"
 
-	| line newStream |
+	| line fixedStream columns |
 	aReadstream ifNil:[ ^ nil ].
 
-	"Check if the first line (column head) have all requested columns"
+	"Check if the first line (normally it's columns head) have the good number of columns and the good first title"
 	line := aReadstream nextLine.
-	(line substrings: ',') size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifFalse: [ ^ nil ].
+	columns := (line substrings: ',').
+	columns size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifFalse: [ ^ nil ].
+	columns first = GameyeCollectionFactory exportedSpreadsheetColumn01Title ifFalse:[ ^ nil ].
 
 	"Build the new stream"
-	newStream := ReadWriteStream on: (String new: aReadstream size).
-	newStream nextPutAll: line; cr.
+	fixedStream := ReadWriteStream on: String new.
+	fixedStream nextPutAll: line; cr.
 
 	line := aReadstream nextLine.
 
@@ -47,14 +49,13 @@ GameyeInputDataUtils class >> prepareExportedSpreadsheet: aReadstream [
 			"Remove not necessary spaces at the start or the end"
 			formattedCell := c withBlanksCondensed withoutQuoting.
 			formattedCell := formattedCell copyReplaceAll: '"' with: '""'.
-			newStream nextPutAll: formattedCell.
-		] separatedBy:[ newStream nextPut: $, ].
+			fixedStream nextPutAll: formattedCell.
+		] separatedBy:[ fixedStream nextPut: $, ].
 
-		newStream cr.
+		fixedStream cr.
 
 		line := aReadstream nextLine.
 	].
 
-	newStream resetToStart.
-	^ ZnCharacterReadStream on: newStream encoding: (aReadstream encoder)
+	^ fixedStream reset
 ]

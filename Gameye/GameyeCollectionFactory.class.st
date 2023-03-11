@@ -45,8 +45,8 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 	aFileReference ifNil:[ ^ nil ].
 	aFileReference isFile ifFalse:[ ^ nil ].
 
-	readStream := aFileReference readStream.
-	neoCSVReader := NeoCSVReader on: (GameyeInputDataUtils prepareExportedSpreadsheet: readStream).
+	readStream := GameyeInputDataUtils prepareExportedSpreadsheetReadStream: aFileReference readStream.
+	neoCSVReader := NeoCSVReader on: readStream.
 
 	array := neoCSVReader
 		separator: $,;
@@ -83,6 +83,12 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 	collection date: date.
 
 	^ collection
+]
+
+{ #category : #accessing }
+GameyeCollectionFactory class >> exportedSpreadsheetColumn01Title [
+
+	^ 'Platform'
 ]
 
 { #category : #reading }
