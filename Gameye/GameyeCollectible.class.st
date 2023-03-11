@@ -8,6 +8,7 @@ Class {
 		'isForSale',
 		'isOnWishList',
 		'title',
+		'dateAdded',
 		'rawDatas'
 	],
 	#category : #'Gameye-Model'
@@ -30,6 +31,18 @@ GameyeCollectible class >> type: aSymbol [
 	
 	self allSubclassesDo: [ :c | c type = aSymbol ifTrue:[ ^ c new ] ].
 	^ self new
+]
+
+{ #category : #accessing }
+GameyeCollectible >> dateAdded [
+
+	^ dateAdded
+]
+
+{ #category : #accessing }
+GameyeCollectible >> dateAdded: anObject [
+
+	dateAdded := anObject
 ]
 
 { #category : #accessing }

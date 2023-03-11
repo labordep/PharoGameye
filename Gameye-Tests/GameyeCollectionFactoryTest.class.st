@@ -128,215 +128,209 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleHeadContent [
 	^'Platform,Type,Owned,ForSale,Wishlist,Title,Publisher,Developer,DateAdded,Ownership,PriceLoose,PriceCIB,PriceNew,YourPrice,PricePaid,ItemCondition,BoxCondition,ManualCondition,Beat,PlayedCompletion,Notes'
 ]
 
+{ #category : #assertions }
+GameyeCollectionFactoryTest >> assertWishAndForSellCollectionsAreEmpty: collections [
+	| wishListCollection forSellCollection |
+
+	wishListCollection := collections at: GameyeCollection wish.
+	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: wishListCollection haveUnknowns equals: false.
+	self assert: wishListCollection haveVideoGames equals: false.
+	self assert: wishListCollection haveSystems equals: false.
+	self assert: wishListCollection havePeripherals equals: false.
+	self assert: wishListCollection haveToyToLife equals: false.
+	self assert: wishListCollection havePrintMedias equals: false.
+	self assert: wishListCollection numberOfCollectibles equals: 0.
+
+	forSellCollection := collections at: GameyeCollection forSell.
+	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: forSellCollection haveUnknowns equals: false.
+	self assert: forSellCollection haveVideoGames equals: false.
+	self assert: forSellCollection haveSystems equals: false.
+	self assert: forSellCollection havePeripherals equals: false.
+	self assert: forSellCollection haveToyToLife equals: false.
+	self assert: forSellCollection havePrintMedias equals: false.
+	self assert: forSellCollection numberOfCollectibles equals: 0
+]
+
 { #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peripheral [
 
-	| collection collectible collections wishListCollection forSellCollection |
+	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet:  (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1Peripheral).
 
-	collection := collections at: #collection.
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: true.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection peripheralsCollectibles first.
 	self assert: collectible isPeripheral.
-	
-	"check empty collections"
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0	
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
 { #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1PeripheralAsAUnknownCollectible [
 
-	| collection collectible collections wishListCollection forSellCollection |
+	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1PeripheralAsAUnknownCollectible).
 
-	collection := collections at: #collection.
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: collection haveUnknowns.
+	self assert: collection haveUnknowns equals: true.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection unknownsCollectibles first.
 	self assert: collectible isUnknown.
 	self assert: collectible rawDatas size equals: GameyeCollectionFactory numberOfExportedSpreadsheetColumns.
-	
-	"check empty collections"
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0	
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
 { #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1PrintMedia [
 
-	| collection collectible collections wishListCollection forSellCollection |
+	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1PrintMedia).
 
-	collection := collections at: #collection.
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: true.
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection printMediasCollectibles first.
 	self assert: collectible isPrintMedia.
-	
-	"check empty collections"
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0	
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
 { #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1System [
 
-	| collection collectible collections wishListCollection forSellCollection |
+	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1System).
 
-	collection := collections at: #collection.
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: true.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection systemsCollectibles first.
 	self assert: collectible isSystem.
-	
-	"check empty collections"
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0	
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
 { #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1ToyToLife [
 
-	| collection collectible collections wishListCollection forSellCollection |
+	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1ToyToLife).
 
-	collection := collections at: #collection.
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: true.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 1.
 
 	collectible := collection toysToLifeCollectibles first.
 	self assert: collectible isToyToLife.
-	
-	"check empty collections"
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0	
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
 { #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues [
 
-	| collection collectible collections wishListCollection forSellCollection |
+	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1VideoGameWitComplexeStringValues).
-	
-	collection := collections at: #collection.
+
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: true.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 1.
 	collectible := collection videoGamesCollectibles first.
 	self assert: collectible isVideoGame.
-	
-	"check empty collections"
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0	
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
-{ #category : #accessing }
+{ #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_3VideoGames2SystemsWitComplexeStringValues [
 
-	| collection collections wishListCollection forSellCollection |
+	| collection collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_3VideoGames2SystemsWitComplexeStringValues).
-	
-	collection := collections at: #collection.
+
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: true.
+	self assert: collection haveSystems equals: true.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 5.
 	1 to: 3 do:[ :i | self assert: (collection videoGamesCollectibles at: i) isVideoGame ].
 	1 to: 2 do:[ :i | self assert: (collection systemsCollectibles at: i) isSystem ].
-	
-	"check empty collections"
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0	
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
 { #category : #tests }
 GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_Empty [
 
-	| collection collections wishListCollection forSellCollection |
+	| collection collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_Empty).
-	 
-	wishListCollection := collections at: #wishList.
-	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: wishListCollection haveUnknowns equals: false.
-	self assert: wishListCollection numberOfCollectibles equals: 0.
-	
-	collection := collections at: #collection.
+
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
-	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0.
+
+	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
 { #category : #tests }
@@ -348,18 +342,33 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_Wishl
 
 	self assert: collections size equals: 3.
 
-	wishListCollection := collections at: #wishList.
+	wishListCollection := collections at: GameyeCollection wish.
 	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: wishListCollection haveUnknowns equals: false.
+	self assert: wishListCollection haveVideoGames equals: true.
+	self assert: wishListCollection haveSystems equals: false.
+	self assert: wishListCollection havePeripherals equals: false.
+	self assert: wishListCollection haveToyToLife equals: false.
+	self assert: wishListCollection havePrintMedias equals: false.
 	self assert: wishListCollection numberOfCollectibles equals: 1.
-	
-	collection := collections at: #collection.
+
+	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 0.
-	
-	forSellCollection := collections at: #forSell.
+
+	forSellCollection := collections at: GameyeCollection forSell.
 	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
 	self assert: forSellCollection haveUnknowns equals: false.
-	self assert: forSellCollection numberOfCollectibles equals: 0.
+	self assert: forSellCollection haveVideoGames equals: false.
+	self assert: forSellCollection haveSystems equals: false.
+	self assert: forSellCollection havePeripherals equals: false.
+	self assert: forSellCollection haveToyToLife equals: false.
+	self assert: forSellCollection havePrintMedias equals: false.
+	self assert: forSellCollection numberOfCollectibles equals: 0
 ]

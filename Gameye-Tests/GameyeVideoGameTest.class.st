@@ -9,7 +9,7 @@ GameyeVideoGameTest >> testConstructor [
 
 	| videoGame |
 	videoGame := GameyeCollectible type: GameyeVideoGame type.
-	self assert: videoGame class equals: GameyeVideoGame.
+	self assert: videoGame class equals: GameyeVideoGame
 ]
 
 { #category : #tests }
@@ -18,4 +18,6 @@ GameyeVideoGameTest >> testInitialize [
 	| videoGame |
 	videoGame := GameyeVideoGame new.
 	self assert: videoGame type equals: GameyeVideoGame type.
+	self assert: videoGame publisher isNil.
+	self assert: videoGame developer isNil
 ]

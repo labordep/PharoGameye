@@ -12,7 +12,7 @@ GameyeUnknownCollectibleTest >> testConstructor [
 
 	| unknown |
 	unknown := GameyeCollectible type: GameyeUnknownCollectible type.
-	self assert: unknown class equals: GameyeUnknownCollectible.
+	self assert: unknown class equals: GameyeUnknownCollectible
 ]
 
 { #category : #tests }
@@ -20,5 +20,5 @@ GameyeUnknownCollectibleTest >> testInitialize [
 
 	| unknown |
 	unknown := GameyeUnknownCollectible new.
-	self assert: unknown type equals: GameyeUnknownCollectible type.
+	self assert: unknown type equals: GameyeUnknownCollectible type
 ]

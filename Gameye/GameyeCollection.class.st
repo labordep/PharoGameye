@@ -17,6 +17,24 @@ Class {
 	#category : #'Gameye-Model'
 }
 
+{ #category : #enumerating }
+GameyeCollection class >> forSell [ 
+
+	^#forSell
+]
+
+{ #category : #enumerating }
+GameyeCollection class >> owned [ 
+
+	^#owned
+]
+
+{ #category : #enumerating }
+GameyeCollection class >> wish [ 
+
+	^#wish
+]
+
 { #category : #'collectibles - add-remove' }
 GameyeCollection >> addCollectible: aCollectible [
 
@@ -55,9 +73,39 @@ GameyeCollection >> date: aDate [
 ]
 
 { #category : #testing }
+GameyeCollection >> havePeripherals [
+
+	^ self peripherals notEmpty
+]
+
+{ #category : #testing }
+GameyeCollection >> havePrintMedias [
+
+	^ self printMedias notEmpty
+]
+
+{ #category : #testing }
+GameyeCollection >> haveSystems [
+
+	^ self systems notEmpty
+]
+
+{ #category : #testing }
+GameyeCollection >> haveToyToLife [
+
+	^ self toysToLife notEmpty
+]
+
+{ #category : #testing }
 GameyeCollection >> haveUnknowns [
 
 	^ self unknowns notEmpty
+]
+
+{ #category : #testing }
+GameyeCollection >> haveVideoGames [
+
+	^ self videoGames notEmpty
 ]
 
 { #category : #'collectibles - get' }

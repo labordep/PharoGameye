@@ -8,30 +8,6 @@ Class {
 	#category : #'Gameye-Core'
 }
 
-{ #category : #private }
-GameyeCollectionFactory class >> checkExportedSpreadsheetParsingProblems: anArray for: aFileReference [
-	| nbLinesInFile readSteam line |
-	self flag:'Method used for debugging during dev'.
-	
-	"Count number of lines of the file"
-	readSteam := aFileReference readStream.
-	line := readSteam nextLine.
-	nbLinesInFile := 0. "not include column head line"	
-	[ line notNil ] whileTrue:[  
-		line := readSteam nextLine. 
-		line ifNotNil:[
-			line isEmpty ifTrue:[ 
-				line := nil 
-			] ifFalse:[
-				nbLinesInFile := nbLinesInFile + 1.
-			].
-		].
-	].
-
-	"Compare with the number of line of the array"
-	Transcript crShow: '[Gameye Spreadsheet Parser] ', anArray size asString ,' / ', nbLinesInFile asString ,' parsed lines.'.
-]
-
 { #category : #'create collection' }
 GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
 	"Return just the collectibles collection (not for sell and wish list collections)"
@@ -40,7 +16,7 @@ GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileR
 	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
 	collections ifNil:[ ^ nil ].
 	
-	^ collections at: #collection
+	^ collections at: GameyeCollection owned
 ]
 
 { #category : #private }
@@ -53,9 +29,9 @@ GameyeCollectionFactory class >> createCollectionsFromDataArray: anArray [
 	wishListCollection := GameyeCollection new.
 	forSellCollection := GameyeCollection new.
 
-	collections at: #collection put: collection.
-	collections at: #wishList put: wishListCollection.
-	collections at: #forSell put: forSellCollection.
+	collections at: GameyeCollection owned put: collection.
+	collections at: GameyeCollection wish put: wishListCollection.
+	collections at: GameyeCollection forSell put: forSellCollection.
 
 	anArray ifNil: [ ^ collections ].	
 
@@ -96,9 +72,6 @@ GameyeCollectionFactory class >> createCollectionsFromExportedSpreadsheet: aFile
 
 	readStream := GameyeInputDataUtils prepareExportedSpreadsheetReadStream: aFileReference readStream.
 	array := self parseExportedSpreadsheetReadStream: readStream.
-
-	"Check problems"
-	self checkExportedSpreadsheetParsingProblems: array for: aFileReference.
 	
 	collections := (self createCollectionsFromDataArray: array) ifNil:[ ^ nil ].
 
@@ -108,7 +81,7 @@ GameyeCollectionFactory class >> createCollectionsFromExportedSpreadsheet: aFile
 
 	fileName := aFileReference path basenameWithoutExtension.
 	collections keysAndValuesDo:[ :k :collection | 
-		collection name: fileName, (k = #wishList ifTrue:['_wishList'] ifFalse:[k = #forSell ifTrue:['_forSell'] ifFalse:['']]).
+		collection name: fileName, (k = GameyeCollection wish ifTrue:['_wish'] ifFalse:[k = GameyeCollection forSell ifTrue:['_forSell'] ifFalse:['']]).
 		collection date: date. 
 	].
 	
@@ -123,7 +96,7 @@ GameyeCollectionFactory class >> createForSellCollectionFromExportedSpreadsheet:
 	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
 	collections ifNil:[ ^ nil ].
 	
-	^ collections at: #forSell
+	^ collections at: GameyeCollection forSell
 ]
 
 { #category : #'create collection' }
@@ -134,7 +107,7 @@ GameyeCollectionFactory class >> createWishListCollectionFromExportedSpreadsheet
 	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
 	collections ifNil:[ ^ nil ].
 	
-	^ collections at: #wishList
+	^ collections at: GameyeCollection wish
 ]
 
 { #category : #accessing }

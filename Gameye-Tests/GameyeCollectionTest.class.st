@@ -46,6 +46,11 @@ GameyeCollectionTest >> testInitialize [
 	self assert: collection name isNil.
 	self assert: collection date isNil.
 	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 0
 ]
 
@@ -55,7 +60,7 @@ GameyeCollectionTest >> testName [
 	| collection |
 	collection := GameyeCollection new.
 	collection name: 'MyCollection'.
-	self assert: collection name equals: 'MyCollection'.
+	self assert: collection name equals: 'MyCollection'
 ]
 
 { #category : #tests }
@@ -113,7 +118,7 @@ GameyeCollectionTest >> testSystemsCollectibles [
 	self assert: collection systemsCollectibles first equals: collectible
 ]
 
-{ #category : #test }
+{ #category : #tests }
 GameyeCollectionTest >> testToysToLifeCollectibles [
 
 	| collectible collection |
