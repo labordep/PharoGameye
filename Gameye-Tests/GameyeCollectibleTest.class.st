@@ -19,5 +19,6 @@ GameyeCollectibleTest >> testInitialize [
 	self assert: collectible isOnWishList equals: false.
 	self assert: collectible title isNil.
 	self assert: collectible dateAdded isNil.
+	self assert: collectible pricePaid isNil.
 	self assert: collectible rawDatas isNil
 ]

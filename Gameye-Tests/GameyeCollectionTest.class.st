@@ -15,6 +15,7 @@ GameyeCollectionTest >> testAddCollectible [
 	collection addCollectible: GameyeUnknownCollectible new.
 	self assert: collection haveUnknowns equals: true.
 	self assert: collection numberOfCollectibles equals: 1.
+	self assert: collection collectibles size equals: 1.
 
 	"Bad cases"
 	collection addCollectible: nil.
@@ -51,7 +52,8 @@ GameyeCollectionTest >> testInitialize [
 	self assert: collection havePeripherals equals: false.
 	self assert: collection haveToyToLife equals: false.
 	self assert: collection havePrintMedias equals: false.
-	self assert: collection numberOfCollectibles equals: 0
+	self assert: collection numberOfCollectibles equals: 0.
+	self assert: collection collectibles size equals: 0
 ]
 
 { #category : #tests }
@@ -96,6 +98,7 @@ GameyeCollectionTest >> testRemoveCollectible [
 	collection removeCollectible: collectible.
 	self assert: collection haveUnknowns equals: false.
 	self assert: collection numberOfCollectibles equals: 0.
+	self assert: collection collectibles size equals: 0.
 
 	"Bad cases"
 	collection removeCollectible: collectible.

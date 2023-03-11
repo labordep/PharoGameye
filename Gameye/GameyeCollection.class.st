@@ -60,6 +60,21 @@ GameyeCollection >> addCollectible: aCollectible [
 	^ self
 ]
 
+{ #category : #'collectibles - get' }
+GameyeCollection >> collectibles [
+	"Return all collectibles"
+
+	| collectibles |
+	collectibles := OrderedCollection new.
+	collectibles addAll: self videoGames.
+	collectibles addAll: self systems.
+	collectibles addAll: self peripherals.
+	collectibles addAll: self toysToLife.
+	collectibles addAll: self printMedias.
+	collectibles addAll: self unknowns.
+	^collectibles
+]
+
 { #category : #accessing }
 GameyeCollection >> date [
 
@@ -176,6 +191,15 @@ GameyeCollection >> peripherals: anObject [
 GameyeCollection >> peripheralsCollectibles [
 
 	^self peripherals asOrderedCollection
+]
+
+{ #category : #statistics }
+GameyeCollection >> pricePaid [
+	"Return price paid for all collectibles"
+	| pricePaid |
+	pricePaid := 0.
+	self collectibles do: [ :c | c pricePaid ifNotNil:[ :p | pricePaid := pricePaid + p ] ].
+	^ pricePaid
 ]
 
 { #category : #accessing }

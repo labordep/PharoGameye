@@ -9,6 +9,7 @@ Class {
 		'isOnWishList',
 		'title',
 		'dateAdded',
+		'pricePaid',
 		'rawDatas'
 	],
 	#category : #'Gameye-Model'
@@ -127,6 +128,18 @@ GameyeCollectible >> platform [
 GameyeCollectible >> platform: anObject [
 
 	platform := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> pricePaid [
+
+	^ pricePaid
+]
+
+{ #category : #accessing }
+GameyeCollectible >> pricePaid: anObject [
+
+	pricePaid := anObject
 ]
 
 { #category : #raw }

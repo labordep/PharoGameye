@@ -23,6 +23,7 @@ GameyeCollectionFactory class >> createCollectibleFromDataArray: anArray [
 	collectible isOnWishList: (anArray at: 5).
 	collectible title: (anArray at: 6).
 	collectible dateAdded: (anArray at: 9).
+	collectible pricePaid: (anArray at: 15).
 
 	"Processing for Video Games"
 	collectible isVideoGame ifTrue:[
@@ -167,13 +168,11 @@ GameyeCollectionFactory class >> parseExportedSpreadsheetReadStream: aReadStream
 		addFieldConverter: [ :string | string = '(null)' ifTrue:[nil] ifFalse:[string] ]; "Developer"
 		addFieldConverter: [ :string | Date readFrom: string pattern: 'dd/mm/yyyy' ]; "DateAdded"
 		addSymbolField; "Ownership"
-		"Sometime is equals to ' -1.0' opr '-1.0', this is probably a bug"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceLoose"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceCIB"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceNew"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "YourPrice"
-		"Sometime is equals to '?', this is probably a bug"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PricePaid"
+		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "PriceLoose"
+		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "PriceCIB"
+		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "PriceNew"
+		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "YourPrice"
+		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "PricePaid"
 		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ItemCondition"
 		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "BoxCondition"
 		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ManualCondition"
@@ -183,6 +182,15 @@ GameyeCollectionFactory class >> parseExportedSpreadsheetReadStream: aReadStream
 		upToEnd.
 
 	^array
+]
+
+{ #category : #private }
+GameyeCollectionFactory class >> parseNeoNumberString: aString [
+
+	aString = '-1.0' ifTrue:[ ^ nil ].
+	aString = '?' ifTrue:[ ^ nil ].
+
+	^ NeoNumberParser parse: aString ifFail: [nil]
 ]
 
 { #category : #'see class side' }
