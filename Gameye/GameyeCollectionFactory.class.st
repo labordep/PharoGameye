@@ -8,6 +8,34 @@ Class {
 	#category : #'Gameye-Core'
 }
 
+{ #category : #private }
+GameyeCollectionFactory class >> createCollectibleFromDataArray: anArray [
+	| collectible |
+
+	anArray ifNil: [ ^ nil ].
+	anArray size = self numberOfExportedSpreadsheetColumns ifFalse:[ ^ nil ].
+
+	"Create the collectible"
+	collectible := GameyeCollectible type: (anArray at: 2).
+	collectible platform: (anArray at: 1).
+	collectible isOwned: (anArray at: 3).
+	collectible isForSale: (anArray at: 4).
+	collectible isOnWishList: (anArray at: 5).
+	collectible title: (anArray at: 6).
+	collectible dateAdded: (anArray at: 9).
+
+	"Processing for Video Games"
+	collectible isVideoGame ifTrue:[
+		collectible publisher: (anArray at: 7).
+		collectible developer: (anArray at: 8).
+	].
+
+	"Processing for unknown collectible : conserve original datas to have a post analyse"
+	collectible isUnknown ifTrue:[collectible rawDatas: anArray].
+
+	^ collectible
+]
+
 { #category : #'create collection' }
 GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
 	"Return just the collectibles collection (not for sell and wish list collections)"
@@ -33,28 +61,12 @@ GameyeCollectionFactory class >> createCollectionsFromDataArray: anArray [
 	collections at: GameyeCollection wish put: wishListCollection.
 	collections at: GameyeCollection forSell put: forSellCollection.
 
-	anArray ifNil: [ ^ collections ].	
-
-	anArray do:[ :e | | collectible |
-		e size = self numberOfExportedSpreadsheetColumns ifTrue:[
-
-			"Create the collectible"
-			collectible := GameyeCollectible type: (e at: 2).
-			collectible platform: (e at: 1).
-			collectible isOwned: (e at: 3).
-			collectible isForSale: (e at: 4).
-			collectible isOnWishList: (e at: 5).
-			collectible title: (e at: 6).
-			collectible dateAdded: (e at: 9).
-
-			"Processing for unknown collectible : conserve original datas to have a post analyse"
-			collectible isUnknown ifTrue:[
-				collectible rawDatas: e.
-			].
-			
+	anArray ifNil: [ ^ collections ].
+	anArray do:[ :e |
+		(self createCollectibleFromDataArray: e) ifNotNil:[ :collectible |
 			collectible isForSale ifTrue:[ forSellCollection addCollectible: collectible ] ifFalse:[
 				collectible isOnWishList ifTrue:[ wishListCollection addCollectible: collectible ] ifFalse:[
-					collection addCollectible: collectible.	
+					collection addCollectible: collectible.
 				].
 			].
 		].
