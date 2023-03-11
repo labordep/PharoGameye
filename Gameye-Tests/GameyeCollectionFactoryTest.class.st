@@ -15,6 +15,14 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1Periphera
 ]
 
 { #category : #samples }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1PrintMedia [
+	"1 Print media sample"
+
+	^self exportedSpreadsheetSampleHeadContent, '
+"N Power","Print Media",1,0,0,"[Vol. 145] Mario Advance","Missing Field","Missing Field","11/03/2023","Loose","9.49","14.23","?","9.49","1.90","?","?","10"," "," ",""'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1VideoGameWitComplexeStringValues [
 	"This game have title and developper names with coma and quotes : ""Ivan ""Ironman"" Stewart's Super Off Road"" and ""Rare, Ltd."""
 
@@ -80,6 +88,21 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 	collectible := collection unknownsCollectibles first.
 	self assert: collectible isUnknown.
 	self assert: collectible rawDatas size equals: GameyeCollectionFactory numberOfExportedSpreadsheetColumns
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1PrintMedia [
+
+	| collection collectible |
+	collection := GameyeCollectionFactory createCollectionFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1PrintMedia).
+
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection printMediasCollectibles first.
+	self assert: collectible isPrintMedia
 ]
 
 { #category : #tests }

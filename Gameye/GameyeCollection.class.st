@@ -10,7 +10,8 @@ Class {
 		'systems',
 		'toysToLife',
 		'videoGames',
-		'unknowns'
+		'unknowns',
+		'printMedias'
 	],
 	#category : #'Gameye-Model'
 }
@@ -106,6 +107,24 @@ GameyeCollection >> peripherals: anObject [
 GameyeCollection >> peripheralsCollectibles [
 
 	^self peripherals asOrderedCollection
+]
+
+{ #category : #accessing }
+GameyeCollection >> printMedias [
+
+	^ printMedias ifNil: [ printMedias := Set new ]
+]
+
+{ #category : #accessing }
+GameyeCollection >> printMedias: anObject [
+
+	printMedias := anObject
+]
+
+{ #category : #printing }
+GameyeCollection >> printMediasCollectibles [
+
+	^self printMedias asOrderedCollection
 ]
 
 { #category : #'collectibles - add-remove' }

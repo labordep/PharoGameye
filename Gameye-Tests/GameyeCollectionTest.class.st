@@ -60,6 +60,17 @@ GameyeCollectionTest >> testPeripheralsCollectibles [
 ]
 
 { #category : #tests }
+GameyeCollectionTest >> testPrintMediasCollectibles [
+
+	| collectible collection |
+	collectible := GameyePrintMedia new.
+	collection := GameyeCollection new.
+	collection addCollectible: collectible.
+	self assert: collection printMediasCollectibles size equals: 1.
+	self assert: collection printMediasCollectibles first equals: collectible
+]
+
+{ #category : #tests }
 GameyeCollectionTest >> testRemoveCollectible [
 
 	| collection collectible |

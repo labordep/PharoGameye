@@ -68,6 +68,12 @@ GameyeCollectible >> isPeripheral [
 ]
 
 { #category : #testing }
+GameyeCollectible >> isPrintMedia [
+
+	^ false
+]
+
+{ #category : #testing }
 GameyeCollectible >> isSystem [
 
 	^ false
