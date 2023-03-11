@@ -19,29 +19,26 @@ Class {
 { #category : #'collectibles - add-remove' }
 GameyeCollection >> addCollectible: aCollectible [
 
-	aCollectible ifNil:[ ^ self ].
-
+	aCollectible ifNil: [ ^ self ].
 	aCollectible isVideoGame ifTrue: [
 		self videoGames add: aCollectible.
 		^ self ].
-
 	aCollectible isSystem ifTrue: [
 		self systems add: aCollectible.
 		^ self ].
-
 	aCollectible isPeripheral ifTrue: [
 		self peripherals add: aCollectible.
 		^ self ].
-
 	aCollectible isToyToLife ifTrue: [
 		self toysToLife add: aCollectible.
 		^ self ].
-
 	aCollectible isPrintMedia ifTrue: [
 		self printMedias add: aCollectible.
 		^ self ].
 
-	self unknowns add: aCollectible
+	aCollectible isUnknown ifFalse: [ ^ self ].
+	self unknowns add: aCollectible.
+	^ self
 ]
 
 { #category : #accessing }
@@ -83,11 +80,16 @@ GameyeCollection >> includesCollectible: aCollectible [
 		^ self toysToLife includes: aCollectible.
 	].
 
-	^ self unknowns includes: aCollectible
+	aCollectible isUnknown ifTrue: [
+		^ self unknowns includes: aCollectible.
+	].
+
+	^ false
 ]
 
 { #category : #statistics }
 GameyeCollection >> numberOfCollectibles [
+	"Cannot return errors collectibles to detect errors when counting"
 
 	^ self videoGames size
 	+ self peripherals size
@@ -126,7 +128,7 @@ GameyeCollection >> printMedias: anObject [
 	printMedias := anObject
 ]
 
-{ #category : #printing }
+{ #category : #'collectibles - get' }
 GameyeCollection >> printMediasCollectibles [
 
 	^self printMedias asOrderedCollection
@@ -135,29 +137,26 @@ GameyeCollection >> printMediasCollectibles [
 { #category : #'collectibles - add-remove' }
 GameyeCollection >> removeCollectible: aCollectible [
 
-	aCollectible ifNil:[ ^ self ].
-
+	aCollectible ifNil: [ ^ self ].
 	aCollectible isVideoGame ifTrue: [
-		self videoGames remove: aCollectible ifAbsent:[nil].
+		self videoGames remove: aCollectible ifAbsent: [ nil ].
 		^ self ].
-
 	aCollectible isSystem ifTrue: [
-		self systems remove: aCollectible ifAbsent:[nil].
+		self systems remove: aCollectible ifAbsent: [ nil ].
 		^ self ].
-
 	aCollectible isPeripheral ifTrue: [
-		self peripherals remove: aCollectible ifAbsent:[nil].
+		self peripherals remove: aCollectible ifAbsent: [ nil ].
 		^ self ].
-
 	aCollectible isToyToLife ifTrue: [
-		self toysToLife remove: aCollectible ifAbsent:[nil].
+		self toysToLife remove: aCollectible ifAbsent: [ nil ].
 		^ self ].
-
 	aCollectible isPrintMedia ifTrue: [
-		self printMedias remove: aCollectible ifAbsent:[nil].
+		self printMedias remove: aCollectible ifAbsent: [ nil ].
 		^ self ].
 
-	self unknowns remove: aCollectible ifAbsent:[nil]
+	aCollectible isUnknown ifFalse: [ ^ self ].
+	self unknowns remove: aCollectible ifAbsent: [ nil ].
+	^ self
 ]
 
 { #category : #accessing }

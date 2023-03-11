@@ -40,41 +40,13 @@ GameyeCollectionFactory class >> createCollectionFromDataArray: anArray [
 
 { #category : #reading }
 GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
+	| readStream array collection date |
 
-	| readStream neoCSVReader array collection date |
 	aFileReference ifNil:[ ^ nil ].
 	aFileReference isFile ifFalse:[ ^ nil ].
 
 	readStream := GameyeInputDataUtils prepareExportedSpreadsheetReadStream: aFileReference readStream.
-	neoCSVReader := NeoCSVReader on: readStream.
-
-	array := neoCSVReader
-		separator: $,;
-		skipHeader;
-		addField; "Platform"
-		addSymbolField; "Type"
-		addFieldConverter: [ :string | string = '1' ]; "Owned"
-		addFieldConverter: [ :string | string = '1' ]; "ForSale"
-		addFieldConverter: [ :string | string = '1' ]; "Wishlist"
-		addFieldConverter: [ :string | string = '(null)' ifTrue:[nil] ifFalse:[string] ]; "Title"
-		addFieldConverter: [ :string | string = '(null)' ifTrue:[nil] ifFalse:[string] ]; "Publisher"
-		addFieldConverter: [ :string | string = '(null)' ifTrue:[nil] ifFalse:[string] ]; "Developer"
-		addFieldConverter: [ :string | Date readFrom: string pattern: 'dd/mm/yyyy' ]; "DateAdded"
-		addSymbolField; "Ownership"
-		"Sometime is equals to ' -1.0' opr '-1.0', this is probably a bug"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceLoose"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceCIB"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceNew"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "YourPrice"
-		"Sometime is equals to '?', this is probably a bug"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PricePaid"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ItemCondition"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "BoxCondition"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ManualCondition"
-		addField; "Beat"
-		addField; "PlayedCompletion"
-		addField; "Notes"
-		upToEnd.
+	array := self parseExportedSpreadsheetReadStream: readStream.
 
 	collection := (self createCollectionFromDataArray: array) ifNil:[ ^ nil ].
 
@@ -108,4 +80,41 @@ GameyeCollectionFactory class >> getDateFromFilename: aString [
 GameyeCollectionFactory class >> numberOfExportedSpreadsheetColumns [
 
 	^ 21
+]
+
+{ #category : #reading }
+GameyeCollectionFactory class >> parseExportedSpreadsheetReadStream: aReadStream [
+	"Parse a CSV readstream as an array"
+	| neoCSVReader array |
+	neoCSVReader := NeoCSVReader on: aReadStream.
+
+	array := neoCSVReader
+		separator: $,;
+		skipHeader;
+		addField; "Platform"
+		addSymbolField; "Type"
+		addFieldConverter: [ :string | string = '1' ]; "Owned"
+		addFieldConverter: [ :string | string = '1' ]; "ForSale"
+		addFieldConverter: [ :string | string = '1' ]; "Wishlist"
+		addFieldConverter: [ :string | string = '(null)' ifTrue:[nil] ifFalse:[string] ]; "Title"
+		addFieldConverter: [ :string | string = '(null)' ifTrue:[nil] ifFalse:[string] ]; "Publisher"
+		addFieldConverter: [ :string | string = '(null)' ifTrue:[nil] ifFalse:[string] ]; "Developer"
+		addFieldConverter: [ :string | Date readFrom: string pattern: 'dd/mm/yyyy' ]; "DateAdded"
+		addSymbolField; "Ownership"
+		"Sometime is equals to ' -1.0' opr '-1.0', this is probably a bug"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceLoose"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceCIB"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PriceNew"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "YourPrice"
+		"Sometime is equals to '?', this is probably a bug"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "PricePaid"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ItemCondition"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "BoxCondition"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ManualCondition"
+		addField; "Beat"
+		addField; "PlayedCompletion"
+		addField; "Notes"
+		upToEnd.
+
+	^array
 ]

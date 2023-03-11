@@ -19,6 +19,8 @@ GameyeInputDataUtils class >> extractCellsFromLine: aString [
 	cells := OrderedCollection new.
 	index := aString findString: '"'.
 	
+	self halt.
+	
 	^cells asArray
 ]
 

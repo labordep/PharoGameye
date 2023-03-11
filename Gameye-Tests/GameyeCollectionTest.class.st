@@ -12,7 +12,7 @@ GameyeCollectionTest >> testAddCollectible [
 
 	| collection |
 	collection := GameyeCollection new.
-	collection addCollectible: GameyeCollectible new.
+	collection addCollectible: GameyeUnknownCollectible new.
 	self assert: collection haveUnknowns equals: true.
 	self assert: collection numberOfCollectibles equals: 1.
 
@@ -26,7 +26,7 @@ GameyeCollectionTest >> testAddCollectible [
 GameyeCollectionTest >> testIncludesCollectible [
 
 	| collection collectible |
-	collectible := GameyeCollectible new.
+	collectible := GameyeVideoGame new.
 	collection := GameyeCollection new.
 
 	self assert: (collection includesCollectible: collectible) equals: false.

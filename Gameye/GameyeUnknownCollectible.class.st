@@ -1,13 +1,11 @@
 "
 This collectible is a not identify (unknown) collectible.
-This should be a bad stream read (when trying to import Gameye datas file) or a removed collectible from the main gameye database catalog.
+Cases should be a out of sync of the Gameye database catalog.
+This collectible is not a bad read collectible, in case of a parsing/reading error the collectible is a GameyeCollectible object.
 "
 Class {
 	#name : #GameyeUnknownCollectible,
 	#superclass : #GameyeCollectible,
-	#instVars : [
-		'rawDatas'
-	],
 	#category : #'Gameye-Model'
 }
 
@@ -21,16 +19,4 @@ GameyeUnknownCollectible class >> type [
 GameyeUnknownCollectible >> isUnknown [
 
 	^ true
-]
-
-{ #category : #accessing }
-GameyeUnknownCollectible >> rawDatas [
-
-	^ rawDatas
-]
-
-{ #category : #accessing }
-GameyeUnknownCollectible >> rawDatas: anObject [
-
-	rawDatas := anObject
 ]

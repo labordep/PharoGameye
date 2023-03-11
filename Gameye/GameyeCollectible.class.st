@@ -7,10 +7,17 @@ Class {
 		'isOwned',
 		'isForSale',
 		'isOnWishList',
-		'title'
+		'title',
+		'rawDatas'
 	],
 	#category : #'Gameye-Model'
 }
+
+{ #category : #testing }
+GameyeCollectible class >> isAbstract [ 
+
+	^ self = GameyeCollectible
+]
 
 { #category : #accessing }
 GameyeCollectible class >> type [
@@ -107,6 +114,18 @@ GameyeCollectible >> platform [
 GameyeCollectible >> platform: anObject [
 
 	platform := anObject
+]
+
+{ #category : #raw }
+GameyeCollectible >> rawDatas [
+
+	^ rawDatas
+]
+
+{ #category : #raw }
+GameyeCollectible >> rawDatas: anObject [
+
+	rawDatas := anObject
 ]
 
 { #category : #accessing }
