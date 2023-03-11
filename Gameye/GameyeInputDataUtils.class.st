@@ -10,7 +10,7 @@ Class {
 
 { #category : #private }
 GameyeInputDataUtils class >> extractCellsFromLine: aString [
-	| cells newCells safeCells |
+	| cells newCells safeCells type |
 
 	cells := aString substrings: ','.
 	cells size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifTrue:[ ^ cells asArray ].
@@ -23,15 +23,16 @@ GameyeInputDataUtils class >> extractCellsFromLine: aString [
 	"Not found case : why this case can be possible ?"
 	cells size > GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifFalse:[ ^ safeCells ].
 	
-	"Processing for VideoGames"
-	(cells at: 2) = '"VideoGame"' ifTrue:[ | title publisher developer notes rebuildedCells |
+	"Processing for VideoGames or Systems"
+	type := cells at: 2.
+	(type = '"VideoGame"' or:[type = '"Systems"' or:[type = '"Peripherals"']]) ifTrue:[ | rebuildedCells |
 		
 		"A comma or more are inside datas, probably inside string datas as title or editor name or comment (etc.). 
 		Try to cut manually and format the comma into HTML code &#44; to ignor the comma during parsing"
 		
 		"Problematic cells : 6, 7, 8, 21, extract all cells of the array to rebuild the correct number of cell"
 		rebuildedCells := self rebuildCells: (cells copyFrom: 6 to: cells size).
-		rebuildedCells do:[ :cell | newCells add: cell ].
+		newCells addAll: rebuildedCells.
 	].
 	
 	newCells size ~= GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifTrue:[

@@ -53,6 +53,29 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1VideoGame
 "NES","VideoGame",1,0,0,"Ivan "Ironman" Stewart''s Super Off Road","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","10.85","46.64","326.48","46.64","-1.0","6","7","7"," "," ",""'
 ]
 
+{ #category : #accessing }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_3VideoGames2SystemsWitComplexeStringValues [
+	"This is an extract from problematic strings content"
+
+	^self exportedSpreadsheetSampleHeadContent, '
+"Atari 2600","VideoGame",1,0,0,"Q*bert","Atari, Inc.","Parker Brothers","22/03/2021","Loose","6.97","16.37","42.73","6.97","?","?","?","8"," "," ",""
+"Atari 2600","VideoGame",1,0,0,"Space Invaders","(null)","(null)","22/03/2021","Loose","-1.0", "-1.0", "-1.0", "-1.0","?","?","?","5"," "," ","Étiquette percée, en pack avec la console"
+"Atari 2600","Systems",1,0,0,"Atari 2600 System [Vadar]","Missing Field","Missing Field","04/04/2021","CIB","54.38","146.51","219.34","146.51","71.21","10","9","10"," "," ","Pack avec Space invaders, modèle cx-2600-gp"
+"Atari 2600","Systems",1,0,0,"Atari 2600 System [Vadar]","Missing Field","Missing Field","15/04/2021","CIB","54.38","146.51","219.34","146.51","?","10","10","10"," "," ","Avec le jeu othello, modèle cx-2600-gp"
+"PS1","VideoGame",1,0,0,"Broken Sword 2 - Les Boucliers de Quetzalcoatl","Sony","Revolution Software Ltd.","22/03/2021","CIB","-1.0", "-1.0", "-1.0", "-1.0","-1.0","10","10","10"," "," ",""'
+]
+
+{ #category : #samples }
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_4VideoGamesWitComplexeStringValues [
+	"This game have title and developper names with coma and quotes : ""Ivan ""Ironman"" Stewart's Super Off Road"" and ""Rare, Ltd."""
+
+	^self exportedSpreadsheetSampleHeadContent, '
+"NES","VideoGame",1,0,0,"Ivan "Ironman" Stewart''s Super Off Road","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","10.85","46.64","326.48","46.64","-1.0","6","7","7"," "," ","
+"Atari 2600","VideoGame",1,0,0,"Space Invaders","(null)","(null)","22/03/2021","Loose","-1.0", "-1.0", "-1.0", "-1.0","?","?","?","5"," "," ","Étiquette percée, en pack avec la console"
+"NES","VideoGame",1,0,0,"Ivan "Ironman" Stewart''s Super Off Road","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","10.85","46.64","326.48","46.64","-1.0","6","7","7"," "," ",""
+"Atari 2600","VideoGame",1,0,0,"Space Invaders","(null)","(null)","22/03/2021","Loose","-1.0", "-1.0", "-1.0", "-1.0","?","?","?","5"," "," ","Étiquette percée, en pack avec la console"'
+]
+
 { #category : #samples }
 GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_Empty [
 	"This sample contains some frequently generated cases not easy to read/parse or exceptions due to collection evolution"
@@ -254,6 +277,32 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Vide
 	self assert: collection numberOfCollectibles equals: 1.
 	collectible := collection videoGamesCollectibles first.
 	self assert: collectible isVideoGame.
+	
+	"check empty collections"
+	wishListCollection := collections at: #wishList.
+	self assert: wishListCollection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: wishListCollection haveUnknowns equals: false.
+	self assert: wishListCollection numberOfCollectibles equals: 0.
+	
+	forSellCollection := collections at: #forSell.
+	self assert: forSellCollection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: forSellCollection haveUnknowns equals: false.
+	self assert: forSellCollection numberOfCollectibles equals: 0	
+]
+
+{ #category : #accessing }
+GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_3VideoGames2SystemsWitComplexeStringValues [
+
+	| collection collections wishListCollection forSellCollection |
+	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_3VideoGames2SystemsWitComplexeStringValues).
+	
+	collection := collections at: #collection.
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection numberOfCollectibles equals: 5.
+	1 to: 3 do:[ :i | self assert: (collection videoGamesCollectibles at: i) isVideoGame ].
+	1 to: 2 do:[ :i | self assert: (collection systemsCollectibles at: i) isSystem ].
 	
 	"check empty collections"
 	wishListCollection := collections at: #wishList.

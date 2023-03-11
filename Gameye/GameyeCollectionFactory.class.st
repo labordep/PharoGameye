@@ -8,6 +8,30 @@ Class {
 	#category : #'Gameye-Core'
 }
 
+{ #category : #private }
+GameyeCollectionFactory class >> checkExportedSpreadsheetParsingProblems: anArray for: aFileReference [
+	| nbLinesInFile readSteam line |
+	self flag:'Method used for debugging during dev'.
+	
+	"Count number of lines of the file"
+	readSteam := aFileReference readStream.
+	line := readSteam nextLine.
+	nbLinesInFile := 0. "not include column head line"	
+	[ line notNil ] whileTrue:[  
+		line := readSteam nextLine. 
+		line ifNotNil:[
+			line isEmpty ifTrue:[ 
+				line := nil 
+			] ifFalse:[
+				nbLinesInFile := nbLinesInFile + 1.
+			].
+		].
+	].
+
+	"Compare with the number of line of the array"
+	Transcript crShow: '[Gameye Spreadsheet Parser] ', anArray size asString ,' / ', nbLinesInFile asString ,' parsed lines.'.
+]
+
 { #category : #'create collection' }
 GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
 	"Return just the collectibles collection (not for sell and wish list collections)"
@@ -73,6 +97,9 @@ GameyeCollectionFactory class >> createCollectionsFromExportedSpreadsheet: aFile
 	readStream := GameyeInputDataUtils prepareExportedSpreadsheetReadStream: aFileReference readStream.
 	array := self parseExportedSpreadsheetReadStream: readStream.
 
+	"Check problems"
+	self checkExportedSpreadsheetParsingProblems: array for: aFileReference.
+	
 	collections := (self createCollectionsFromDataArray: array) ifNil:[ ^ nil ].
 
 	"Check if the date is on the filename and add it to the collection data"
