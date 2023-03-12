@@ -23,7 +23,14 @@ GameyeCollectionFactory class >> createCollectibleFromDataArray: anArray [
 	collectible isOnWishList: (anArray at: 5).
 	collectible title: (anArray at: 6).
 	collectible dateAdded: (anArray at: 9).
+	collectible ownership: (anArray at: 10).
+	collectible priceLoose: (anArray at: 11).
+	collectible priceCIB: (anArray at: 12).
+	collectible priceNew: (anArray at: 13).
+	collectible yourPrice: (anArray at: 14).
 	collectible pricePaid: (anArray at: 15).
+
+	collectible notes: (anArray at: 21).
 
 	"Processing for Video Games"
 	collectible isVideoGame ifTrue:[

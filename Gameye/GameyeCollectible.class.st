@@ -9,7 +9,13 @@ Class {
 		'isOnWishList',
 		'title',
 		'dateAdded',
+		'ownership',
+		'priceLoose',
+		'priceCIB',
+		'priceNew',
+		'yourPrice',
 		'pricePaid',
+		'notes',
 		'rawDatas'
 	],
 	#category : #'Gameye-Model'
@@ -46,6 +52,42 @@ GameyeCollectible >> dateAdded: anObject [
 	dateAdded := anObject
 ]
 
+{ #category : #'testing - ownership' }
+GameyeCollectible >> haveBox [
+
+	^self isBoxed or:[self isBoxedPlus or:[self isManualAndBox or:[self isCIB or:[self isCIBPlus or:[self isSealed]]]]]
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> haveManual [
+
+	^self isManual or:[self isManualAndBox or:[self isCIB or:[self isCIBPlus or:[self isSealed]]]]
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isBoxed [
+
+	^ self ownership = GameyeOwnership boxed
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isBoxedPlus [
+
+	^ self ownership = GameyeOwnership boxedPlus
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isCIB [
+
+	^ self ownership = GameyeOwnership completeInBox
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isCIBPlus [
+
+	^ self ownership = GameyeOwnership completeInBoxPlus
+]
+
 { #category : #accessing }
 GameyeCollectible >> isForSale [
 
@@ -56,6 +98,30 @@ GameyeCollectible >> isForSale [
 GameyeCollectible >> isForSale: anObject [
 
 	isForSale := anObject
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isLoose [
+
+	^ self ownership = GameyeOwnership loose
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isLoosePlus [
+
+	^ self ownership = GameyeOwnership loosePlus
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isManual [
+
+	^ self ownership = GameyeOwnership manual
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isManualAndBox [
+
+	^ self ownership = GameyeOwnership manualAndBox
 ]
 
 { #category : #accessing }
@@ -70,6 +136,12 @@ GameyeCollectible >> isOnWishList: anObject [
 	isOnWishList := anObject
 ]
 
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isOther [
+
+	^ self ownership = GameyeOwnership other
+]
+
 { #category : #accessing }
 GameyeCollectible >> isOwned [
 
@@ -82,40 +154,70 @@ GameyeCollectible >> isOwned: anObject [
 	isOwned := anObject
 ]
 
-{ #category : #testing }
+{ #category : #'testing - type' }
 GameyeCollectible >> isPeripheral [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : #'testing - type' }
 GameyeCollectible >> isPrintMedia [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isSealed [
+
+	^ self ownership = GameyeOwnership sealed
+]
+
+{ #category : #'testing - type' }
 GameyeCollectible >> isSystem [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : #'testing - type' }
 GameyeCollectible >> isToyToLife [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : #'testing - type' }
 GameyeCollectible >> isUnknown [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : #'testing - type' }
 GameyeCollectible >> isVideoGame [
 
 	^ false
+]
+
+{ #category : #accessing }
+GameyeCollectible >> notes [
+
+	^ notes
+]
+
+{ #category : #accessing }
+GameyeCollectible >> notes: anObject [
+
+	notes := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> ownership [
+
+	^ ownership
+]
+
+{ #category : #accessing }
+GameyeCollectible >> ownership: anObject [
+
+	ownership := anObject
 ]
 
 { #category : #accessing }
@@ -128,6 +230,42 @@ GameyeCollectible >> platform [
 GameyeCollectible >> platform: anObject [
 
 	platform := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> priceCIB [
+
+	^ priceCIB
+]
+
+{ #category : #accessing }
+GameyeCollectible >> priceCIB: anObject [
+
+	priceCIB := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> priceLoose [
+
+	^ priceLoose
+]
+
+{ #category : #accessing }
+GameyeCollectible >> priceLoose: anObject [
+
+	priceLoose := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> priceNew [
+
+	^ priceNew
+]
+
+{ #category : #accessing }
+GameyeCollectible >> priceNew: anObject [
+
+	priceNew := anObject
 ]
 
 { #category : #accessing }
@@ -170,4 +308,16 @@ GameyeCollectible >> title: anObject [
 GameyeCollectible >> type [
 
 	^ type ifNil: [ type := self class type ]
+]
+
+{ #category : #accessing }
+GameyeCollectible >> yourPrice [
+
+	^ yourPrice
+]
+
+{ #category : #accessing }
+GameyeCollectible >> yourPrice: anObject [
+
+	yourPrice := anObject
 ]
