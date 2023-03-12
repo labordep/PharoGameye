@@ -132,12 +132,30 @@ GameyeCollectibleTest >> testInitialize [
 ]
 
 { #category : #tests }
+GameyeCollectibleTest >> testIsCIB [
+
+	| collectible |
+	collectible := GameyeCollectible new.
+	collectible ownership: GameyeOwnership completeInBox.
+	self assert: collectible isCIB
+]
+
+{ #category : #tests }
 GameyeCollectibleTest >> testIsForSale [
 
 	| collectible |
 	collectible := GameyeCollectible new.
 	collectible isForSale: true.
 	self assert: collectible isForSale
+]
+
+{ #category : #tests }
+GameyeCollectibleTest >> testIsLoose [
+
+	| collectible |
+	collectible := GameyeCollectible new.
+	collectible ownership: GameyeOwnership loose.
+	self assert: collectible isLoose
 ]
 
 { #category : #tests }
@@ -156,6 +174,26 @@ GameyeCollectibleTest >> testIsOwned [
 	collectible := GameyeCollectible new.
 	collectible isOwned: true.
 	self assert: collectible isOwned
+]
+
+{ #category : #tests }
+GameyeCollectibleTest >> testIsSealed [
+
+	| collectible |
+	collectible := GameyeCollectible new.
+	collectible ownership: GameyeOwnership sealed.
+	self assert: collectible isSealed
+]
+
+{ #category : #tests }
+GameyeCollectibleTest >> testNotes [
+
+	| collectible |
+	collectible := GameyeCollectible new.
+	collectible notes: 'Test
+notes'.
+	self assert: collectible notes equals: 'Test
+notes'
 ]
 
 { #category : #tests }

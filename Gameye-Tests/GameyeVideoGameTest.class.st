@@ -87,7 +87,20 @@ GameyeVideoGameTest >> testInitialize [
 	videoGame := GameyeVideoGame new.
 	self assert: videoGame type equals: GameyeVideoGame type.
 	self assert: videoGame publisher isNil.
-	self assert: videoGame developer isNil
+	self assert: videoGame developer isNil.
+
+	"Ownership"
+	self assert: videoGame haveGame equals: false.
+	self assert: videoGame isDigital equals: false
+]
+
+{ #category : #tests }
+GameyeVideoGameTest >> testIsDigital [
+
+	| videoGame |
+	videoGame := GameyeVideoGame new.
+	videoGame ownership: GameyeOwnership digital.
+	self assert: videoGame isDigital
 ]
 
 { #category : #tests }
