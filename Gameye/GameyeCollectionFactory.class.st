@@ -13,7 +13,7 @@ GameyeCollectionFactory class >> createCollectibleFromDataArray: anArray [
 	| collectible |
 
 	anArray ifNil: [ ^ nil ].
-	anArray size = self numberOfExportedSpreadsheetColumns ifFalse:[ ^ nil ].
+	anArray size = GameyeInputDataUtils numberOfExportedSpreadsheetColumns ifFalse:[ ^ nil ].
 
 	"Create the collectible"
 	collectible := GameyeCollectible type: (anArray at: 2).
@@ -124,12 +124,6 @@ GameyeCollectionFactory class >> createWishListCollectionFromExportedSpreadsheet
 	^ collections at: GameyeCollection wish
 ]
 
-{ #category : #accessing }
-GameyeCollectionFactory class >> exportedSpreadsheetColumn01Title [
-
-	^ 'Platform'
-]
-
 { #category : #private }
 GameyeCollectionFactory class >> getDateFromExportedSpreadsheetFilename: aString [
 
@@ -141,12 +135,6 @@ GameyeCollectionFactory class >> getDateFromExportedSpreadsheetFilename: aString
 
 	a := (aString substrings: '_').
 	^ Date newDay: (a at: 2) asInteger month: (a at: 1) asInteger year: (a at: 3) asInteger
-]
-
-{ #category : #accessing }
-GameyeCollectionFactory class >> numberOfExportedSpreadsheetColumns [
-
-	^ 21
 ]
 
 { #category : #private }

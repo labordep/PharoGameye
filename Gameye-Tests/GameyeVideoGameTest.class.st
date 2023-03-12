@@ -13,6 +13,15 @@ GameyeVideoGameTest >> testConstructor [
 ]
 
 { #category : #tests }
+GameyeVideoGameTest >> testDeveloper [
+
+	| videoGame |
+	videoGame := GameyeVideoGame new.
+	videoGame developer: 'Nintendo'.
+	self assert: videoGame developer equals: 'Nintendo'
+]
+
+{ #category : #tests }
 GameyeVideoGameTest >> testInitialize [
 
 	| videoGame |
@@ -20,4 +29,13 @@ GameyeVideoGameTest >> testInitialize [
 	self assert: videoGame type equals: GameyeVideoGame type.
 	self assert: videoGame publisher isNil.
 	self assert: videoGame developer isNil
+]
+
+{ #category : #tests }
+GameyeVideoGameTest >> testPublisher [
+
+	| videoGame |
+	videoGame := GameyeVideoGame new.
+	videoGame publisher: 'Nintendo'.
+	self assert: videoGame publisher equals: 'Nintendo'
 ]

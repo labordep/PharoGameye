@@ -7,6 +7,24 @@ Class {
 	#category : #'Gameye-Tests-Model'
 }
 
+{ #category : #utils }
+GameyeCollectionTest class >> createOwnedCollection [
+	"Create a test collection with owned collectibles"
+
+	| collection |
+	collection := GameyeCollection new.
+	collection name: 'OwnedTestCollection'.
+	collection addCollectible: (GameyeVideoGame new title: 'Game1'; platform: 'N64'; developer: 'Nintendo'; publisher: 'Nintendo'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
+	collection addCollectible: (GameyeVideoGame new title: 'Game2'; platform: 'N64'; developer: 'Nintendo'; publisher: 'Nintendo'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 0).
+	collection addCollectible: (GameyeVideoGame new title: 'Game3'; platform: 'N64'; developer: 'Nintendo'; publisher: 'Nintendo'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
+	collection addCollectible: (GameyeVideoGame new title: 'Game4'; platform: 'N64'; developer: 'Nintendo'; publisher: 'Nintendo'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: nil).
+	collection addCollectible: (GameyeVideoGame new title: 'Game5'; platform: 'N64'; developer: 'Nintendo'; publisher: 'Nintendo'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
+
+	collection collectibles do:[ :c | c isOwned: true ].
+
+	^collection
+]
+
 { #category : #tests }
 GameyeCollectionTest >> testAddCollectible [
 
@@ -21,6 +39,23 @@ GameyeCollectionTest >> testAddCollectible [
 	collection addCollectible: nil.
 	self assert: collection haveUnknowns equals: true.
 	self assert: collection numberOfCollectibles equals: 1
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testCollectibles [
+
+	| collection |
+	collection := self class createOwnedCollection.
+	self assert: collection collectibles size equals: 5.
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testDate [
+
+	| collection |
+	collection := GameyeCollection new.
+	collection date: (Date newDay: 1 month: 5 year: 2021).
+	self assert: collection date equals: (Date newDay: 1 month: 5 year: 2021)
 ]
 
 { #category : #tests }
@@ -66,6 +101,14 @@ GameyeCollectionTest >> testName [
 ]
 
 { #category : #tests }
+GameyeCollectionTest >> testNumberOfCollectibles [
+
+	| collection |
+	collection := self class createOwnedCollection.
+	self assert: collection numberOfCollectibles equals: 5
+]
+
+{ #category : #tests }
 GameyeCollectionTest >> testPeripheralsCollectibles [
 
 	| collectible collection |
@@ -74,6 +117,14 @@ GameyeCollectionTest >> testPeripheralsCollectibles [
 	collection addCollectible: collectible.
 	self assert: collection peripheralsCollectibles size equals: 1.
 	self assert: collection peripheralsCollectibles first equals: collectible
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testPricePaid [
+
+	| collection |
+	collection := self class createOwnedCollection.
+	self assert: collection pricePaid equals: 15
 ]
 
 { #category : #tests }

@@ -197,7 +197,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 	collectible := collection unknownsCollectibles first.
 	self assert: collectible isUnknown.
 	self assert: collectible dateAdded equals: (Date newDay: 13 month: 9 year: 2021).
-	self assert: collectible rawDatas size equals: GameyeCollectionFactory numberOfExportedSpreadsheetColumns.
+	self assert: collectible rawDatas size equals: GameyeInputDataUtils numberOfExportedSpreadsheetColumns.
 
 	self assertWishAndForSellCollectionsAreEmpty: collections
 ]

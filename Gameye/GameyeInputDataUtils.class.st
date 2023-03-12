@@ -8,39 +8,75 @@ Class {
 	#category : #'Gameye-Core'
 }
 
+{ #category : #accessing }
+GameyeInputDataUtils class >> exportedSpreadsheetColumn01Title [
+
+	^ 'Platform'
+]
+
+{ #category : #accessing }
+GameyeInputDataUtils class >> exportedSpreadsheetPeripheralType [
+
+	^ '"Peripherals"'
+]
+
+{ #category : #accessing }
+GameyeInputDataUtils class >> exportedSpreadsheetPrintMediaType [
+
+	^ '"Print Media"'
+]
+
+{ #category : #accessing }
+GameyeInputDataUtils class >> exportedSpreadsheetSystemType [
+
+	^ '"Systems"'
+]
+
+{ #category : #accessing }
+GameyeInputDataUtils class >> exportedSpreadsheetVideoGameType [
+
+	^ '"VideoGame"'
+]
+
 { #category : #private }
 GameyeInputDataUtils class >> extractCellsFromLine: aString [
 	| cells newCells safeCells type |
 
 	cells := aString substrings: ','.
-	cells size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifTrue:[ ^ cells asArray ].
+	cells size = self numberOfExportedSpreadsheetColumns ifTrue:[ ^ cells asArray ].
 
 	"Recreate cells from 1 to 5 (no problematic cells)"
 	newCells := OrderedCollection new.
 	safeCells := newCells copy asArray.
 	1 to: 5 do:[ :i | newCells add: (cells at: i) ].
-	
+
 	"Not found case : why this case can be possible ?"
-	cells size > GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifFalse:[ ^ safeCells ].
-	
+	cells size > self numberOfExportedSpreadsheetColumns ifFalse:[ ^ safeCells ].
+
 	"Processing for VideoGames or Systems"
 	type := cells at: 2.
-	(type = '"VideoGame"' or:[type = '"Systems"' or:[type = '"Peripherals"']]) ifTrue:[ | rebuildedCells |
-		
-		"A comma or more are inside datas, probably inside string datas as title or editor name or comment (etc.). 
+	(type = self exportedSpreadsheetVideoGameType or:[type = self exportedSpreadsheetSystemType or:[type = self exportedSpreadsheetPeripheralType]]) ifTrue:[ | rebuildedCells |
+
+		"A comma or more are inside datas, probably inside string datas as title or editor name or comment (etc.).
 		Try to cut manually and format the comma into HTML code &#44; to ignor the comma during parsing"
-		
+
 		"Problematic cells : 6, 7, 8, 21, extract all cells of the array to rebuild the correct number of cell"
 		rebuildedCells := self rebuildCells: (cells copyFrom: 6 to: cells size).
 		newCells addAll: rebuildedCells.
 	].
-	
-	newCells size ~= GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifTrue:[
+
+	newCells size ~= self numberOfExportedSpreadsheetColumns ifTrue:[
 		"Not found case : why this case can be possible ?"
 		^ safeCells
 	].
-	
+
 	^newCells asArray
+]
+
+{ #category : #accessing }
+GameyeInputDataUtils class >> numberOfExportedSpreadsheetColumns [
+
+	^ 21
 ]
 
 { #category : #formatting }
@@ -53,8 +89,8 @@ GameyeInputDataUtils class >> prepareExportedSpreadsheetReadStream: aReadstream 
 	"Check if the first line (normally it's columns head) have the good number of columns and the good first title"
 	line := aReadstream nextLine.
 	columns := (line substrings: ',').
-	columns size = GameyeCollectionFactory numberOfExportedSpreadsheetColumns ifFalse: [ ^ nil ].
-	columns first = GameyeCollectionFactory exportedSpreadsheetColumn01Title ifFalse:[ ^ nil ].
+	columns size = self numberOfExportedSpreadsheetColumns ifFalse: [ ^ nil ].
+	columns first = self exportedSpreadsheetColumn01Title ifFalse:[ ^ nil ].
 
 	"Build the new stream"
 	fixedStream := ReadWriteStream on: String new.
@@ -69,7 +105,7 @@ GameyeInputDataUtils class >> prepareExportedSpreadsheetReadStream: aReadstream 
 		cells do:[ :cell | | formattedCell |
 
 			"Print media type as a symbol without space"
-			(columnId = 2 and:[cell = '"Print Media"']) ifTrue:[
+			(columnId = 2 and:[cell = self exportedSpreadsheetPrintMediaType]) ifTrue:[
 				formattedCell := '"PrintMedia"'.
 			] ifFalse:[
 				"Remove not necessary spaces at the start or the end"
@@ -95,39 +131,38 @@ GameyeInputDataUtils class >> prepareExportedSpreadsheetReadStream: aReadstream 
 { #category : #private }
 GameyeInputDataUtils class >> rebuildCells: aCellsArray [
 	| newCells |
-	
-	newCells := OrderedCollection new.	
-	
+
+	newCells := OrderedCollection new.
 	1 to: aCellsArray size do:[ :index | | cell previousCell currentCell nextCell cells |
 
 		previousCell := ((index - 1) > 0) ifTrue:[aCellsArray at: (index - 1)] ifFalse:[nil].
 		currentCell := aCellsArray at: index.
 		nextCell := (aCellsArray size >= (index + 1)) ifTrue:[aCellsArray at: (index + 1)] ifFalse:[nil].
-		
+
 		"Remove no necessary blanks"
 		cell := currentCell withBlanksCondensed.
-		
+
 		"Check if the begin and the end of the cell are quotes, if not this is probably that the cell contains a comma and try to recompose with next cell"
 		(cell first = $" and:[cell last = $"]) ifTrue:[
 			newCells add: cell.
 		] ifFalse:[
-			nextCell isNil ifFalse:[
+			nextCell ifNotNil:[
 				"Problem detected : a comma is present in the string, recompose the string with the next cell"
 				currentCell := currentCell,'&#44;', nextCell.
-				
+
 				"Rebuild all the cells with removing the next cell"
 				cells := OrderedCollection with: currentCell.
 				cells addAll: (aCellsArray copyFrom: (index + 2) to: (aCellsArray size)).
-				
+
 				newCells := newCells asOrderedCollection.
-				newCells addAll: (self rebuildCells: cells).				
+				newCells addAll: (self rebuildCells: cells).
 				^ newCells asArray
-				
-			] ifTrue:[self halt:'Unknown case'].
+
+			].
 		].
-		
+
 	].
-	
+
 	^newCells asArray
 ]
 
