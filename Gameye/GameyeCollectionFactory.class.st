@@ -29,13 +29,17 @@ GameyeCollectionFactory class >> createCollectibleFromDataArray: anArray [
 	collectible priceNew: (anArray at: 13).
 	collectible yourPrice: (anArray at: 14).
 	collectible pricePaid: (anArray at: 15).
-
+	collectible itemCondition: (anArray at: 16).
+	collectible boxCondition: (anArray at: 17).
+	collectible manualCondition: (anArray at: 18).
 	collectible notes: (anArray at: 21).
 
 	"Processing for Video Games"
 	collectible isVideoGame ifTrue:[
 		collectible publisher: (anArray at: 7).
 		collectible developer: (anArray at: 8).
+		collectible isBeat: (anArray at: 19).
+		collectible playedCompletion: (anArray at: 20).
 	].
 
 	"Processing for unknown collectible : conserve original datas to have a post analyse"
@@ -168,13 +172,15 @@ GameyeCollectionFactory class >> parseExportedSpreadsheetReadStream: aReadStream
 		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "PriceNew"
 		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "YourPrice"
 		addFieldConverter: [ :string | self parseNeoNumberString: string ]; "PricePaid"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ItemCondition"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "BoxCondition"
-		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [-1] ]; "ManualCondition"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [nil] ]; "ItemCondition"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [nil] ]; "BoxCondition"
+		addFieldConverter: [ :string | NeoNumberParser parse: string ifFail: [nil] ]; "ManualCondition"
 		addField; "Beat"
 		addField; "PlayedCompletion"
 		addField; "Notes"
 		upToEnd.
+
+	self flag:'TODO : Beat as a boolean, played completion as an Integer (%)'.
 
 	^array
 ]

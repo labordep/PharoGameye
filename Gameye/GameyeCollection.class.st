@@ -75,6 +75,12 @@ GameyeCollection >> collectibles [
 	^collectibles
 ]
 
+{ #category : #'collectibles - query' }
+GameyeCollection >> collectiblesForPlatform: aString [
+
+	^ self collectibles select:[ :c | c platform = aString ]
+]
+
 { #category : #accessing }
 GameyeCollection >> date [
 
@@ -85,6 +91,44 @@ GameyeCollection >> date [
 GameyeCollection >> date: aDate [
 
 	date := aDate
+]
+
+{ #category : #private }
+GameyeCollection >> duplicated: aCollectibleList [
+
+	| identifiers duplicated |
+	identifiers := Dictionary new.
+	aCollectibleList do:[ :collectible | | identifier coll |
+		identifier := collectible asIdentifierString.
+		(identifiers includesKey: identifier) ifTrue:[
+			coll := identifiers at: identifier.
+			coll add: collectible.
+		] ifFalse:[
+			identifiers at: identifier put: (OrderedCollection with: collectible).
+		].
+	].
+
+	duplicated := OrderedCollection new.
+	identifiers values select:[ :coll | coll size > 1 ] thenDo:[ :coll | duplicated addAll: coll ].
+	^ duplicated
+]
+
+{ #category : #'collectibles - query' }
+GameyeCollection >> duplicatedPeripherals [
+
+	^ self duplicated: self peripheralsCollectibles
+]
+
+{ #category : #'collectibles - query' }
+GameyeCollection >> duplicatedSystems [
+
+	^ self duplicated: self systemsCollectibles
+]
+
+{ #category : #'collectibles - query' }
+GameyeCollection >> duplicatedVideoGames [
+
+	^ self duplicated: self videoGamesCollectibles
 ]
 
 { #category : #testing }
@@ -193,13 +237,19 @@ GameyeCollection >> peripheralsCollectibles [
 	^self peripherals asOrderedCollection
 ]
 
+{ #category : #'collectibles - query' }
+GameyeCollection >> peripheralsForPlatform: aString [
+
+	^ self peripheralsCollectibles select:[ :c | c platform = aString ]
+]
+
 { #category : #statistics }
 GameyeCollection >> pricePaid [
 	"Return price paid for all collectibles"
-	| pricePaid |
-	pricePaid := 0.
-	self collectibles do: [ :c | c pricePaid ifNotNil:[ :p | pricePaid := pricePaid + p ] ].
-	^ pricePaid
+	| price |
+	price := 0.
+	self collectibles do: [ :c | c pricePaid ifNotNil:[ :p | price := price + p ] ].
+	^ price
 ]
 
 { #category : #accessing }
@@ -263,6 +313,12 @@ GameyeCollection >> systemsCollectibles [
 	^self systems asOrderedCollection
 ]
 
+{ #category : #'collectibles - query' }
+GameyeCollection >> systemsForPlatform: aString [
+
+	^ self systemsCollectibles select:[ :c | c platform = aString ]
+]
+
 { #category : #accessing }
 GameyeCollection >> toysToLife [
 
@@ -315,4 +371,25 @@ GameyeCollection >> videoGames: anObject [
 GameyeCollection >> videoGamesCollectibles [
 
 	^self videoGames asOrderedCollection
+]
+
+{ #category : #'collectibles - query' }
+GameyeCollection >> videoGamesForPlatform: aString [
+
+	^ self videoGamesCollectibles select:[ :c | c platform = aString ]
+]
+
+{ #category : #'collectibles - query' }
+GameyeCollection >> videoGamesForPublisher: aString [
+
+	^ self videoGamesCollectibles select:[ :c | c publisher = aString ]
+]
+
+{ #category : #statistics }
+GameyeCollection >> yourPrice [
+	"Return price estimation (your price) of all the collectibles"
+	| price |
+	price := 0.
+	self collectibles do: [ :c | c yourPrice ifNotNil:[ :p | price := price + p ] ].
+	^ price
 ]

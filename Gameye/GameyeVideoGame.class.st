@@ -3,7 +3,9 @@ Class {
 	#superclass : #GameyeCollectible,
 	#instVars : [
 		'publisher',
-		'developer'
+		'developer',
+		'playedCompletion',
+		'isBeat'
 	],
 	#category : #'Gameye-Model'
 }
@@ -12,6 +14,17 @@ Class {
 GameyeVideoGame class >> type [
 
 	^ #VideoGame
+]
+
+{ #category : #converting }
+GameyeVideoGame >> asIdentifierString [
+	"Return a value corresponding to a unique identifier string, i.e. to compare more games and detect which are the sames"
+
+	^ super asIdentifierString,
+		'-',
+		(self publisher ifNil:[ 'Unknown Publisher' ] asString),
+		'-',
+		(self developer ifNil:[ 'Unknown Developer' ] asString)
 ]
 
 { #category : #accessing }
@@ -46,6 +59,18 @@ GameyeVideoGame >> haveManual [
 	^ super haveManual
 ]
 
+{ #category : #accessing }
+GameyeVideoGame >> isBeat [
+
+	^ isBeat ifNil:[ isBeat := false ]
+]
+
+{ #category : #accessing }
+GameyeVideoGame >> isBeat: anObject [
+
+	isBeat := anObject
+]
+
 { #category : #'testing - ownership' }
 GameyeVideoGame >> isDigital [
 
@@ -56,6 +81,18 @@ GameyeVideoGame >> isDigital [
 GameyeVideoGame >> isVideoGame [
 
 	^ true
+]
+
+{ #category : #accessing }
+GameyeVideoGame >> playedCompletion [
+
+	^ playedCompletion
+]
+
+{ #category : #accessing }
+GameyeVideoGame >> playedCompletion: anObject [
+
+	playedCompletion := anObject
 ]
 
 { #category : #accessing }

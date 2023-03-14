@@ -15,6 +15,9 @@ Class {
 		'priceNew',
 		'yourPrice',
 		'pricePaid',
+		'itemCondition',
+		'boxCondition',
+		'manualCondition',
 		'notes',
 		'rawDatas'
 	],
@@ -38,6 +41,29 @@ GameyeCollectible class >> type: aSymbol [
 	
 	self allSubclassesDo: [ :c | c type = aSymbol ifTrue:[ ^ c new ] ].
 	^ self new
+]
+
+{ #category : #converting }
+GameyeCollectible >> asIdentifierString [
+	"Return a value corresponding to a unique identifier string, i.e. to compare more games and detect which are the sames"
+
+	^ (self type asString) ,
+		'-',
+	 	(self title ifNil:[ 'Unknown Title' ] asString) ,
+		'-',
+		(self platform ifNil:[ 'Unknown Platform' ] asString)
+]
+
+{ #category : #accessing }
+GameyeCollectible >> boxCondition [
+
+	^ boxCondition
+]
+
+{ #category : #accessing }
+GameyeCollectible >> boxCondition: anObject [
+
+	boxCondition := anObject
 ]
 
 { #category : #accessing }
@@ -194,6 +220,30 @@ GameyeCollectible >> isUnknown [
 GameyeCollectible >> isVideoGame [
 
 	^ false
+]
+
+{ #category : #accessing }
+GameyeCollectible >> itemCondition [
+
+	^ itemCondition
+]
+
+{ #category : #accessing }
+GameyeCollectible >> itemCondition: anObject [
+
+	itemCondition := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> manualCondition [
+
+	^ manualCondition
+]
+
+{ #category : #accessing }
+GameyeCollectible >> manualCondition: anObject [
+
+	manualCondition := anObject
 ]
 
 { #category : #accessing }
