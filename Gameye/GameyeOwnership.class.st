@@ -17,7 +17,26 @@ GameyeOwnership class >> CIBPlus [
 ]
 
 { #category : #enumerating }
+GameyeOwnership class >> box [
+
+	^#B
+]
+
+{ #category : #enumerating }
+GameyeOwnership class >> boxAndManual [
+
+	^self manualAndBox
+]
+
+{ #category : #enumerating }
+GameyeOwnership class >> boxAndOther [
+
+	^#'B+O'
+]
+
+{ #category : #enumerating }
 GameyeOwnership class >> boxed [
+	"Game + Box"
 
 	^#Boxed
 ]
@@ -71,9 +90,27 @@ GameyeOwnership class >> manualAndBox [
 ]
 
 { #category : #enumerating }
+GameyeOwnership class >> manualAndOther [
+
+	^#'M+O'
+]
+
+{ #category : #enumerating }
 GameyeOwnership class >> other [
 
 	^#O
+]
+
+{ #category : #enumerating }
+GameyeOwnership class >> otherAndBox [
+
+	^self boxAndOther
+]
+
+{ #category : #enumerating }
+GameyeOwnership class >> otherAndManual [
+
+	^self manualAndOther
 ]
 
 { #category : #enumerating }

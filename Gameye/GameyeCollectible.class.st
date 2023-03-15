@@ -47,11 +47,7 @@ GameyeCollectible class >> type: aSymbol [
 GameyeCollectible >> asIdentifierString [
 	"Return a value corresponding to a unique identifier string, i.e. to compare more games and detect which are the sames"
 
-	^ (self type asString) ,
-		'-',
-	 	(self title ifNil:[ 'Unknown Title' ] asString) ,
-		'-',
-		(self platform ifNil:[ 'Unknown Platform' ] asString)
+	^ String streamContents: [ :stream | self printIdentifierOn: stream ]
 ]
 
 { #category : #accessing }
@@ -81,13 +77,31 @@ GameyeCollectible >> dateAdded: anObject [
 { #category : #'testing - ownership' }
 GameyeCollectible >> haveBox [
 
-	^self isBoxed or:[self isBoxedPlus or:[self isManualAndBox or:[self isCIB or:[self isCIBPlus or:[self isSealed]]]]]
+	^self isBoxed or:[self isBoxedPlus or:[self isManualAndBox or:[self isCIB or:[self isCIBPlus or:[self isSealed or:[self isBox or:[self isBoxAndOther]]]]]]]
 ]
 
 { #category : #'testing - ownership' }
 GameyeCollectible >> haveManual [
 
-	^self isManual or:[self isManualAndBox or:[self isCIB or:[self isCIBPlus or:[self isSealed]]]]
+	^self isManual or:[self isManualAndBox or:[self isCIB or:[self isCIBPlus or:[self isSealed or:[self isManualAndOther]]]]]
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isBox [
+
+	^ self ownership = GameyeOwnership box
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isBoxAndManual [
+
+	^ self isManualAndBox
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isBoxAndOther [
+
+	^ self ownership = GameyeOwnership boxAndOther
 ]
 
 { #category : #'testing - ownership' }
@@ -150,6 +164,12 @@ GameyeCollectible >> isManualAndBox [
 	^ self ownership = GameyeOwnership manualAndBox
 ]
 
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isManualAndOther [
+
+	^ self ownership = GameyeOwnership manualAndOther
+]
+
 { #category : #accessing }
 GameyeCollectible >> isOnWishList [
 
@@ -166,6 +186,18 @@ GameyeCollectible >> isOnWishList: anObject [
 GameyeCollectible >> isOther [
 
 	^ self ownership = GameyeOwnership other
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isOtherAndBox [
+
+	^ self isBoxAndOther
+]
+
+{ #category : #'testing - ownership' }
+GameyeCollectible >> isOtherAndManual [
+
+	^ self isManualAndOther
 ]
 
 { #category : #accessing }
@@ -328,6 +360,23 @@ GameyeCollectible >> pricePaid [
 GameyeCollectible >> pricePaid: anObject [
 
 	pricePaid := anObject
+]
+
+{ #category : #printing }
+GameyeCollectible >> printIdentifierOn: aStream [
+
+	aStream
+		nextPutAll: self type;
+		nextPutAll: '-';
+		nextPutAll: (self title ifNil:[ 'Unknown Title' ]);
+		nextPutAll: '-';
+		nextPutAll: (self platform ifNil:[ 'Unknown Platform' ])
+]
+
+{ #category : #printing }
+GameyeCollectible >> printOn: aStream [
+
+	^self printIdentifierOn: aStream
 ]
 
 { #category : #raw }

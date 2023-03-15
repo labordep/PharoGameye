@@ -81,6 +81,12 @@ GameyeCollection >> collectiblesForPlatform: aString [
 	^ self collectibles select:[ :c | c platform = aString ]
 ]
 
+{ #category : #'collectibles - query' }
+GameyeCollection >> collectiblesForTitle: aString [
+
+	^ self collectibles select:[ :c | c title = aString ]
+]
+
 { #category : #accessing }
 GameyeCollection >> date [
 
@@ -217,6 +223,12 @@ GameyeCollection >> numberOfCollectibles [
 	+ self toysToLife size
 	+ self printMedias size
 	+ self unknowns size
+]
+
+{ #category : #statistics }
+GameyeCollection >> numberOfVideoGames [
+
+	^ self videoGames size
 ]
 
 { #category : #accessing }
@@ -371,6 +383,12 @@ GameyeCollection >> videoGames: anObject [
 GameyeCollection >> videoGamesCollectibles [
 
 	^self videoGames asOrderedCollection
+]
+
+{ #category : #'collectibles - query' }
+GameyeCollection >> videoGamesForDeveloper: aString [
+
+	^ self videoGamesCollectibles select:[ :c | c developer = aString ]
 ]
 
 { #category : #'collectibles - query' }

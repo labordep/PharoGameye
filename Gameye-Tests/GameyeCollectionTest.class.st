@@ -38,7 +38,20 @@ GameyeCollectionTest >> testAddCollectible [
 	"Bad cases"
 	collection addCollectible: nil.
 	self assert: collection haveUnknowns equals: true.
-	self assert: collection numberOfCollectibles equals: 1
+	self assert: collection numberOfCollectibles equals: 1.
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testAddSameCollectible [
+
+	| collection duplicated size |
+	collection := self class createOwnedCollection.
+	size := collection numberOfVideoGames.
+	duplicated := collection videoGamesCollectibles first.
+	1 to: 5 do:[ :i |
+		collection addCollectible: duplicated.
+	].
+	self assert: collection videoGamesCollectibles size equals: size.
 ]
 
 { #category : #tests }
@@ -56,6 +69,36 @@ GameyeCollectionTest >> testDate [
 	collection := GameyeCollection new.
 	collection date: (Date newDay: 1 month: 5 year: 2021).
 	self assert: collection date equals: (Date newDay: 1 month: 5 year: 2021)
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testDuplicatedPeripherals [
+
+	| collection |
+	collection := self class createOwnedCollection.
+	self assert: collection duplicatedPeripherals isEmpty.
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testDuplicatedSystems [
+
+	| collection |
+	collection := self class createOwnedCollection.
+	self assert: collection duplicatedSystems isEmpty.
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testDuplicatedVideoGames [
+
+	| collection duplicated |
+	collection := self class createOwnedCollection.
+	self assert: collection duplicatedVideoGames isEmpty.
+
+	duplicated := collection videoGamesCollectibles first.
+	1 to: 5 do:[ :i |
+		collection addCollectible: duplicated copy.
+	].
+	self assert: collection duplicatedVideoGames size equals: 6.
 ]
 
 { #category : #tests }
@@ -106,6 +149,14 @@ GameyeCollectionTest >> testNumberOfCollectibles [
 	| collection |
 	collection := self class createOwnedCollection.
 	self assert: collection numberOfCollectibles equals: 5
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testNumberOfVideoGames [
+
+	| collection |
+	collection := self class createOwnedCollection.
+	self assert: collection numberOfVideoGames equals: 5
 ]
 
 { #category : #tests }

@@ -16,17 +16,6 @@ GameyeVideoGame class >> type [
 	^ #VideoGame
 ]
 
-{ #category : #converting }
-GameyeVideoGame >> asIdentifierString [
-	"Return a value corresponding to a unique identifier string, i.e. to compare more games and detect which are the sames"
-
-	^ super asIdentifierString,
-		'-',
-		(self publisher ifNil:[ 'Unknown Publisher' ] asString),
-		'-',
-		(self developer ifNil:[ 'Unknown Developer' ] asString)
-]
-
 { #category : #accessing }
 GameyeVideoGame >> developer [
 
@@ -93,6 +82,16 @@ GameyeVideoGame >> playedCompletion [
 GameyeVideoGame >> playedCompletion: anObject [
 
 	playedCompletion := anObject
+]
+
+{ #category : #printing }
+GameyeVideoGame >> printIdentifierOn: aStream [
+
+	super printIdentifierOn: aStream.
+	aStream nextPutAll:	'-';
+		nextPutAll: (self publisher ifNil:[ 'Unknown Publisher' ]);
+		nextPutAll: '-';
+		nextPutAll: (self developer ifNil:[ 'Unknown Developer' ])
 ]
 
 { #category : #accessing }

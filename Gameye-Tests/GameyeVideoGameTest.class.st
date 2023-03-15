@@ -5,6 +5,31 @@ Class {
 }
 
 { #category : #tests }
+GameyeVideoGameTest >> testAsIdentifierString [
+
+	| videoGame |
+	videoGame := GameyeVideoGame new.
+	self assert: videoGame asIdentifierString
+		equals: 'VideoGame-Unknown Title-Unknown Platform-Unknown Publisher-Unknown Developer'.
+
+	videoGame title: 'TestTitle'.
+	self assert: videoGame asIdentifierString
+		equals: 'VideoGame-TestTitle-Unknown Platform-Unknown Publisher-Unknown Developer'.
+
+	videoGame platform: 'TestPlatform'.
+	self assert: videoGame asIdentifierString
+		equals: 'VideoGame-TestTitle-TestPlatform-Unknown Publisher-Unknown Developer'.
+
+	videoGame publisher: 'TestPublisher'.
+	self assert: videoGame asIdentifierString
+		equals: 'VideoGame-TestTitle-TestPlatform-TestPublisher-Unknown Developer'.
+
+	videoGame developer: 'TestDeveloper'.
+	self assert: videoGame asIdentifierString
+		equals: 'VideoGame-TestTitle-TestPlatform-TestPublisher-TestDeveloper'
+]
+
+{ #category : #tests }
 GameyeVideoGameTest >> testConstructor [
 
 	| videoGame |

@@ -8,6 +8,23 @@ Class {
 }
 
 { #category : #tests }
+GameyeCollectibleTest >> testAsIdentifierString [
+
+	| collectible |
+	collectible := GameyeCollectible new.
+	self assert: collectible asIdentifierString
+		equals: 'Collectible-Unknown Title-Unknown Platform'.
+
+	collectible title: 'TestTitle'.
+	self assert: collectible asIdentifierString
+		equals: 'Collectible-TestTitle-Unknown Platform'.
+
+	collectible platform: 'TestPlatform'.
+	self assert: collectible asIdentifierString
+		equals: 'Collectible-TestTitle-TestPlatform'
+]
+
+{ #category : #tests }
 GameyeCollectibleTest >> testDateAdded [
 
 	| collectible |
@@ -23,6 +40,12 @@ GameyeCollectibleTest >> testHaveBox [
 	collectible := GameyeCollectible new.
 
 	"True cases"
+	collectible ownership: GameyeOwnership box.
+	self assert: collectible haveBox equals: true.
+	
+	collectible ownership: GameyeOwnership boxAndOther.
+	self assert: collectible haveBox equals: true.
+	
 	collectible ownership: GameyeOwnership boxed.
 	self assert: collectible haveBox equals: true.
 
@@ -65,7 +88,14 @@ GameyeCollectibleTest >> testHaveManual [
 	collectible ownership: GameyeOwnership manual.
 	self assert: collectible haveManual equals: true.
 
+	"collectible ownership: GameyeOwnership loosePlus.
+	self assert: collectible haveManual equals: true." 
+	self flag:'PLA : Loose plus is a problem because there is no way to knows if the "plus" is a manual or other...'.
+
 	collectible ownership: GameyeOwnership manualAndBox.
+	self assert: collectible haveManual equals: true.
+
+	collectible ownership: GameyeOwnership manualAndOther.
 	self assert: collectible haveManual equals: true.
 
 	collectible ownership: GameyeOwnership completeInBox.
@@ -85,9 +115,6 @@ GameyeCollectibleTest >> testHaveManual [
 	self assert: collectible haveManual equals: false.
 
 	collectible ownership: GameyeOwnership loose.
-	self assert: collectible haveManual equals: false.
-
-	collectible ownership: GameyeOwnership loosePlus.
 	self assert: collectible haveManual equals: false.
 
 	collectible ownership: GameyeOwnership other.
@@ -212,6 +239,14 @@ GameyeCollectibleTest >> testPlatform [
 	collectible := GameyeCollectible new.
 	collectible platform: 'TestPlatform'.
 	self assert: collectible platform equals: 'TestPlatform'
+]
+
+{ #category : #tests }
+GameyeCollectibleTest >> testPrintString [
+
+	| collectible |
+	collectible := GameyeCollectible new.
+	self assert: collectible printString equals: collectible asIdentifierString
 ]
 
 { #category : #tests }
