@@ -2,12 +2,14 @@
 
 ![image](https://user-images.githubusercontent.com/49183340/224508985-aafac0c0-2247-4d01-8daa-6204033367dc.png)
 
-GAMEYE.app tools for Pharo.
+GAMEYE.app collection mobile App model and tools for Pharo.
+
+![image](https://user-images.githubusercontent.com/49183340/225460239-aa9b1bff-e7c0-41ed-a2c7-f2947dbeb2c0.png)
 
 ## Functionnalities
 
-- Complete Gameye App model : ```Collection```, ```VideoGame```, ```System```, ```Peripheral```, ```ToyToLife``` and ```PrintMedia```.
-- Exported spreadsheet parsing (.csv) for owned list, wish list and for sell list.
+- Gameye App model : ```Collection```, ```VideoGame```, ```System```, ```Peripheral```, ```ToyToLife``` and ```PrintMedia```.
+- Exported spreadsheet parsing (.csv) and ```Collection``` instanciation with owned list, wish list and for-sell list. All datas of the spreadsheet are readed for all types of ```Collectibles```.
 
 A ```Collection``` is composed of ```Collectible``` which can be ```VideoGame```, ```System```, ```Peripheral```, etc.
 Each ```Collectible``` have properties as Title, Type, Platform, etc.
