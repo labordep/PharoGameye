@@ -14,6 +14,8 @@ GAMEYE.app collection mobile App model and tools for Pharo.
 A ```Collection``` is composed of ```Collectible``` which can be ```VideoGame```, ```System```, ```Peripheral```, etc.
 Each ```Collectible``` have properties as Title, Type, Platform, etc.
 
+Tested for GAMEYE version 4.20.00.
+
 ## Installing
 
 ```smalltalk
