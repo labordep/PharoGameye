@@ -255,6 +255,12 @@ GameyeCollection >> peripheralsForPlatform: aString [
 	^ self peripheralsCollectibles select:[ :c | c platform = aString ]
 ]
 
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> peripheralsOwnership: aGameyeOwnership [
+
+	^ self peripheralsCollectibles select:[ :c | c ownership = aGameyeOwnership ]
+]
+
 { #category : #statistics }
 GameyeCollection >> pricePaid [
 	"Return price paid for all collectibles"
@@ -307,6 +313,30 @@ GameyeCollection >> removeCollectible: aCollectible [
 	^ self
 ]
 
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> sealedPeripherals [
+
+	^ self peripheralsOwnership: GameyeOwnership sealed
+]
+
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> sealedSystems [
+
+	^ self systemsOwnership: GameyeOwnership sealed
+]
+
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> sealedToysToLife [
+
+	^ self toysToLifeOwnership: GameyeOwnership sealed
+]
+
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> sealedVideoGames [
+
+	^ self videoGamesOwnership: GameyeOwnership sealed
+]
+
 { #category : #accessing }
 GameyeCollection >> systems [
 
@@ -331,6 +361,12 @@ GameyeCollection >> systemsForPlatform: aString [
 	^ self systemsCollectibles select:[ :c | c platform = aString ]
 ]
 
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> systemsOwnership: aGameyeOwnership [
+
+	^ self systemsCollectibles select:[ :c | c ownership = aGameyeOwnership ]
+]
+
 { #category : #accessing }
 GameyeCollection >> toysToLife [
 
@@ -347,6 +383,12 @@ GameyeCollection >> toysToLife: anObject [
 GameyeCollection >> toysToLifeCollectibles [
 
 	^self toysToLife asOrderedCollection
+]
+
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> toysToLifeOwnership: aGameyeOwnership [
+
+	^ self toysToLifeCollectibles select:[ :c | c ownership = aGameyeOwnership ]
 ]
 
 { #category : #accessing }
@@ -401,6 +443,12 @@ GameyeCollection >> videoGamesForPlatform: aString [
 GameyeCollection >> videoGamesForPublisher: aString [
 
 	^ self videoGamesCollectibles select:[ :c | c publisher = aString ]
+]
+
+{ #category : #'collectibles - query - ownership' }
+GameyeCollection >> videoGamesOwnership: aGameyeOwnership [
+
+	^ self videoGamesCollectibles select:[ :c | c ownership = aGameyeOwnership ]
 ]
 
 { #category : #statistics }
