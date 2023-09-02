@@ -49,6 +49,6 @@ This example use parsing methods to return three collections :
 
 ## Licence
 
-This project is a personnal work, I'm not affilied with GAMEYE App.
+This project is a personal work, I'm not affilied with GAMEYE App.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
