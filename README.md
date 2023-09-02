@@ -14,9 +14,11 @@ GAMEYE.app collection mobile App model and tools for Pharo.
 A ```Collection``` is composed of ```Collectible``` which can be ```VideoGame```, ```System```, ```Peripheral```, etc.
 Each ```Collectible``` have properties as Title, Type, Platform, etc.
 
-Tested for GAMEYE version 4.20.00.
+**Note : This project works on GAMEYE v4.x, not already tested on v5.x.**
 
 ## Installing
+
+To install PharoGameye on your Pharo image you can just execute the following script:
 
 ```smalltalk
 Metacello new
@@ -37,10 +39,7 @@ This example use parsing methods to return three collections :
 
 ## About GAMEYE
 
-GAMEYE is a free applicaton to manage collecting from [Harrison Holzhauer](https://www.hdnastudio.com/).
-
-
-[Official Gameye website](https://gameye.app)
+[GAMEYE.app](https://gameye.app/) is a free applicaton to manage collecting from [Harrison Holzhauer](https://www.hdnastudio.com/).
 
 [Gameye on AppStore](https://apps.apple.com/fr/app/gameye/id1105342771)
 
