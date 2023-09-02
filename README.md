@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/github/license/labordep/PharoGameye.svg)](./LICENSE)
+
 # PharoGameye
 
 ![image](https://user-images.githubusercontent.com/49183340/224508985-aafac0c0-2247-4d01-8daa-6204033367dc.png)
