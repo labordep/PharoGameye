@@ -18,7 +18,7 @@ Each ```Collectible``` have properties as Title, Type, Platform, etc.
 
 ## Installing
 
-To install PharoGameye on your Pharo image you can just execute the following script:
+To install PharoGameye on [Pharo](https://pharo.org/) you can just execute the following script in your Pharo image:
 
 ```smalltalk
 Metacello new
