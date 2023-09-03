@@ -5,6 +5,7 @@
 [![Pharo 12](https://img.shields.io/badge/Pharo-12-%23aac9ff.svg)](https://pharo.org/download)
 
 [![GAMEYE.app v4](https://img.shields.io/badge/GAMEYE.app-v4-blue.svg)](https://gameye.app/)
+[![GAMEYE.app v5](https://img.shields.io/badge/GAMEYE.app-v5-red.svg)](https://gameye.app/)
 
 # PharoGameye
 
@@ -22,7 +23,7 @@ GAMEYE.app collection mobile App model and tools for Pharo.
 A ```Collection``` is composed of ```Collectible``` which can be ```VideoGame```, ```System```, ```Peripheral```, etc.
 Each ```Collectible``` have properties as Title, Type, Platform, etc.
 
-**Note : This project works on GAMEYE v4.x, not already tested on v5.x.**
+**Note : This project works on GAMEYE v4.x, development in progress for v5.x.**
 
 ## Installing
 
