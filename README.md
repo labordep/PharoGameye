@@ -45,7 +45,7 @@ This example use parsing methods to return three collections :
 
 ## About GAMEYE
 
-[GAMEYE.app](https://gameye.app/) is a free applicaton to manage collecting from [Harrison Holzhauer](https://www.hdnastudio.com/).
+[GAMEYE.app](https://gameye.app/) is a free applicaton to manage collecting from [Harrison Holzhauer](https://www.hdnastudio.com/), © 2016-2023 GAMEYE, INC.
 
 [Gameye on AppStore](https://apps.apple.com/fr/app/gameye/id1105342771)
 
