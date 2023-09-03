@@ -1,4 +1,5 @@
 [![License](https://img.shields.io/github/license/labordep/PharoGameye.svg)](./LICENSE)
+[![CI](https://github.com/labordep/PharoGameye/actions/workflows/CI.yml/badge.svg)](https://github.com/labordep/PharoGameye/actions/workflows/CI.yml)
 
 # PharoGameye
 
