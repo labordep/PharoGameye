@@ -1,6 +1,9 @@
 [![License](https://img.shields.io/github/license/labordep/PharoGameye.svg)](./LICENSE)
 [![CI](https://github.com/labordep/PharoGameye/actions/workflows/CI.yml/badge.svg)](https://github.com/labordep/PharoGameye/actions/workflows/CI.yml)
 
+[![Pharo 11](https://img.shields.io/badge/Pharo-11-%23aac9ff.svg)](https://pharo.org/download)
+[![Pharo 12](https://img.shields.io/badge/Pharo-12-%23aac9ff.svg)](https://pharo.org/download)
+
 # PharoGameye
 
 ![image](https://user-images.githubusercontent.com/49183340/224508985-aafac0c0-2247-4d01-8daa-6204033367dc.png)
