@@ -84,13 +84,13 @@ GameyeInputDataUtils class >> prepareExportedSpreadsheetReadStream: aReadstream 
 	"Return a ReadStream of an exported SpreadSheet file with fixing all knowns generation knowns problems"
 
 	| line fixedStream columns |
-	aReadstream ifNil:[ ^ nil ].
+	aReadstream ifNil:[ ^ self signalNotSupportedSpreadsheetFile ].
 
 	"Check if the first line (normally it's columns head) have the good number of columns and the good first title"
 	line := aReadstream nextLine.
 	columns := (line substrings: ',').
-	columns size = self numberOfExportedSpreadsheetColumns ifFalse: [ ^ nil ].
-	columns first = self exportedSpreadsheetColumn01Title ifFalse:[ ^ nil ].
+	columns size = self numberOfExportedSpreadsheetColumns ifFalse: [ ^ self signalNotSupportedSpreadsheetFile ].
+	columns first = self exportedSpreadsheetColumn01Title ifFalse:[ ^ self signalNotSupportedSpreadsheetFile ].
 
 	"Build the new stream"
 	fixedStream := ReadWriteStream on: String new.
@@ -164,6 +164,12 @@ GameyeInputDataUtils class >> rebuildCells: aCellsArray [
 	].
 
 	^newCells asArray
+]
+
+{ #category : #'error signalling' }
+GameyeInputDataUtils class >> signalNotSupportedSpreadsheetFile [
+
+	^ NotSupportedSpreadsheetFileGameyeError signal 
 ]
 
 { #category : #'see class side' }

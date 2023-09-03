@@ -48,17 +48,6 @@ GameyeCollectionFactory class >> createCollectibleFromDataArray: anArray [
 	^ collectible
 ]
 
-{ #category : #'create collection' }
-GameyeCollectionFactory class >> createCollectionFromExportedSpreadsheet: aFileReference [
-	"Return just the collectibles collection (not for sell and wish list collections)"
-	
-	| collections |
-	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
-	collections ifNil:[ ^ nil ].
-	
-	^ collections at: GameyeCollection owned
-]
-
 { #category : #private }
 GameyeCollectionFactory class >> createCollectionsFromDataArray: anArray [
 	"Return collections from array : collectibles, wishlist and for sell"
@@ -92,10 +81,11 @@ GameyeCollectionFactory class >> createCollectionsFromExportedSpreadsheet: aFile
 	"Return all collections from a file : collectibles, for sell and wish list"
 	| readStream array date collections fileName |
 
-	aFileReference ifNil:[ ^ nil ].
-	aFileReference isFile ifFalse:[ ^ nil ].
+	aFileReference ifNil:[ ^ self signalNotAFile ].
+	aFileReference isFile ifFalse:[ ^ self signalNotAFile ].
 
 	readStream := GameyeInputDataUtils prepareExportedSpreadsheetReadStream: aFileReference readStream.
+	
 	array := self parseExportedSpreadsheetReadStream: readStream.
 	
 	collections := (self createCollectionsFromDataArray: array) ifNil:[ ^ nil ].
@@ -122,6 +112,17 @@ GameyeCollectionFactory class >> createForSellCollectionFromExportedSpreadsheet:
 	collections ifNil:[ ^ nil ].
 	
 	^ collections at: GameyeCollection forSell
+]
+
+{ #category : #'create collection' }
+GameyeCollectionFactory class >> createOwnedCollectionFromExportedSpreadsheet: aFileReference [
+	"Return just the collectibles collection (not for sell and wish list collections)"
+	
+	| collections |
+	collections := self createCollectionsFromExportedSpreadsheet: aFileReference.
+	collections ifNil:[ ^ nil ].
+	
+	^ collections at: GameyeCollection owned
 ]
 
 { #category : #'create collection' }
@@ -192,6 +193,12 @@ GameyeCollectionFactory class >> parseNeoNumberString: aString [
 	aString = '?' ifTrue:[ ^ nil ].
 
 	^ NeoNumberParser parse: aString ifFail: [nil]
+]
+
+{ #category : #'error signalling' }
+GameyeCollectionFactory class >> signalNotAFile [
+
+	^ NotAFileGameyeError signal
 ]
 
 { #category : #'see class side' }

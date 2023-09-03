@@ -379,3 +379,12 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_Wishl
 	self assert: forSellCollection havePrintMedias equals: false.
 	self assert: forSellCollection numberOfCollectibles equals: 0
 ]
+
+{ #category : #tests }
+GameyeCollectionFactoryTest >> testCreateCollectionFromNotSupportedFiles [
+	| error |
+	
+	error := nil.
+	[ GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: nil ] onErrorDo: [ :e | error := e].
+	self assert: error class equals: NotAFileGameyeError.
+]
