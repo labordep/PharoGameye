@@ -7,6 +7,7 @@ Class {
 	#instVars : [
 		'name',
 		'date',
+		'gameyeVersion',
 		'peripherals',
 		'systems',
 		'toysToLife',
@@ -135,6 +136,18 @@ GameyeCollection >> duplicatedSystems [
 GameyeCollection >> duplicatedVideoGames [
 
 	^ self duplicated: self videoGamesCollectibles
+]
+
+{ #category : #accessing }
+GameyeCollection >> gameyeVersion [
+
+	^ gameyeVersion ifNil: [ gameyeVersion := GameyeVersion unknown ]
+]
+
+{ #category : #accessing }
+GameyeCollection >> gameyeVersion: anObject [
+
+	gameyeVersion := anObject
 ]
 
 { #category : #testing }
