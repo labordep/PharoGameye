@@ -7,7 +7,7 @@ Class {
 { #category : #parsing }
 AbstractGameyeInputDataUtils class >> createCollectibleFromDataArray: anArray [
 	
-	self subclassResponsibility
+	self subclassResponsibility 
 ]
 
 { #category : #parsing }

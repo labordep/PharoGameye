@@ -8,6 +8,8 @@ Class {
 		'isForSale',
 		'isOnWishList',
 		'title',
+		'country',
+		'releaseType',
 		'dateAdded',
 		'ownership',
 		'priceLoose',
@@ -19,6 +21,7 @@ Class {
 		'boxCondition',
 		'manualCondition',
 		'notes',
+		'tags',
 		'rawDatas'
 	],
 	#category : #'Gameye-Model'
@@ -60,6 +63,18 @@ GameyeCollectible >> boxCondition [
 GameyeCollectible >> boxCondition: anObject [
 
 	boxCondition := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> country [
+
+	^ country
+]
+
+{ #category : #accessing }
+GameyeCollectible >> country: anObject [
+
+	country := anObject
 ]
 
 { #category : #accessing }
@@ -389,6 +404,30 @@ GameyeCollectible >> rawDatas [
 GameyeCollectible >> rawDatas: anObject [
 
 	rawDatas := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> releaseType [
+
+	^ releaseType
+]
+
+{ #category : #accessing }
+GameyeCollectible >> releaseType: anObject [
+
+	releaseType := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> tags [
+
+	^ tags
+]
+
+{ #category : #accessing }
+GameyeCollectible >> tags: anObject [
+
+	tags := anObject
 ]
 
 { #category : #accessing }
