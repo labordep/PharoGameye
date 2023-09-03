@@ -34,6 +34,18 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFilename [
 ]
 
 { #category : #assertions }
+GameyeCollectionFactoryTest >> assertCollection: aCollection equalsGameyeVersion: aGameyeVersion [
+
+	self assert: aCollection gameyeVersion equals: aGameyeVersion
+]
+
+{ #category : #assertions }
+GameyeCollectionFactoryTest >> assertCollectionGameyeVersion: aCollection [
+
+	self subclassResponsibility 
+]
+
+{ #category : #assertions }
 GameyeCollectionFactoryTest >> assertWishAndForSellCollectionsAreEmpty: collections [
 	| wishListCollection forSellCollection |
 

@@ -90,7 +90,7 @@ GameyeCollectionFactoryV4Test class >> exportedSpreadsheetSampleContentV4_Wishli
 
 { #category : #'accessing - v4' }
 GameyeCollectionFactoryV4Test class >> exportedSpreadsheetSampleFileReferenceV4_Empty [
-	<script:'self exportedSpreadsheetSampleFileReference_Empty inspect'>
+	<script:'self exportedSpreadsheetSampleFileReferenceV4_Empty inspect'>
 
 	^self exportedSpreadsheetSampleFileReference: self exportedSpreadsheetSampleContentV4_Empty
 ]
@@ -100,6 +100,12 @@ GameyeCollectionFactoryV4Test class >> exportedSpreadsheetSampleHeadContentV4 [
 	"This sample contains columns head"
 
 	^'Platform,Type,Owned,ForSale,Wishlist,Title,Publisher,Developer,DateAdded,Ownership,PriceLoose,PriceCIB,PriceNew,YourPrice,PricePaid,ItemCondition,BoxCondition,ManualCondition,Beat,PlayedCompletion,Notes'
+]
+
+{ #category : #assertions }
+GameyeCollectionFactoryV4Test >> assertCollectionGameyeVersion: aCollection [
+
+	self assertCollection: aCollection equalsGameyeVersion: GameyeVersion v4 
 ]
 
 { #category : #'tests - v4' }
@@ -123,6 +129,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Pe
 	self assert: collectible isPeripheral.
 	self assert: collectible dateAdded equals: (Date newDay: 10 month: 7 year: 2021).
 
+	self assertCollectionGameyeVersion: collection.
 	self assertWishAndForSellCollectionsAreEmpty: datas
 ]
 

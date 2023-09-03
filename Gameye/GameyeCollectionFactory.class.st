@@ -54,9 +54,9 @@ GameyeCollectionFactory class >> createCollectionsFromDataArray: anArray [
 	| collection collections wishListCollection forSellCollection |
 
 	collections := Dictionary new.
-	collection := GameyeCollection new.
-	wishListCollection := GameyeCollection new.
-	forSellCollection := GameyeCollection new.
+	collection := GameyeCollection new gameyeVersion: GameyeVersion v4; yourself.
+	wishListCollection := GameyeCollection new gameyeVersion: GameyeVersion v4; yourself.
+	forSellCollection := GameyeCollection new gameyeVersion: GameyeVersion v4; yourself.
 
 	collections at: GameyeCollection owned put: collection.
 	collections at: GameyeCollection wish put: wishListCollection.

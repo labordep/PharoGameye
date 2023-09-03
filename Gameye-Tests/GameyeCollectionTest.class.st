@@ -102,6 +102,15 @@ GameyeCollectionTest >> testDuplicatedVideoGames [
 ]
 
 { #category : #tests }
+GameyeCollectionTest >> testGameyeVersion [
+
+	| collection |
+	collection := GameyeCollection new.
+	collection gameyeVersion: GameyeVersion v4.
+	self assert: collection gameyeVersion equals: GameyeVersion v4
+]
+
+{ #category : #tests }
 GameyeCollectionTest >> testIncludesCollectible [
 
 	| collection collectible |
@@ -124,6 +133,7 @@ GameyeCollectionTest >> testInitialize [
 	collection := GameyeCollection new.
 	self assert: collection name isNil.
 	self assert: collection date isNil.
+	self assert: collection gameyeVersion equals: GameyeVersion unknown.
 	self assert: collection haveUnknowns equals: false.
 	self assert: collection haveVideoGames equals: false.
 	self assert: collection haveSystems equals: false.
