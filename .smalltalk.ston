@@ -1,13 +1,13 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'PharoGameye',
+      #baseline : 'Gameye',
       #platforms : [ #pharo ]
     }
   ],
   #testing : {
     #include : {
-      #packages : [ 'PharoGameye*-Tests' ]
+      #packages : [ 'Gameye*-Tests' ]
     }
   }
 }
