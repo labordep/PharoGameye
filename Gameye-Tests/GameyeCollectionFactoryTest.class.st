@@ -8,56 +8,56 @@ Class {
 }
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1Peripheral [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_1Peripheral [
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "N64","Peripherals",1,0,0,"Expansion Pak","Missing Field","Missing Field","10/07/2021","CIB","46.63","77.35","112.19","77.35","51.85","10","10","10"," "," ",""'
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1PeripheralAsAUnknownCollectible [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_1PeripheralAsAUnknownCollectible [
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "SNES","?",1,0,0,"Super Scope 6 [Gun Bundle]","Missing Field","Missing Field","13/09/2021","Boxed","-1.0", "-1.0", "-1.0", "-1.0","55.97","10","?","9"," "," ","This is a commentary"'
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1PrintMedia [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_1PrintMedia [
 	"1 Print media sample"
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "N Power","Print Media",1,0,0,"[Vol. 145] Mario Advance","Missing Field","Missing Field","11/03/2023","Loose","9.49","14.23","?","9.49","1.90","?","?","10"," "," ",""'
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1System [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_1System [
 	"1 System sample"
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "Saturn","Systems",1,0,0,"Sega Saturn Console (PAL)","Missing Field","Missing Field","18/07/2022","Boxed","88.91","169.46","381.99","156.75","139.92","10","?","10"," "," ",""'
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1ToyToLife [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_1ToyToLife [
 	"1 System sample"
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "amiibo","ToysToLife",1,0,0,"Zelda - Breath of Wild","Missing Field","Missing Field","19/04/2022","Loose","26.11","26.11","36.44","26.11","13.99","?","?","10"," "," ",""'
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_1VideoGameWitComplexeStringValues [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues [
 	"This game have title and developper names with coma and quotes : ""Ivan ""Ironman"" Stewart's Super Off Road"" and ""Rare, Ltd."""
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "NES","VideoGame",1,0,0,"Ivan "Ironman" Stewart''s Super Off Road","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","10.85","46.64","326.48","46.64","-1.0","6","7","7"," "," ",""'
 ]
 
 { #category : #'accessing - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_3VideoGames2SystemsWitComplexeStringValues [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_3VideoGames2SystemsWitComplexeStringValues [
 	"This is an extract from problematic strings content"
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "Atari 2600","VideoGame",1,0,0,"Q*bert","Atari, Inc.","Parker Brothers","22/03/2021","Loose","6.97","16.37","42.73","6.97","?","?","?","8"," "," ",""
 "Atari 2600","VideoGame",1,0,0,"Space Invaders","(null)","(null)","22/03/2021","Loose","-1.0", "-1.0", "-1.0", "-1.0","?","?","?","5"," "," ","Étiquette percée, en pack avec la console"
 "Atari 2600","Systems",1,0,0,"Atari 2600 System [Vadar]","Missing Field","Missing Field","04/04/2021","CIB","54.38","146.51","219.34","146.51","71.21","10","9","10"," "," ","Pack avec Space invaders, modèle cx-2600-gp"
@@ -66,10 +66,10 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_3VideoGame
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_4VideoGamesWitComplexeStringValues [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_4VideoGamesWitComplexeStringValues [
 	"This game have title and developper names with coma and quotes : ""Ivan ""Ironman"" Stewart's Super Off Road"" and ""Rare, Ltd."""
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "NES","VideoGame",1,0,0,"Ivan "Ironman" Stewart''s Super Off Road","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","10.85","46.64","326.48","46.64","-1.0","6","7","7"," "," ","
 "Atari 2600","VideoGame",1,0,0,"Space Invaders","(null)","(null)","22/03/2021","Loose","-1.0", "-1.0", "-1.0", "-1.0","?","?","?","5"," "," ","Étiquette percée, en pack avec la console"
 "NES","VideoGame",1,0,0,"Ivan "Ironman" Stewart''s Super Off Road","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","10.85","46.64","326.48","46.64","-1.0","6","7","7"," "," ",""
@@ -77,17 +77,17 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_4VideoGame
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_Empty [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_Empty [
 	"This sample contains some frequently generated cases not easy to read/parse or exceptions due to collection evolution"
 
-	^self exportedSpreadsheetSampleHeadContent
+	^self exportedSpreadsheetSampleHeadContentV4
 ]
 
 { #category : #'samples - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContent_Wishlist_1VideoGame [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleContentV4_Wishlist_1VideoGame [
 	"This game have title and developper names with coma and quotes : ""Ivan ""Ironman"" Stewart's Super Off Road"" and ""Rare, Ltd."""
 
-	^self exportedSpreadsheetSampleHeadContent, '
+	^self exportedSpreadsheetSampleHeadContentV4, '
 "Switch","VideoGame",0,0,1,"Advance Wars 1+2: Re-Boot Camp","Nintendo","WayForward Technologies","","Wishlist","-1.0", "-1.0", "-1.0", "-1.0","-1.0"," "," "," "," "," ",""'
 ]
 
@@ -109,10 +109,10 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReference: aFi
 ]
 
 { #category : #'accessing - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReference_Empty [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFileReferenceV4_Empty [
 	<script:'self exportedSpreadsheetSampleFileReference_Empty inspect'>
 
-	^self exportedSpreadsheetSampleFileReference: self exportedSpreadsheetSampleContent_Empty
+	^self exportedSpreadsheetSampleFileReference: self exportedSpreadsheetSampleContentV4_Empty
 ]
 
 { #category : #accessing }
@@ -122,7 +122,7 @@ GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleFilename [
 ]
 
 { #category : #'accessing - v4' }
-GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleHeadContent [
+GameyeCollectionFactoryTest class >> exportedSpreadsheetSampleHeadContentV4 [
 	"This sample contains columns head"
 
 	^'Platform,Type,Owned,ForSale,Wishlist,Title,Publisher,Developer,DateAdded,Ownership,PriceLoose,PriceCIB,PriceNew,YourPrice,PricePaid,ItemCondition,BoxCondition,ManualCondition,Beat,PlayedCompletion,Notes'
@@ -158,7 +158,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 
 	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet:  (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1Peripheral).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1Peripheral).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -182,7 +182,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Peri
 
 	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1PeripheralAsAUnknownCollectible).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1PeripheralAsAUnknownCollectible).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -207,7 +207,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Prin
 
 	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1PrintMedia).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1PrintMedia).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -231,7 +231,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Syst
 
 	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1System).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1System).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -255,7 +255,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1ToyT
 
 	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1ToyToLife).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1ToyToLife).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -279,7 +279,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_1Vide
 
 	| collection collectible collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_1VideoGameWitComplexeStringValues).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -303,7 +303,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_3Vide
 
 	| collection collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_3VideoGames2SystemsWitComplexeStringValues).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_3VideoGames2SystemsWitComplexeStringValues).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -325,7 +325,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_Empty
 
 	| collection collections |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_Empty).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_Empty).
 
 	collection := collections at: GameyeCollection owned.
 	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
@@ -345,7 +345,7 @@ GameyeCollectionFactoryTest >> testCreateCollectionFromExportedSpreadsheet_Wishl
 
 	| collections wishListCollection collection forSellCollection |
 	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
-		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContent_Wishlist_1VideoGame).
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_Wishlist_1VideoGame).
 
 	self assert: collections size equals: 3.
 
