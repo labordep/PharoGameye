@@ -66,6 +66,26 @@ GameyeCollectionFactoryTest >> assertWishAndForSellCollectionsAreEmpty: collecti
 ]
 
 { #category : #'tests - common' }
+GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1BadElement [
+	| collection collectible |
+
+	collection := datas at: GameyeCollection owned.
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: true.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection unknownsCollectibles first.
+	self assert: collectible isUnknown.
+
+	self assertWishAndForSellCollectionsAreEmpty: datas
+]
+
+{ #category : #'tests - common' }
 GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1System [
 	| collection collectible  |
 
@@ -134,6 +154,27 @@ GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1VideoGam
 
 	collectible := collection videoGamesCollectibles first.
 	self assert: collectible dateAdded equals: (Date newDay: 22 month: 3 year: 2021).
+	self assert: collectible isVideoGame.
+
+	self assertWishAndForSellCollectionsAreEmpty: datas
+]
+
+{ #category : #'tests - common' }
+GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2 [
+	| collection collectible |
+
+	collection := datas at: GameyeCollection owned.
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: true.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection videoGamesCollectibles first.
+	self assert: collectible dateAdded equals: (Date newDay: 23 month: 8 year: 2021).
 	self assert: collectible isVideoGame.
 
 	self assertWishAndForSellCollectionsAreEmpty: datas

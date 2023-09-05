@@ -51,6 +51,14 @@ GameyeCollectionFactoryV4Test class >> exportedSpreadsheetSampleContentV4_1Video
 ]
 
 { #category : #samples }
+GameyeCollectionFactoryV4Test class >> exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues2 [
+	"This game have problems in v5 but works in v4"
+
+	^self exportedSpreadsheetSampleHeadContentV4, '
+"N64","VideoGame",1,0,0,"Hey You, Pikachu!","Nintendo","Ambrella","23/08/2021","CIB","6.70","130.30","371.04","130.30","6.38","9","9","10"," "," ","C’est le jeu seul et pas le pack avec accessoires "'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryV4Test class >> exportedSpreadsheetSampleContentV4_3VideoGames2SystemsWitComplexeStringValues [
 	"This is an extract from problematic strings content"
 
@@ -217,6 +225,15 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Vi
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues).
 
 	self createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2 [
+
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues2).
+
+	self createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2
 ]
 
 { #category : #tests }

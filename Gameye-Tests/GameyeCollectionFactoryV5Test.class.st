@@ -5,6 +5,14 @@ Class {
 }
 
 { #category : #samples }
+GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1BadElement [
+	"Test to create an unknown element when a problem appears"
+
+	^self exportedSpreadsheetSampleHeadContentV5, '
+"","","","","","","","","","","","","","","","","",""," "," ","","",'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1System [
 	"self exportedSpreadsheetSampleContentV5_1System"
 
@@ -25,6 +33,14 @@ GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1Video
 
 	^self exportedSpreadsheetSampleHeadContentV5, '
 "Nintendo (NES)","Games","Owned","Ivan "Ironman" Stewart''s Super Off Road","United States of America","Official","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","11.77","45.78","236.47","45.78","-1.0","7","6","7"," "," ","","",'
+]
+
+{ #category : #samples }
+GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues2 [
+	"This game have problem in v5 but works in v4"
+
+	^self exportedSpreadsheetSampleHeadContentV5, '
+"Nintendo 64","Games","Owned","Hey You, Pikachu!","United States of America","Official","Nintendo","Ambrella","23/08/2021","CIB","4.63","130.63","365.30","130.63","6.98","10","9","9"," "," ","C’est le jeu seul et pas le pack avec accessoires ","❔,JAP",'
 ]
 
 { #category : #samples }
@@ -53,6 +69,15 @@ GameyeCollectionFactoryV5Test >> setUp [
 
 	super setUp.
 	gameyeVersion := GameyeVersion v5.
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1BadElement [
+
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1BadElement).
+
+	self createCollectionFromExportedSpreadsheet_1BadElement
 ]
 
 { #category : #tests }
@@ -89,4 +114,13 @@ GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1Vi
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues).
 
 	self createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2 [
+
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues2).
+
+	self createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2
 ]

@@ -42,7 +42,9 @@ GameyeCollectible class >> type [
 { #category : #constructor }
 GameyeCollectible class >> type: aSymbol [ 
 	
-	self allSubclassesDo: [ :c | c type = aSymbol ifTrue:[ ^ c new ] ].
+	| symbol |
+	symbol := aSymbol ifNil:[ GameyeUnknownCollectible type ].
+	self allSubclassesDo: [ :c | c type = symbol ifTrue:[ ^ c new ] ].
 	^ self new
 ]
 
