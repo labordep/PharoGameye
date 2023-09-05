@@ -441,6 +441,12 @@ GameyeCollection >> videoGamesCollectibles [
 ]
 
 { #category : #'collectibles - query' }
+GameyeCollection >> videoGamesForCountry: aSymbol [
+
+	^ self videoGamesCollectibles select:[ :c | c country = aSymbol ]
+]
+
+{ #category : #'collectibles - query' }
 GameyeCollection >> videoGamesForDeveloper: aString [
 
 	^ self videoGamesCollectibles select:[ :c | c developer = aString ]

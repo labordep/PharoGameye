@@ -20,6 +20,15 @@ GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1Contr
 ]
 
 { #category : #samples }
+GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1FoundVideoGameAnd1NotFoundVideoGame [
+	"Two games : one found in the database and one not found in the database (red title)"
+
+	^self exportedSpreadsheetSampleHeadContentV5, '
+"Sega Saturn","Games","Owned","SimCity 2000","United States of America","Official","Missing Field","Missing Field","24/02/2022","CIB","17.93","22.22","66.11","22.22","30.00","10","10","10"," "," ","","",
+"Sony PlayStation","Games","Owned","Sim City 2000","","Official","Missing Field","Missing Field","22/03/2021","CIB","-1.0", "-1.0", "-1.0", "-1.0","-1.0","10","7","10"," "," ","","Remplacer boite",'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1System [
 	"self exportedSpreadsheetSampleContentV5_1System"
 
@@ -94,6 +103,15 @@ GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1Co
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1ControllerWithTags).
 
 	self createCollectionFromExportedSpreadsheet_1ControllerWithTags
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1FoundVideoGameAnd1NotFoundVideoGame [
+
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1FoundVideoGameAnd1NotFoundVideoGame).
+
+	self createCollectionFromExportedSpreadsheet_1FoundVideoGameAnd1NotFoundVideoGame
 ]
 
 { #category : #tests }

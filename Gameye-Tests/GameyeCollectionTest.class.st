@@ -14,9 +14,9 @@ GameyeCollectionTest class >> createOwnedCollection [
 	| collection |
 	collection := GameyeCollection new.
 	collection name: 'OwnedTestCollection'.
-	collection addCollectible: (GameyeVideoGame new title: 'Game1'; platform: 'N64'; developer: 'Nintendo'; publisher: 'Nintendo'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
-	collection addCollectible: (GameyeVideoGame new title: 'Game2'; platform: 'PS2'; developer: 'Sony'; publisher: 'Sony'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 0).
-	collection addCollectible: (GameyeVideoGame new title: 'Game3'; platform: 'Xbox 360'; developer: 'Microsoft'; publisher: 'Microsoft'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
+	collection addCollectible: (GameyeVideoGame new title: 'Game1'; platform: 'N64'; country: #'United States of America'; developer: 'Nintendo'; publisher: 'Nintendo'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
+	collection addCollectible: (GameyeVideoGame new title: 'Game2'; platform: 'PS2'; country: #'United Kingdom'; developer: 'Sony'; publisher: 'Sony'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 0).
+	collection addCollectible: (GameyeVideoGame new title: 'Game3'; platform: 'Xbox 360'; country: #'Japan'; developer: 'Microsoft'; publisher: 'Microsoft'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
 	collection addCollectible: (GameyeVideoGame new title: 'Game4'; platform: 'Jaguar'; developer: 'Atari'; publisher: 'Atari'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: nil).
 	collection addCollectible: (GameyeVideoGame new title: 'Game5'; platform: 'CD-i'; developer: 'Philips'; publisher: 'Philips'; dateAdded: (Date newDay: 21 month: 1 year: 2023); pricePaid: 5).
 
@@ -264,6 +264,26 @@ GameyeCollectionTest >> testVideoGamesCollectibles [
 	collection addCollectible: collectible.
 	self assert: collection videoGamesCollectibles size equals: 1.
 	self assert: collection videoGamesCollectibles first equals: collectible
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testVideoGamesForCountry [
+
+	| collection n64Games |
+	collection := self class createOwnedCollection.
+	n64Games := collection videoGamesForCountry: #'United Kingdom'.
+	self assert: n64Games size equals: 1.
+	self assert: n64Games first country equals: #'United Kingdom'
+]
+
+{ #category : #tests }
+GameyeCollectionTest >> testVideoGamesForDeveloper [
+
+	| collection n64Games |
+	collection := self class createOwnedCollection.
+	n64Games := collection videoGamesForDeveloper: 'Nintendo'.
+	self assert: n64Games size equals: 1.
+	self assert: n64Games first developer equals: 'Nintendo'
 ]
 
 { #category : #tests }

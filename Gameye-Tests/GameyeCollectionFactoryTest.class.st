@@ -114,6 +114,35 @@ GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1Controll
 ]
 
 { #category : #'tests - common' }
+GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1FoundVideoGameAnd1NotFoundVideoGame [
+	| collection foundCollectible notFoundCollectible col |
+
+	collection := datas at: GameyeCollection owned.
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: true.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
+	self assert: collection numberOfCollectibles equals: 2.
+
+	foundCollectible := collection videoGamesCollectibles first.
+	self assert: foundCollectible dateAdded equals: (Date newDay: 24 month: 2 year: 2022).
+	self assert: foundCollectible isVideoGame.
+	
+	notFoundCollectible := collection videoGamesCollectibles second.
+	self assert: notFoundCollectible dateAdded equals: (Date newDay: 22 month: 3 year: 2021).
+	self assert: notFoundCollectible isVideoGame.
+	
+	col := collection videoGamesForCountry: nil.
+	self assert: col size equals: 1.
+	self assert: col first identicalTo: notFoundCollectible. 
+
+	self assertWishAndForSellCollectionsAreEmpty: datas
+]
+
+{ #category : #'tests - common' }
 GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1System [
 	| collection collectible  |
 

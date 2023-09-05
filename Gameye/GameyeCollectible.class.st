@@ -384,11 +384,11 @@ GameyeCollectible >> pricePaid: anObject [
 GameyeCollectible >> printIdentifierOn: aStream [
 
 	aStream
-		nextPutAll: self type;
-		nextPutAll: '-';
-		nextPutAll: (self title ifNil:[ 'Unknown Title' ]);
-		nextPutAll: '-';
-		nextPutAll: (self platform ifNil:[ 'Unknown Platform' ])
+		nextPutAll: (self title ifNil:[ '?' ]);
+		nextPutAll: ' (';
+		nextPutAll: (self type ifNil:[ '?' ]);
+		nextPutAll: ') ';
+		nextPutAll: (self platform ifNil:[ '?' ])
 ]
 
 { #category : #printing }
