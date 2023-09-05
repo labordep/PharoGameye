@@ -1,4 +1,4 @@
-name: 'CI'
+name: 'Tests'
 
 env: 
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - 'master'
-      - 'dev-2.0'
   pull_request:
     types: [assigned, opened, synchronize, reopened]
 
