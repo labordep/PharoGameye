@@ -13,17 +13,15 @@
 
 GAMEYE.app collection mobile App model and tools for Pharo.
 
-![image](https://user-images.githubusercontent.com/49183340/225460239-aa9b1bff-e7c0-41ed-a2c7-f2947dbeb2c0.png)
+![image](https://github.com/labordep/PharoGameye/assets/49183340/b61ddd5a-8a14-405d-8a15-638c645d6e3b)
 
 ## Functionnalities
 
-- Gameye App model : ```Collection```, ```VideoGame```, ```System```, ```Peripheral```, ```ToyToLife``` and ```PrintMedia```.
+- Gameye App model : ```Collection```, ```VideoGame```, ```System```, ```Peripheral``` (with ```Controller``` and ```Accessory```), ```ToyToLife``` and ```PrintMedia```.
 - Exported spreadsheet parsing (.csv) and ```Collection``` instanciation with owned list, wish list and for-sell list. All datas of the spreadsheet are readed for all types of ```Collectibles```.
 
 A ```Collection``` is composed of ```Collectible``` which can be ```VideoGame```, ```System```, ```Peripheral```, etc.
-Each ```Collectible``` have properties as Title, Type, Platform, etc.
-
-**Note : This project works on GAMEYE v4.x, development in progress for v5.x.**
+Each ```Collectible``` have common properties as Title, Platform, etc. and specific properties as Developer, Publisher, etc.
 
 ## Installing
 
@@ -38,13 +36,53 @@ Metacello new
    load.
 ```
 
-## Examples
+## How to use it?
 
-To parse an existing exported spreadsheet file run ```GameyeExamples loadExportedSpreadsheet``` example.
+The class ```GameyeExamples``` provide a simple script to load an exported spreadsheet file.
+Run ```GameyeExamples loadExportedSpreadsheet``` to test.
+
+![image](https://github.com/labordep/PharoGameye/assets/49183340/182454b1-4f60-40d9-8e39-3cba2fcc63d1)
+
 This example use parsing methods to return three collections : 
 - The "Owned" collection
 - The "Wish List" collection 
 - The "For Sell" collection
+
+![image](https://github.com/labordep/PharoGameye/assets/49183340/e94ad485-a50c-4a72-b1cd-b22b5b5ef515)
+
+Then navigate into the model to inspect your collection using the Pharo UI.
+
+![image](https://github.com/labordep/PharoGameye/assets/49183340/c0046401-56df-4c17-9ac1-04dc1d510611)
+
+![image](https://github.com/labordep/PharoGameye/assets/49183340/efc8caf7-cd69-473b-bfc5-94c4741e0347)
+
+## Tips
+
+### How to get Collectibles with a database synchronization problem ?
+
+Since v5 of GAMEYE application there is a country / region management. 
+
+A problem can appears when GAMEYE application not recognize your collectible: each collectible is displayed with a "red title".
+
+You need to fix each collectible by selected the good one in the list, but this is difficult to get all "red title" collectibles, especially on a big database.
+
+![image](https://github.com/labordep/PharoGameye/assets/49183340/46efd417-f96a-439e-a0fa-dc6e75b23160)
+
+A way to identify collectibles is to use this script on your collection :
+
+```smalltalk
+"get your collection manually with the sample file"
+collection := GameyeCollectionFactory createOwnedCollectionFromExportedSpreadsheet: 'pharo-local\iceberg\labordep\PharoGameye\GameyeSpreadsheetSampleV5.csv' asFileReference.
+games := collection videoGamesForCountry: nil. "here games are a list of games with potential problems, no one in the sample"
+```
+
+Or use ```GameyeExamples``` script to import into the Pharo UI :
+
+![image](https://github.com/labordep/PharoGameye/assets/49183340/b0a9823b-2415-45fd-be2d-2c1f1c2f1f23)
+
+![image](https://github.com/labordep/PharoGameye/assets/49183340/f5afd633-59e7-4735-9b3d-cda95c6d04d6)
+
+Note : this problem was present in v4 but without way to identify wich collectibles are with a problem.
 
 ## About GAMEYE
 
