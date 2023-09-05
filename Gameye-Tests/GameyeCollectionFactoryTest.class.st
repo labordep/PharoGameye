@@ -104,6 +104,11 @@ GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1Controll
 	collectible := collection peripheralsCollectibles first.
 	self assert: collectible dateAdded equals: (Date newDay: 14 month: 8 year: 2023).
 	self assert: collectible isController.
+	self assert: collectible tags size equals: 2.
+
+	"tag test"
+	self assert: (collectible tags includes: 'A nettoyer').
+	self assert: (collectible tags includes: 'HS').
 
 	self assertWishAndForSellCollectionsAreEmpty: datas
 ]

@@ -438,13 +438,13 @@ GameyeCollectible >> releaseType: anObject [
 { #category : #accessing }
 GameyeCollectible >> tags [
 
-	^ tags
+	^ tags ifNil:[tags := Set new]
 ]
 
 { #category : #accessing }
-GameyeCollectible >> tags: anObject [
+GameyeCollectible >> tags: aCollection [
 
-	tags := anObject
+	tags := aCollection
 ]
 
 { #category : #accessing }

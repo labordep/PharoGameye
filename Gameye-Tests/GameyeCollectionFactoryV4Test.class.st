@@ -207,7 +207,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Sy
 	self assert: collectible title equals: 'Sega Saturn Console (PAL)'.
 	self assert: collectible country isNil.
 	self assert: collectible releaseType isNil.
-	self assert: collectible tags isNil.
+	self assert: collectible tags isEmpty.
 ]
 
 { #category : #tests }

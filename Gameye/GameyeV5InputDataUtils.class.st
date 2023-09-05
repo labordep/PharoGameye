@@ -6,7 +6,7 @@ Class {
 
 { #category : #parsing }
 GameyeV5InputDataUtils class >> createCollectibleFromDataArray: anArray [
-	| collectible userRecordType |
+	| collectible userRecordType tags |
 
 	anArray ifNil: [ ^ nil ].
 	anArray size = self numberOfExportedSpreadsheetColumns ifFalse:[ ^ nil ].
@@ -32,7 +32,9 @@ GameyeV5InputDataUtils class >> createCollectibleFromDataArray: anArray [
 	collectible boxCondition: (anArray at: 17).
 	collectible manualCondition: (anArray at: 18).
 	collectible notes: (anArray at: 21).
-	collectible tags: (anArray at: 22).
+	
+	tags := self extractTagsFromCell: (anArray at: 22).
+	tags ifNotNil:[collectible tags addAll: tags].
 
 	"Processing for Video Games"
 	collectible isVideoGame ifTrue:[
@@ -93,6 +95,20 @@ GameyeV5InputDataUtils class >> extractCellsFromLine: aString [
 	].
 
 	^newCells asArray
+]
+
+{ #category : #private }
+GameyeV5InputDataUtils class >> extractTagsFromCell: aString [
+	"Tag string example : 'A nettoyer&#44;HS' "
+
+	| tags |
+
+	aString ifNil:[ ^ nil ].
+	aString ifEmpty:[ ^ nil ].
+
+	"Extract tags with special caracters"
+	tags := aString substrings: '&#44;'.
+	^ tags ifEmpty: [ nil ] ifNotEmpty: [ tags asOrderedCollection ]
 ]
 
 { #category : #accessing }
