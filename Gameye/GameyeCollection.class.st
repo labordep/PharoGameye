@@ -77,6 +77,12 @@ GameyeCollection >> collectibles [
 ]
 
 { #category : #'collectibles - query' }
+GameyeCollection >> collectiblesForCountry: aString [
+
+	^ self collectibles select:[ :c | c country = aString ]
+]
+
+{ #category : #'collectibles - query' }
 GameyeCollection >> collectiblesForPlatform: aString [
 
 	^ self collectibles select:[ :c | c platform = aString ]
@@ -263,6 +269,12 @@ GameyeCollection >> peripheralsCollectibles [
 ]
 
 { #category : #'collectibles - query' }
+GameyeCollection >> peripheralsForCountry: aString [
+
+	^ self peripheralsCollectibles select:[ :c | c country = aString ]
+]
+
+{ #category : #'collectibles - query' }
 GameyeCollection >> peripheralsForPlatform: aString [
 
 	^ self peripheralsCollectibles select:[ :c | c platform = aString ]
@@ -369,6 +381,12 @@ GameyeCollection >> systemsCollectibles [
 ]
 
 { #category : #'collectibles - query' }
+GameyeCollection >> systemsForCountry: aString [
+
+	^ self systemsCollectibles select:[ :c | c country = aString ]
+]
+
+{ #category : #'collectibles - query' }
 GameyeCollection >> systemsForPlatform: aString [
 
 	^ self systemsCollectibles select:[ :c | c platform = aString ]
@@ -438,6 +456,12 @@ GameyeCollection >> videoGames: anObject [
 GameyeCollection >> videoGamesCollectibles [
 
 	^self videoGames asOrderedCollection
+]
+
+{ #category : #'collectibles - query' }
+GameyeCollection >> videoGamesForCountry: aSymbol [
+
+	^ self videoGamesCollectibles select:[ :c | c country = aSymbol ]
 ]
 
 { #category : #'collectibles - query' }

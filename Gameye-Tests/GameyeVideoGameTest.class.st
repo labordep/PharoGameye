@@ -10,23 +10,23 @@ GameyeVideoGameTest >> testAsIdentifierString [
 	| videoGame |
 	videoGame := GameyeVideoGame new.
 	self assert: videoGame asIdentifierString
-		equals: 'VideoGame-Unknown Title-Unknown Platform-Unknown Publisher-Unknown Developer'.
+		equals: '? (VideoGame) ?'.
 
 	videoGame title: 'TestTitle'.
 	self assert: videoGame asIdentifierString
-		equals: 'VideoGame-TestTitle-Unknown Platform-Unknown Publisher-Unknown Developer'.
+		equals: 'TestTitle (VideoGame) ?'.
 
 	videoGame platform: 'TestPlatform'.
 	self assert: videoGame asIdentifierString
-		equals: 'VideoGame-TestTitle-TestPlatform-Unknown Publisher-Unknown Developer'.
+		equals: 'TestTitle (VideoGame) TestPlatform'.
 
 	videoGame publisher: 'TestPublisher'.
 	self assert: videoGame asIdentifierString
-		equals: 'VideoGame-TestTitle-TestPlatform-TestPublisher-Unknown Developer'.
+		equals: 'TestTitle (VideoGame) TestPlatform - TestPublisher'.
 
 	videoGame developer: 'TestDeveloper'.
 	self assert: videoGame asIdentifierString
-		equals: 'VideoGame-TestTitle-TestPlatform-TestPublisher-TestDeveloper'
+		equals: 'TestTitle (VideoGame) TestPlatform - TestDeveloper / TestPublisher'
 ]
 
 { #category : #tests }

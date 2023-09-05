@@ -11,6 +11,18 @@ GameyePeripheral class >> type [
 ]
 
 { #category : #testing }
+GameyePeripheral >> isAccessory [
+
+	^ false
+]
+
+{ #category : #testing }
+GameyePeripheral >> isController [
+
+	^ false
+]
+
+{ #category : #testing }
 GameyePeripheral >> isPeripheral [
 
 	^ true

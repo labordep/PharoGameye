@@ -8,6 +8,8 @@ Class {
 		'isForSale',
 		'isOnWishList',
 		'title',
+		'country',
+		'releaseType',
 		'dateAdded',
 		'ownership',
 		'priceLoose',
@@ -19,7 +21,9 @@ Class {
 		'boxCondition',
 		'manualCondition',
 		'notes',
-		'rawDatas'
+		'tags',
+		'rawDatas',
+		'rawIndex'
 	],
 	#category : #'Gameye-Model'
 }
@@ -39,7 +43,9 @@ GameyeCollectible class >> type [
 { #category : #constructor }
 GameyeCollectible class >> type: aSymbol [ 
 	
-	self allSubclassesDo: [ :c | c type = aSymbol ifTrue:[ ^ c new ] ].
+	| symbol |
+	symbol := aSymbol ifNil:[ GameyeUnknownCollectible type ].
+	self allSubclassesDo: [ :c | c type = symbol ifTrue:[ ^ c new ] ].
 	^ self new
 ]
 
@@ -60,6 +66,18 @@ GameyeCollectible >> boxCondition [
 GameyeCollectible >> boxCondition: anObject [
 
 	boxCondition := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> country [
+
+	^ country
+]
+
+{ #category : #accessing }
+GameyeCollectible >> country: anObject [
+
+	country := anObject
 ]
 
 { #category : #accessing }
@@ -366,11 +384,11 @@ GameyeCollectible >> pricePaid: anObject [
 GameyeCollectible >> printIdentifierOn: aStream [
 
 	aStream
-		nextPutAll: self type;
-		nextPutAll: '-';
-		nextPutAll: (self title ifNil:[ 'Unknown Title' ]);
-		nextPutAll: '-';
-		nextPutAll: (self platform ifNil:[ 'Unknown Platform' ])
+		nextPutAll: (self title ifNil:[ '?' ]);
+		nextPutAll: ' (';
+		nextPutAll: (self type ifNil:[ '?' ]);
+		nextPutAll: ') ';
+		nextPutAll: (self platform ifNil:[ '?' ])
 ]
 
 { #category : #printing }
@@ -381,6 +399,7 @@ GameyeCollectible >> printOn: aStream [
 
 { #category : #raw }
 GameyeCollectible >> rawDatas [
+	"This property store the raw data of the collectible from an imported file (in case of)"
 
 	^ rawDatas
 ]
@@ -389,6 +408,43 @@ GameyeCollectible >> rawDatas [
 GameyeCollectible >> rawDatas: anObject [
 
 	rawDatas := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> rawIndex [
+	"This index is used to know what is the position of the collectible from an imported file (in case of)"
+	
+	^ rawIndex
+]
+
+{ #category : #accessing }
+GameyeCollectible >> rawIndex: anObject [
+
+	rawIndex := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> releaseType [
+
+	^ releaseType
+]
+
+{ #category : #accessing }
+GameyeCollectible >> releaseType: anObject [
+
+	releaseType := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> tags [
+
+	^ tags ifNil:[tags := Set new]
+]
+
+{ #category : #accessing }
+GameyeCollectible >> tags: aCollection [
+
+	tags := aCollection
 ]
 
 { #category : #accessing }

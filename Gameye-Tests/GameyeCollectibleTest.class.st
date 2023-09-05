@@ -13,15 +13,15 @@ GameyeCollectibleTest >> testAsIdentifierString [
 	| collectible |
 	collectible := GameyeCollectible new.
 	self assert: collectible asIdentifierString
-		equals: 'Collectible-Unknown Title-Unknown Platform'.
+		equals: '? (Collectible) ?'.
 
 	collectible title: 'TestTitle'.
 	self assert: collectible asIdentifierString
-		equals: 'Collectible-TestTitle-Unknown Platform'.
+		equals: 'TestTitle (Collectible) ?'.
 
 	collectible platform: 'TestPlatform'.
 	self assert: collectible asIdentifierString
-		equals: 'Collectible-TestTitle-TestPlatform'
+		equals: 'TestTitle (Collectible) TestPlatform'
 ]
 
 { #category : #tests }
@@ -141,7 +141,11 @@ GameyeCollectibleTest >> testInitialize [
 	self assert: collectible pricePaid isNil.
 
 	self assert: collectible notes isNil.
+	self assert: collectible tags isEmpty.
+	
+	"Raw datas : in case of problems"
 	self assert: collectible rawDatas isNil.
+	self assert: collectible rawIndex isNil.
 
 	"Ownership"
 	self assert: collectible haveBox equals: false.
@@ -247,6 +251,24 @@ GameyeCollectibleTest >> testPrintString [
 	| collectible |
 	collectible := GameyeCollectible new.
 	self assert: collectible printString equals: collectible asIdentifierString
+]
+
+{ #category : #tests }
+GameyeCollectibleTest >> testTags [
+
+	| collectible tag1 tag2 |
+	collectible := GameyeCollectible new.
+	tag1 := #tag1.
+	tag2 := #tag2.
+	collectible tags add: tag1.
+	collectible tags add: tag2.	
+	self assert: collectible tags size equals: 2.
+	self assert: (collectible tags includes: tag1).
+	self assert: (collectible tags includes: tag2).
+	
+	collectible tags remove: tag1.
+	self assert: collectible tags size equals: 1.
+	self assert: (collectible tags includes: tag2).
 ]
 
 { #category : #tests }

@@ -88,10 +88,11 @@ GameyeVideoGame >> playedCompletion: anObject [
 GameyeVideoGame >> printIdentifierOn: aStream [
 
 	super printIdentifierOn: aStream.
-	aStream nextPutAll:	'-';
-		nextPutAll: (self publisher ifNil:[ 'Unknown Publisher' ]);
-		nextPutAll: '-';
-		nextPutAll: (self developer ifNil:[ 'Unknown Developer' ])
+	(self developer notNil or:[self publisher notNil]) ifFalse:[ ^ self ].
+		
+	aStream nextPutAll:	' - ';
+		nextPutAll: (self developer ifNil:[ '' ] ifNotNil:[ :e | e , ' / ']);
+		nextPutAll: (self publisher ifNil:[ '' ])
 ]
 
 { #category : #accessing }
