@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 GameyeAccessory class >> type [
 
-	^ #'Game Accessories'
+	^ #GameAccessories
 ]
 
 { #category : #testing }

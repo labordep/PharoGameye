@@ -63,9 +63,15 @@ AbstractGameyeInputDataUtils class >> exportedSpreadsheetSystemType [
 ]
 
 { #category : #accessing }
+AbstractGameyeInputDataUtils class >> exportedSpreadsheetToyToLifeType [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 AbstractGameyeInputDataUtils class >> exportedSpreadsheetVideoGameType [
 
-	^ '"VideoGame"'
+	^ self subclassResponsibility 
 ]
 
 { #category : #private }
@@ -83,7 +89,7 @@ AbstractGameyeInputDataUtils class >> extractCellsFromLine: aString [
 	"Not found case : why this case can be possible ?"
 	cells size > self numberOfExportedSpreadsheetColumns ifFalse:[ ^ safeCells ].
 
-	"Processing for VideoGames or Systems"
+	"Processing for Games or Systems"
 	type := cells at: 2.
 	(type = self exportedSpreadsheetVideoGameType or:[type = self exportedSpreadsheetSystemType or:[type = self exportedSpreadsheetPeripheralType]]) ifTrue:[ | rebuildedCells |
 

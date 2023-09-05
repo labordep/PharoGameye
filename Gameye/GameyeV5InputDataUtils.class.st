@@ -49,6 +49,24 @@ GameyeV5InputDataUtils class >> createCollectibleFromDataArray: anArray [
 ]
 
 { #category : #accessing }
+GameyeV5InputDataUtils class >> exportedSpreadsheetGameAccessorieType [
+
+	^ '"Game Accessories"'
+]
+
+{ #category : #accessing }
+GameyeV5InputDataUtils class >> exportedSpreadsheetToyToLifeType [
+
+	^ '"Toys To Life"'
+]
+
+{ #category : #accessing }
+GameyeV5InputDataUtils class >> exportedSpreadsheetVideoGameType [
+
+	^ '"Games"'
+]
+
+{ #category : #accessing }
 GameyeV5InputDataUtils class >> gameyeVersion [ 
 
 	^ GameyeVersion v5
@@ -74,11 +92,16 @@ GameyeV5InputDataUtils class >> getSpreadsheetReadStream: aFileReference [
 		"Cell content processing"
 		cells do:[ :cell | | formattedCell |
 
-			"Print media type as a symbol without space"
-			(columnId = 2 and:[cell = self exportedSpreadsheetPrintMediaType]) ifTrue:[
-				formattedCell := '"PrintMedia"'.
+			"Specific type formatting"
+			columnId = 2 ifTrue:[
 				self flag:'labordep: check if printed media call have same name in v4 and v5'.
-			] ifFalse:[
+				cell = self exportedSpreadsheetPrintMediaType ifTrue:[formattedCell := '"PrintMedia"'].
+				cell = self exportedSpreadsheetGameAccessorieType ifTrue:[formattedCell := '"GameAccessories"'].
+				cell = self exportedSpreadsheetToyToLifeType ifTrue:[formattedCell := '"ToysToLife"'].
+				cell = self exportedSpreadsheetVideoGameType ifTrue:[formattedCell := '"VideoGame"'].
+			].
+		
+			formattedCell ifNil:[
 				"Remove not necessary spaces at the start or the end"
 				formattedCell := cell withBlanksCondensed withoutQuoting.
 				formattedCell := formattedCell copyReplaceAll: '"' with: '""'.
@@ -116,13 +139,7 @@ GameyeV5InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream 
 		separator: $,;
 		skipHeader;
 		addField; "Platform"
-		addFieldConverter: [ :string | 
-			string = 'Games' ifTrue:[GameyeVideoGame type] ifFalse:[
-				string = 'Toys To Life' ifTrue:[GameyeToyToLife type] ifFalse:[
-					string
-				].
-			].
-		]; "Category"
+		addSymbolField; "Category (= Type)"
 		addSymbolField; "UserRecordType"
 		addFieldConverter: [ :string | string = 'Missing Field' ifTrue:[nil] ifFalse:[string] ]; "Title"
 		addSymbolField; "Country"

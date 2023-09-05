@@ -49,6 +49,18 @@ GameyeV4InputDataUtils class >> createCollectibleFromDataArray: anArray [
 ]
 
 { #category : #accessing }
+GameyeV4InputDataUtils class >> exportedSpreadsheetToyToLifeType [
+
+	^ '"ToysToLife"'
+]
+
+{ #category : #accessing }
+GameyeV4InputDataUtils class >> exportedSpreadsheetVideoGameType [
+
+	^ '"VideoGame"'
+]
+
+{ #category : #accessing }
 GameyeV4InputDataUtils class >> gameyeVersion [ 
 
 	^ GameyeVersion v4

@@ -20,6 +20,14 @@ GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1ToyTo
 ]
 
 { #category : #samples }
+GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues [
+	"This game have title and developper names with coma and quotes : ""Ivan ""Ironman"" Stewart's Super Off Road"" and ""Rare, Ltd."""
+
+	^self exportedSpreadsheetSampleHeadContentV5, '
+"Nintendo (NES)","Games","Owned","Ivan "Ironman" Stewart''s Super Off Road","United States of America","Official","Tradewest, Inc.","Rare, Ltd.","22/03/2021","CIB","11.77","45.78","236.47","45.78","-1.0","7","6","7"," "," ","","",'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_Empty [
 	"This sample contains some frequently generated cases not easy to read/parse or exceptions due to collection evolution"
 
@@ -40,14 +48,14 @@ GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleHeadContentV5 [
 	^'Platform,Category,UserRecordType,Title,Country,ReleaseType,Publisher,Developer,CreatedAt,Ownership,PriceLoose,PriceCIB,PriceNew,YourPrice,PricePaid,ItemCondition,BoxCondition,ManualCondition,Beat,PlayedCompletion,Notes,Tags'
 ]
 
-{ #category : #running }
+{ #category : #tests }
 GameyeCollectionFactoryV5Test >> setUp [ 
 
 	super setUp.
 	gameyeVersion := GameyeVersion v5.
 ]
 
-{ #category : #running }
+{ #category : #tests }
 GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1System [
 
 	| collection collectible |
@@ -65,11 +73,20 @@ GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1Sy
 	self assert: collectible tags notNil.
 ]
 
-{ #category : #running }
+{ #category : #tests }
 GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1ToyToLife [
 
 	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1ToyToLife).
 
 	self createCollectionFromExportedSpreadsheet_1ToyToLife.
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues [
+
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues).
+
+	self createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues
 ]

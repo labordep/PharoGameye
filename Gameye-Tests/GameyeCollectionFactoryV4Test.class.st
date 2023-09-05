@@ -102,14 +102,14 @@ GameyeCollectionFactoryV4Test class >> exportedSpreadsheetSampleHeadContentV4 [
 	^'Platform,Type,Owned,ForSale,Wishlist,Title,Publisher,Developer,DateAdded,Ownership,PriceLoose,PriceCIB,PriceNew,YourPrice,PricePaid,ItemCondition,BoxCondition,ManualCondition,Beat,PlayedCompletion,Notes'
 ]
 
-{ #category : #assertions }
+{ #category : #running }
 GameyeCollectionFactoryV4Test >> setUp [ 
 
 	super setUp.
 	gameyeVersion := GameyeVersion v4.
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Peripheral [
 
 	| collection collectible |
@@ -134,7 +134,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Pe
 	self assertWishAndForSellCollectionsAreEmpty: datas
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1PeripheralAsAUnknownCollectible [
 
 	| collection collectible collections |
@@ -159,7 +159,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Pe
 	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1PrintMedia [
 
 	| collection collectible collections |
@@ -183,7 +183,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Pr
 	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1System [
 
 	| collectible collection |
@@ -201,7 +201,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Sy
 	self assert: collectible tags isNil.
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1ToyToLife [
 
 	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
@@ -210,31 +210,16 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1To
 	self createCollectionFromExportedSpreadsheet_1ToyToLife.
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues [
 
-	| collection collectible collections |
-	collections := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues).
 
-	collection := collections at: GameyeCollection owned.
-	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
-	self assert: collection haveUnknowns equals: false.
-	self assert: collection haveVideoGames equals: true.
-	self assert: collection haveSystems equals: false.
-	self assert: collection havePeripherals equals: false.
-	self assert: collection haveToyToLife equals: false.
-	self assert: collection havePrintMedias equals: false.
-	self assert: collection numberOfCollectibles equals: 1.
-
-	collectible := collection videoGamesCollectibles first.
-	self assert: collectible dateAdded equals: (Date newDay: 22 month: 3 year: 2021).
-	self assert: collectible isVideoGame.
-
-	self assertWishAndForSellCollectionsAreEmpty: collections
+	self createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_3VideoGames2SystemsWitComplexeStringValues [
 
 	| collection collections |
@@ -256,7 +241,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_3Vi
 	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_Empty [
 
 	| collection collections |
@@ -276,7 +261,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_Emp
 	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
 
-{ #category : #'tests - v4' }
+{ #category : #tests }
 GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_Wishlist_1VideoGame [
 
 	| collections wishListCollection collection forSellCollection |
