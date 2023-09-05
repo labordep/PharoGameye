@@ -5,7 +5,7 @@
 [![Pharo 12](https://img.shields.io/badge/Pharo-12-%23aac9ff.svg)](https://pharo.org/download)
 
 [![GAMEYE.app v4](https://img.shields.io/badge/GAMEYE.app-v4-blue.svg)](https://gameye.app/)
-[![GAMEYE.app v5](https://img.shields.io/badge/GAMEYE.app-v5-red.svg)](https://gameye.app/)
+[![GAMEYE.app v5](https://img.shields.io/badge/GAMEYE.app-v5-blue.svg)](https://gameye.app/)
 
 # PharoGameye
 
