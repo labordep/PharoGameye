@@ -68,7 +68,7 @@ GameyeV5InputDataUtils class >> exportedSpreadsheetVideoGameType [
 
 { #category : #accessing }
 GameyeV5InputDataUtils class >> extractCellsFromLine: aString [
-	| cells newCells safeCells type |
+	| cells newCells safeCells type rebuildedCells |
 
 	cells := aString substrings: ','.
 	cells size = self numberOfExportedSpreadsheetColumns ifTrue:[ ^ cells asArray ].
@@ -81,17 +81,11 @@ GameyeV5InputDataUtils class >> extractCellsFromLine: aString [
 	"Not found case : why this case can be possible ?"
 	cells size > self numberOfExportedSpreadsheetColumns ifFalse:[ ^ safeCells ].
 
-	"Processing for Games or Systems"
-	type := cells at: 2.
-	(type = self exportedSpreadsheetVideoGameType or:[type = self exportedSpreadsheetSystemType or:[type = self exportedSpreadsheetPeripheralType]]) ifTrue:[ | rebuildedCells |
-
-		"A comma or more are inside datas, probably inside string datas as title or editor name or comment (etc.).
-		Try to cut manually and format the comma into HTML code &#44; to ignor the comma during parsing"
-
-		"Problematic cells zone : 4 to 22, extract all cells of the array to rebuild the correct number of cell"
-		rebuildedCells := self rebuildCells: (cells copyFrom: 4 to: cells size).
-		newCells addAll: rebuildedCells.
-	].
+	"A comma or more are inside datas, probably inside string datas as title or editor name or comment (etc.).
+	Try to cut manually and format the comma into HTML code &#44; to ignor the comma during parsing"
+	"Problematic cells zone : 4 to 22, extract all cells of the array to rebuild the correct number of cell"
+	rebuildedCells := self rebuildCells: (cells copyFrom: 4 to: cells size).
+	newCells addAll: rebuildedCells.
 
 	newCells size ~= self numberOfExportedSpreadsheetColumns ifTrue:[
 		"Not found case : why this case can be possible ?"

@@ -13,6 +13,13 @@ GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1BadEl
 ]
 
 { #category : #samples }
+GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1ControllerWithTags [
+	
+	^self exportedSpreadsheetSampleHeadContentV5, '
+"Sega Master System","Controllers","Owned","Master System Controller","United States of America","Official","Sega","Missing Field","14/08/2023","Loose","36.07","?","44.40","36.07","-1.0","8","?","?"," "," ","Remplacer croix directionnelle ","A nettoyer,HS",'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1System [
 	"self exportedSpreadsheetSampleContentV5_1System"
 
@@ -81,6 +88,15 @@ GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1Ba
 ]
 
 { #category : #tests }
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1ControllerWithTags [
+
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1ControllerWithTags).
+
+	self createCollectionFromExportedSpreadsheet_1ControllerWithTags
+]
+
+{ #category : #tests }
 GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1System [
 
 	| collection collectible |
@@ -108,7 +124,7 @@ GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1To
 ]
 
 { #category : #tests }
-GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues [
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWithComplexeStringValues [
 
 	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues).
@@ -117,7 +133,7 @@ GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1Vi
 ]
 
 { #category : #tests }
-GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2 [
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWithComplexeStringValues2 [
 
 	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues2).

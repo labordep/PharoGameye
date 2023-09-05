@@ -142,6 +142,7 @@ GameyeCollectibleTest >> testInitialize [
 
 	self assert: collectible notes isNil.
 	self assert: collectible rawDatas isNil.
+	self assert: collectible rawIndex isNil.
 
 	"Ownership"
 	self assert: collectible haveBox equals: false.

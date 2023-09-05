@@ -11,9 +11,9 @@ AbstractGameyeInputDataUtils class >> createCollectibleFromDataArray: anArray [
 ]
 
 { #category : #parsing }
-AbstractGameyeInputDataUtils class >> createCollectionsFromDataArray: anArray [
+AbstractGameyeInputDataUtils class >> createCollectionsFromDataArray: anArrayOfACollection [
 	"Return collections from array : collectibles, wishlist and for sell"
-	| collection collections wishListCollection forSellCollection |
+	| collection collections wishListCollection forSellCollection index |
 
 	collections := Dictionary new.
 	collection := GameyeCollection new gameyeVersion: self gameyeVersion; yourself.
@@ -24,14 +24,23 @@ AbstractGameyeInputDataUtils class >> createCollectionsFromDataArray: anArray [
 	collections at: GameyeCollection wish put: wishListCollection.
 	collections at: GameyeCollection forSell put: forSellCollection.
 
-	anArray ifNil: [ ^ collections ].
-	anArray do:[ :e |
-		(self createCollectibleFromDataArray: e) ifNotNil:[ :collectible |
+	anArrayOfACollection ifNil: [ ^ collections ].
+	
+	index := 0.
+	anArrayOfACollection do:[ :anArrayOfACollectible |
+		index := index + 1.
+		(self createCollectibleFromDataArray: anArrayOfACollectible) ifNotNil:[ :collectible |
+		
+			"Processing for unknown collectible to help the debug"
+			collectible rawIndex: index.
+			
+			"Add the collectible into the good list"
 			collectible isForSale ifTrue:[ forSellCollection addCollectible: collectible ] ifFalse:[
 				collectible isOnWishList ifTrue:[ wishListCollection addCollectible: collectible ] ifFalse:[
 					collection addCollectible: collectible.
 				].
 			].
+		
 		].
 	].
 

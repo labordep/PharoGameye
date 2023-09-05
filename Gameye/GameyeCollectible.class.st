@@ -22,7 +22,8 @@ Class {
 		'manualCondition',
 		'notes',
 		'tags',
-		'rawDatas'
+		'rawDatas',
+		'rawIndex'
 	],
 	#category : #'Gameye-Model'
 }
@@ -398,6 +399,7 @@ GameyeCollectible >> printOn: aStream [
 
 { #category : #raw }
 GameyeCollectible >> rawDatas [
+	"This property store the raw data of the collectible from an imported file (in case of)"
 
 	^ rawDatas
 ]
@@ -406,6 +408,19 @@ GameyeCollectible >> rawDatas [
 GameyeCollectible >> rawDatas: anObject [
 
 	rawDatas := anObject
+]
+
+{ #category : #accessing }
+GameyeCollectible >> rawIndex [
+	"This index is used to know what is the position of the collectible from an imported file (in case of)"
+	
+	^ rawIndex
+]
+
+{ #category : #accessing }
+GameyeCollectible >> rawIndex: anObject [
+
+	rawIndex := anObject
 ]
 
 { #category : #accessing }

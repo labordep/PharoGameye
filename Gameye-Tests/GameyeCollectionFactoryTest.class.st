@@ -81,6 +81,29 @@ GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1BadEleme
 
 	collectible := collection unknownsCollectibles first.
 	self assert: collectible isUnknown.
+	self assert: collectible rawDatas notNil.
+	self assert: collectible rawIndex equals: 1.
+
+	self assertWishAndForSellCollectionsAreEmpty: datas
+]
+
+{ #category : #'tests - common' }
+GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1ControllerWithTags [
+	| collection collectible |
+
+	collection := datas at: GameyeCollection owned.
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: false.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: true.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
+	self assert: collection numberOfCollectibles equals: 1.
+
+	collectible := collection peripheralsCollectibles first.
+	self assert: collectible dateAdded equals: (Date newDay: 14 month: 8 year: 2023).
+	self assert: collectible isController.
 
 	self assertWishAndForSellCollectionsAreEmpty: datas
 ]

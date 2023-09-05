@@ -163,6 +163,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Pe
 	self assert: collectible isUnknown.
 	self assert: collectible dateAdded equals: (Date newDay: 13 month: 9 year: 2021).
 	self assert: collectible rawDatas size equals: GameyeV4InputDataUtils numberOfExportedSpreadsheetColumns.
+	self assert: collectible rawIndex equals: 1.
 
 	self assertWishAndForSellCollectionsAreEmpty: collections
 ]
@@ -219,7 +220,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1To
 ]
 
 { #category : #tests }
-GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues [
+GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWithComplexeStringValues [
 
 	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues).
@@ -228,7 +229,7 @@ GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1Vi
 ]
 
 { #category : #tests }
-GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2 [
+GameyeCollectionFactoryV4Test >> testCreateCollectionFromExportedSpreadsheet_1VideoGameWithComplexeStringValues2 [
 
 	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV4_1VideoGameWitComplexeStringValues2).
