@@ -13,15 +13,15 @@ GameyeCollectibleTest >> testAsIdentifierString [
 	| collectible |
 	collectible := GameyeCollectible new.
 	self assert: collectible asIdentifierString
-		equals: 'Collectible-Unknown Title-Unknown Platform'.
+		equals: '? (Collectible) ?'.
 
 	collectible title: 'TestTitle'.
 	self assert: collectible asIdentifierString
-		equals: 'Collectible-TestTitle-Unknown Platform'.
+		equals: 'TestTitle (Collectible) ?'.
 
 	collectible platform: 'TestPlatform'.
 	self assert: collectible asIdentifierString
-		equals: 'Collectible-TestTitle-TestPlatform'
+		equals: 'TestTitle (Collectible) TestPlatform'
 ]
 
 { #category : #tests }

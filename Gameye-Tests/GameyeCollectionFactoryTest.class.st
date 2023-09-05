@@ -127,17 +127,17 @@ GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1FoundVid
 	self assert: collection havePrintMedias equals: false.
 	self assert: collection numberOfCollectibles equals: 2.
 
-	foundCollectible := collection videoGamesCollectibles first.
+	col := collection videoGamesForCountry: #'United States of America'.
+	self assert: col size equals: 1.
+	foundCollectible := col first.
 	self assert: foundCollectible dateAdded equals: (Date newDay: 24 month: 2 year: 2022).
 	self assert: foundCollectible isVideoGame.
 	
-	notFoundCollectible := collection videoGamesCollectibles second.
-	self assert: notFoundCollectible dateAdded equals: (Date newDay: 22 month: 3 year: 2021).
-	self assert: notFoundCollectible isVideoGame.
-	
 	col := collection videoGamesForCountry: nil.
 	self assert: col size equals: 1.
-	self assert: col first identicalTo: notFoundCollectible. 
+	notFoundCollectible := col first.
+	self assert: notFoundCollectible dateAdded equals: (Date newDay: 22 month: 3 year: 2021).
+	self assert: notFoundCollectible isVideoGame.
 
 	self assertWishAndForSellCollectionsAreEmpty: datas
 ]
