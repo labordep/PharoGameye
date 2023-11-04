@@ -154,7 +154,7 @@ GameyeV4InputDataUtils class >> numberOfExportedSpreadsheetColumns [
 
 { #category : #parsing }
 GameyeV4InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream [
-	"Parse a CSV readstream as an array"
+	"Parse a CSV readstream as an Array"
 	| neoCSVReader array |
 	neoCSVReader := NeoCSVReader on: aReadStream.
 
@@ -186,7 +186,7 @@ GameyeV4InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream 
 
 	self flag:'TODO : Beat as a boolean, played completion as an Integer (%)'.
 
-	^array
+	^ array
 ]
 
 { #category : #'see class side' }

@@ -245,7 +245,7 @@ GameyeCollectible >> isPrintMedia [
 { #category : #'testing - ownership' }
 GameyeCollectible >> isSealed [
 
-	^ self ownership = GameyeOwnership sealed
+	^ (self ownership = GameyeOwnership sealed or:[self ownership = GameyeOwnership notOpen])
 ]
 
 { #category : #'testing - type' }

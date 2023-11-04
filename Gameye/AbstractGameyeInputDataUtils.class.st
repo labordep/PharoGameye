@@ -27,6 +27,7 @@ AbstractGameyeInputDataUtils class >> createCollectionsFromDataArray: anArrayOfA
 	anArrayOfACollection ifNil: [ ^ collections ].
 	
 	index := 0.
+	
 	anArrayOfACollection do:[ :anArrayOfACollectible |
 		index := index + 1.
 		(self createCollectibleFromDataArray: anArrayOfACollectible) ifNotNil:[ :collectible |
@@ -152,6 +153,7 @@ AbstractGameyeInputDataUtils class >> numberOfExportedSpreadsheetColumns [
 
 { #category : #parsing }
 AbstractGameyeInputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream [
+	"Parse a CSV readstream as an Array"
 	
 	self subclassResponsibility 
 ]

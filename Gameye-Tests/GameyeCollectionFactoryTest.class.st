@@ -237,6 +237,48 @@ GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_1VideoGam
 	self assertWishAndForSellCollectionsAreEmpty: datas
 ]
 
+{ #category : #'tests - common' }
+GameyeCollectionFactoryTest >> createCollectionFromExportedSpreadsheet_5VideoGamesWithDifferentOwnership [
+	| collection collectible |
+
+	collection := datas at: GameyeCollection owned.
+	self assert: collection date equals: (Date newDay: 20 month: 2 year: 2023).
+	self assert: collection haveUnknowns equals: false.
+	self assert: collection haveVideoGames equals: true.
+	self assert: collection haveSystems equals: false.
+	self assert: collection havePeripherals equals: false.
+	self assert: collection haveToyToLife equals: false.
+	self assert: collection havePrintMedias equals: false.
+	self assert: collection numberOfCollectibles equals: 5.
+
+	collectible := collection videoGamesCollectibles at: 1.
+	self assert: collectible dateAdded equals: (Date newDay: 30 month: 12 year: 2021).
+	self assert: collectible isVideoGame.
+	self assert: collectible isSealed.
+
+	collectible := collection videoGamesCollectibles at: 2.
+	self assert: collectible dateAdded equals: (Date newDay: 12 month: 07 year: 2022).
+	self assert: collectible isVideoGame.
+	self assert: collectible isCIB.
+		
+	collectible := collection videoGamesCollectibles at: 3.
+	self assert: collectible dateAdded equals: (Date newDay: 26 month: 4 year: 2022).
+	self assert: collectible isVideoGame.
+	self assert: collectible isBoxed.
+	
+	collectible := collection videoGamesCollectibles at: 4.
+	self assert: collectible dateAdded equals: (Date newDay: 8 month: 4 year: 2021).
+	self assert: collectible isVideoGame.
+	self assert: collectible isLoose.
+	
+	collectible := collection videoGamesCollectibles at: 5.
+	self assert: collectible dateAdded equals: (Date newDay: 25 month: 6 year: 2021).
+	self assert: collectible isVideoGame.
+	self assert: collectible isLoosePlus.	
+
+	self assertWishAndForSellCollectionsAreEmpty: datas
+]
+
 { #category : #running }
 GameyeCollectionFactoryTest >> setUp [
 

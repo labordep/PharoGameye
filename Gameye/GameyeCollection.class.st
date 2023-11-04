@@ -40,25 +40,56 @@ GameyeCollection class >> wish [
 GameyeCollection >> addCollectible: aCollectible [
 
 	aCollectible ifNil: [ ^ self ].
-	aCollectible isVideoGame ifTrue: [
-		self videoGames add: aCollectible.
-		^ self ].
-	aCollectible isSystem ifTrue: [
-		self systems add: aCollectible.
-		^ self ].
-	aCollectible isPeripheral ifTrue: [
-		self peripherals add: aCollectible.
-		^ self ].
-	aCollectible isToyToLife ifTrue: [
-		self toysToLife add: aCollectible.
-		^ self ].
-	aCollectible isPrintMedia ifTrue: [
-		self printMedias add: aCollectible.
-		^ self ].
+	aCollectible isVideoGame ifTrue: [ ^ self addVideoGame: aCollectible ].
+	aCollectible isSystem ifTrue: [ ^ self addSystem: aCollectible ].
+	aCollectible isPeripheral ifTrue: [ ^ self addPeripheral: aCollectible ].
+	aCollectible isToyToLife ifTrue: [ ^ self addToyToLife: aCollectible ].
+	aCollectible isPrintMedia ifTrue: [ ^ self addPrintMedia: aCollectible ].
 
 	aCollectible isUnknown ifFalse: [ ^ self ].
-	self unknowns add: aCollectible.
-	^ self
+	self addUnknown: aCollectible
+]
+
+{ #category : #private }
+GameyeCollection >> addPeripheral: aCollectible [
+
+	(self peripherals includes: aCollectible) ifTrue: [ ^ true ].
+	self peripherals add: aCollectible
+]
+
+{ #category : #private }
+GameyeCollection >> addPrintMedia: aCollectible [
+
+	(self printMedias includes: aCollectible) ifTrue: [ ^ true ].
+	self printMedias add: aCollectible
+]
+
+{ #category : #private }
+GameyeCollection >> addSystem: aCollectible [
+
+	(self systems includes: aCollectible) ifTrue: [ ^ true ].
+	self systems add: aCollectible
+]
+
+{ #category : #private }
+GameyeCollection >> addToyToLife: aCollectible [
+
+	(self toysToLife includes: aCollectible) ifTrue: [ ^ true ].
+	self toysToLife add: aCollectible
+]
+
+{ #category : #private }
+GameyeCollection >> addUnknown: aCollectible [
+
+	(self unknowns includes: aCollectible) ifTrue: [ ^ true ].
+	self unknowns add: aCollectible
+]
+
+{ #category : #private }
+GameyeCollection >> addVideoGame: aCollectible [
+
+	(self videoGames includes: aCollectible) ifTrue: [ ^ true ].
+	self videoGames add: aCollectible
 ]
 
 { #category : #'collectibles - get' }
@@ -253,7 +284,7 @@ GameyeCollection >> numberOfVideoGames [
 { #category : #accessing }
 GameyeCollection >> peripherals [
 
-	^ peripherals ifNil: [ peripherals := Set new ]
+	^ peripherals ifNil: [ peripherals := OrderedCollection new ]
 ]
 
 { #category : #accessing }
@@ -298,7 +329,7 @@ GameyeCollection >> pricePaid [
 { #category : #accessing }
 GameyeCollection >> printMedias [
 
-	^ printMedias ifNil: [ printMedias := Set new ]
+	^ printMedias ifNil: [ printMedias := OrderedCollection new ]
 ]
 
 { #category : #accessing }
@@ -365,7 +396,7 @@ GameyeCollection >> sealedVideoGames [
 { #category : #accessing }
 GameyeCollection >> systems [
 
-	^ systems ifNil: [ systems := Set new ]
+	^ systems ifNil: [ systems := OrderedCollection new ]
 ]
 
 { #category : #accessing }
@@ -401,7 +432,7 @@ GameyeCollection >> systemsOwnership: aGameyeOwnership [
 { #category : #accessing }
 GameyeCollection >> toysToLife [
 
-	^ toysToLife ifNil: [ toysToLife := Set new ]
+	^ toysToLife ifNil: [ toysToLife := OrderedCollection new ]
 ]
 
 { #category : #accessing }
@@ -425,7 +456,7 @@ GameyeCollection >> toysToLifeOwnership: aGameyeOwnership [
 { #category : #accessing }
 GameyeCollection >> unknowns [
 
-	^ unknowns ifNil: [ unknowns := Set new ]
+	^ unknowns ifNil: [ unknowns := OrderedCollection new ]
 ]
 
 { #category : #accessing }
@@ -443,7 +474,7 @@ GameyeCollection >> unknownsCollectibles [
 { #category : #accessing }
 GameyeCollection >> videoGames [
 
-	^ videoGames ifNil: [ videoGames := Set new ]
+	^ videoGames ifNil: [ videoGames := OrderedCollection new ]
 ]
 
 { #category : #accessing }

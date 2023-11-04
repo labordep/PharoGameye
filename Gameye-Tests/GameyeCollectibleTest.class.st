@@ -217,6 +217,15 @@ GameyeCollectibleTest >> testIsSealed [
 ]
 
 { #category : #tests }
+GameyeCollectibleTest >> testIsSealed2 [
+
+	| collectible |
+	collectible := GameyeCollectible new.
+	collectible ownership: GameyeOwnership notOpen.
+	self assert: collectible isSealed
+]
+
+{ #category : #tests }
 GameyeCollectibleTest >> testNotes [
 
 	| collectible |

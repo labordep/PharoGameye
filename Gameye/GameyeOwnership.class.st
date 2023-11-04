@@ -96,6 +96,12 @@ GameyeOwnership class >> manualAndOther [
 ]
 
 { #category : #enumerating }
+GameyeOwnership class >> notOpen [
+
+	^ #New
+]
+
+{ #category : #enumerating }
 GameyeOwnership class >> other [
 
 	^#O

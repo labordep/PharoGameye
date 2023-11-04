@@ -60,6 +60,19 @@ GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_1Video
 ]
 
 { #category : #samples }
+GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_5VideoGames [
+	"This list have different type of ownership"
+
+	^self exportedSpreadsheetSampleHeadContentV5, '
+	"Nintendo Game Boy Advance","Games","Owned","Game & Watch Gallery Advance","United Kingdom","Official","Nintendo","Tose","30/12/2021","New","11.83","26.13","167.55","167.55","90.00","?","10","?"," "," ","","",
+	"Nintendo Game Boy Advance","Games","Owned","Excitebike NES Classics","United Kingdom","Official","Nintendo","Nintendo","12/07/2022","CIB","11.27","27.28","54.56","27.28","105.00","10","10","10"," "," ","","",
+	"Sony PlayStation","Games","Owned","Gran Turismo 2","United Kingdom","Official","Sony","Polyphony Digital Inc.","26/04/2022","Boxed","5.72","11.28","111.57","8.56","10.00","8","10","?"," "," ","Disc 1 non fonctionnel ","Incomplet",
+	"Nintendo 64","Games","Owned","Pokémon Stadium 2","United Kingdom","Official","Nintendo","Nintendo EAD","08/04/2021","Loose","56.08","151.18","515.10","56.08","70.00","10","?","?"," "," ","Cartouche NOE","",
+	"Super Nintendo (SNES)","Games","Owned","Pilotwings","United Kingdom","Official","Nintendo","Nintendo EAD","25/06/2021","Loose+","12.49","29.23","71.06","20.10","9.99","10","?","10"," "," ","","",
+'
+]
+
+{ #category : #samples }
 GameyeCollectionFactoryV5Test class >> exportedSpreadsheetSampleContentV5_Empty [
 	"This sample contains some frequently generated cases not easy to read/parse or exceptions due to collection evolution"
 
@@ -157,4 +170,13 @@ GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_1Vi
 		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_1VideoGameWitComplexeStringValues2).
 
 	self createCollectionFromExportedSpreadsheet_1VideoGameWitComplexeStringValues2
+]
+
+{ #category : #tests }
+GameyeCollectionFactoryV5Test >> testCreateCollectionFromExportedSpreadsheet_5VideoGamesWithDifferentOwnership [
+
+	datas := GameyeCollectionFactory createCollectionsFromExportedSpreadsheet: (self class
+		exportedSpreadsheetSampleFileReference: self class exportedSpreadsheetSampleContentV5_5VideoGames).
+
+	self createCollectionFromExportedSpreadsheet_5VideoGamesWithDifferentOwnership
 ]

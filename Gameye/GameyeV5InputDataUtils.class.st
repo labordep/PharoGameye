@@ -176,7 +176,7 @@ GameyeV5InputDataUtils class >> numberOfExportedSpreadsheetColumns [
 
 { #category : #parsing }
 GameyeV5InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream [
-	"Parse a CSV readstream as an array"
+	"Parse a CSV readstream as an Array"
 	| neoCSVReader array |
 	neoCSVReader := NeoCSVReader on: aReadStream.
 	
@@ -207,7 +207,7 @@ GameyeV5InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream 
 		addField; "Tags"
 		upToEnd.
 
-	^array
+	^ array
 ]
 
 { #category : #'see class side' }
