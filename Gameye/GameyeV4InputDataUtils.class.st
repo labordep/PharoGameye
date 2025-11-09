@@ -3,12 +3,14 @@ This class format Gameye input files (as exported .csv sheet) to be correct for 
 Exported files are not supported in a lot of cases and this utils class have the job to make the file readeable and fix all exporting problems.
 "
 Class {
-	#name : #GameyeV4InputDataUtils,
-	#superclass : #AbstractGameyeInputDataUtils,
-	#category : #'Gameye-Core'
+	#name : 'GameyeV4InputDataUtils',
+	#superclass : 'AbstractGameyeInputDataUtils',
+	#category : 'Gameye-Core',
+	#package : 'Gameye',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV4InputDataUtils class >> createCollectibleFromDataArray: anArray [
 	| collectible |
 
@@ -48,19 +50,19 @@ GameyeV4InputDataUtils class >> createCollectibleFromDataArray: anArray [
 	^ collectible
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV4InputDataUtils class >> exportedSpreadsheetToyToLifeType [
 
 	^ '"ToysToLife"'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV4InputDataUtils class >> exportedSpreadsheetVideoGameType [
 
 	^ '"VideoGame"'
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeV4InputDataUtils class >> extractCellsFromLine: aString [
 	| cells newCells safeCells type |
 
@@ -95,13 +97,13 @@ GameyeV4InputDataUtils class >> extractCellsFromLine: aString [
 	^newCells asArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV4InputDataUtils class >> gameyeVersion [ 
 
 	^ GameyeVersion v4
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 GameyeV4InputDataUtils class >> getSpreadsheetReadStream: aFileReference [
 	"Return a ReadStream of an exported SpreadSheet file with fixing all knowns generation knowns problems"
 	| line fixedStream readStream |
@@ -146,13 +148,13 @@ GameyeV4InputDataUtils class >> getSpreadsheetReadStream: aFileReference [
 	^ fixedStream reset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV4InputDataUtils class >> numberOfExportedSpreadsheetColumns [
 
 	^ 21
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 GameyeV4InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream [
 	"Parse a CSV readstream as an Array"
 	| neoCSVReader array |
@@ -189,6 +191,6 @@ GameyeV4InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream 
 	^ array
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 GameyeV4InputDataUtils >> seeClassSide [
 ]

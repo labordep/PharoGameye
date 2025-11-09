@@ -3,12 +3,14 @@ This class read datas exported from Gameye.
 Data can be a file reference.
 "
 Class {
-	#name : #GameyeCollectionFactory,
-	#superclass : #Object,
-	#category : #'Gameye-Core'
+	#name : 'GameyeCollectionFactory',
+	#superclass : 'Object',
+	#category : 'Gameye-Core',
+	#package : 'Gameye',
+	#tag : 'Core'
 }
 
-{ #category : #'create collection' }
+{ #category : 'create collection' }
 GameyeCollectionFactory class >> createCollectionsFromExportedSpreadsheet: aFileReference [
 	"Return all collections from a file : collectibles, for sell and wish list"
 	| readStream array date collections fileName utilsClass |
@@ -37,7 +39,7 @@ GameyeCollectionFactory class >> createCollectionsFromExportedSpreadsheet: aFile
 	
 ]
 
-{ #category : #'create collection' }
+{ #category : 'create collection' }
 GameyeCollectionFactory class >> createForSellCollectionFromExportedSpreadsheet: aFileReference [
 	"Return just the for seell collection (not collection and wish list collections)"
 	
@@ -48,7 +50,7 @@ GameyeCollectionFactory class >> createForSellCollectionFromExportedSpreadsheet:
 	^ collections at: GameyeCollection forSell
 ]
 
-{ #category : #'create collection' }
+{ #category : 'create collection' }
 GameyeCollectionFactory class >> createOwnedCollectionFromExportedSpreadsheet: aFileReference [
 	"Return just the collectibles collection (not for sell and wish list collections)"
 	
@@ -59,7 +61,7 @@ GameyeCollectionFactory class >> createOwnedCollectionFromExportedSpreadsheet: a
 	^ collections at: GameyeCollection owned
 ]
 
-{ #category : #'create collection' }
+{ #category : 'create collection' }
 GameyeCollectionFactory class >> createWishListCollectionFromExportedSpreadsheet: aFileReference [
 	"Return just the wish list collection (not collection and for sell collections)"
 	
@@ -70,24 +72,25 @@ GameyeCollectionFactory class >> createWishListCollectionFromExportedSpreadsheet
 	^ collections at: GameyeCollection wish
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollectionFactory class >> inputDataUtilsClassForSpreadsheetFile: aFileReference [
 	"Return the corresponding utility class to manage a spreadsheet readstream"
 
 	| gameyeVersion |
 	gameyeVersion := AbstractGameyeInputDataUtils getSpreadsheetFileReferenceGameyeVersion: aFileReference.
+	gameyeVersion = GameyeVersion v5dot05 ifTrue:[ ^ GameyeV5dot05InputDataUtils ].
 	gameyeVersion = GameyeVersion v5 ifTrue:[ ^ GameyeV5InputDataUtils ].
 	gameyeVersion = GameyeVersion v4 ifTrue:[ ^ GameyeV4InputDataUtils ].
 	
 	^ AbstractGameyeInputDataUtils signalNotSupportedSpreadsheetFile
 ]
 
-{ #category : #'error signalling' }
+{ #category : 'error signalling' }
 GameyeCollectionFactory class >> signalNotAFile [
 
 	^ NotAFileGameyeError signal
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 GameyeCollectionFactory >> seeClassSide [
 ]

@@ -1,16 +1,18 @@
 Class {
-	#name : #GameyeController,
-	#superclass : #GameyePeripheral,
-	#category : #'Gameye-Model'
+	#name : 'GameyeController',
+	#superclass : 'GameyePeripheral',
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeController class >> type [
 
 	^ #Controllers
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeController >> isController [
 
 	^ true

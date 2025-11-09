@@ -1,16 +1,18 @@
 Class {
-	#name : #GameyePrintMedia,
-	#superclass : #GameyeCollectible,
-	#category : #'Gameye-Model'
+	#name : 'GameyePrintMedia',
+	#superclass : 'GameyeCollectible',
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyePrintMedia class >> type [
 
 	^ #PrintMedia
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyePrintMedia >> isPrintMedia [
 
 	^ true

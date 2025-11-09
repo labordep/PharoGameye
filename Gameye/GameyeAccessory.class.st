@@ -1,16 +1,18 @@
 Class {
-	#name : #GameyeAccessory,
-	#superclass : #GameyePeripheral,
-	#category : #'Gameye-Model'
+	#name : 'GameyeAccessory',
+	#superclass : 'GameyePeripheral',
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeAccessory class >> type [
 
 	^ #GameAccessories
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeAccessory >> isAccessory [
 
 	^ true

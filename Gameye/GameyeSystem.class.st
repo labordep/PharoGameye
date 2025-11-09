@@ -1,16 +1,18 @@
 Class {
-	#name : #GameyeSystem,
-	#superclass : #GameyeCollectible,
-	#category : #'Gameye-Model'
+	#name : 'GameyeSystem',
+	#superclass : 'GameyeCollectible',
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeSystem class >> type [
 
 	^ #Systems
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeSystem >> isSystem [
 
 	^ true

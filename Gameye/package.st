@@ -1,1 +1,1 @@
-Package { #name : #Gameye }
+Package { #name : 'Gameye' }

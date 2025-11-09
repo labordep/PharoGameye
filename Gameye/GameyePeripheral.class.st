@@ -1,28 +1,30 @@
 Class {
-	#name : #GameyePeripheral,
-	#superclass : #GameyeCollectible,
-	#category : #'Gameye-Model'
+	#name : 'GameyePeripheral',
+	#superclass : 'GameyeCollectible',
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyePeripheral class >> type [
 
 	^ #Peripherals
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyePeripheral >> isAccessory [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyePeripheral >> isController [
 
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyePeripheral >> isPeripheral [
 
 	^ true
