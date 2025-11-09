@@ -1,10 +1,12 @@
 Class {
-	#name : #GameyeV5InputDataUtils,
-	#superclass : #AbstractGameyeInputDataUtils,
-	#category : #'Gameye-Core'
+	#name : 'GameyeV5InputDataUtils',
+	#superclass : 'AbstractGameyeInputDataUtils',
+	#category : 'Gameye-Core',
+	#package : 'Gameye',
+	#tag : 'Core'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 GameyeV5InputDataUtils class >> createCollectibleFromDataArray: anArray [
 	| collectible userRecordType tags |
 
@@ -17,7 +19,7 @@ GameyeV5InputDataUtils class >> createCollectibleFromDataArray: anArray [
 	userRecordType := anArray at: 3.
 	collectible isOwned: (userRecordType = #Owned).
 	collectible isForSale: (userRecordType = #ForSale).
-	collectible isOnWishList: (userRecordType = #Wishlist). self flag:'labordep: check if this is the correct symbol'.
+	collectible isOnWishList: (userRecordType = #Wishlist).
 	collectible title: (anArray at: 4).
 	collectible country: (anArray at: 5).
 	collectible releaseType: (anArray at: 6).
@@ -50,25 +52,25 @@ GameyeV5InputDataUtils class >> createCollectibleFromDataArray: anArray [
 	^ collectible
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV5InputDataUtils class >> exportedSpreadsheetGameAccessorieType [
 
 	^ '"Game Accessories"'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV5InputDataUtils class >> exportedSpreadsheetToyToLifeType [
 
 	^ '"Toys To Life"'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV5InputDataUtils class >> exportedSpreadsheetVideoGameType [
 
 	^ '"Games"'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV5InputDataUtils class >> extractCellsFromLine: aString [
 	| cells newCells safeCells type rebuildedCells |
 
@@ -97,7 +99,7 @@ GameyeV5InputDataUtils class >> extractCellsFromLine: aString [
 	^newCells asArray
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeV5InputDataUtils class >> extractTagsFromCell: aString [
 	"Tag string example : 'A nettoyer&#44;HS' "
 
@@ -111,13 +113,13 @@ GameyeV5InputDataUtils class >> extractTagsFromCell: aString [
 	^ tags ifEmpty: [ nil ] ifNotEmpty: [ tags asOrderedCollection ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV5InputDataUtils class >> gameyeVersion [ 
 
 	^ GameyeVersion v5
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 GameyeV5InputDataUtils class >> getSpreadsheetReadStream: aFileReference [
 	"Return a ReadStream of an exported SpreadSheet file with fixing all knowns generation knowns problems"
 	| readStream line fixedStream |
@@ -168,13 +170,13 @@ GameyeV5InputDataUtils class >> getSpreadsheetReadStream: aFileReference [
 	^ fixedStream reset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeV5InputDataUtils class >> numberOfExportedSpreadsheetColumns [
 
 	^ 22
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 GameyeV5InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream [
 	"Parse a CSV readstream as an Array"
 	| neoCSVReader array |
@@ -210,6 +212,6 @@ GameyeV5InputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream 
 	^ array
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 GameyeV5InputDataUtils >> seeClassSide [
 ]

@@ -1,16 +1,18 @@
 Class {
-	#name : #AbstractGameyeInputDataUtils,
-	#superclass : #Object,
-	#category : #'Gameye-Core'
+	#name : 'AbstractGameyeInputDataUtils',
+	#superclass : 'Object',
+	#category : 'Gameye-Core',
+	#package : 'Gameye',
+	#tag : 'Core'
 }
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 AbstractGameyeInputDataUtils class >> createCollectibleFromDataArray: anArray [
 	
 	self subclassResponsibility 
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 AbstractGameyeInputDataUtils class >> createCollectionsFromDataArray: anArrayOfACollection [
 	"Return collections from array : collectibles, wishlist and for sell"
 	| collection collections wishListCollection forSellCollection index |
@@ -48,55 +50,55 @@ AbstractGameyeInputDataUtils class >> createCollectionsFromDataArray: anArrayOfA
 	^ collections
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> exportedSpreadsheetColumn01Title [
 
 	^ 'Platform'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> exportedSpreadsheetPeripheralType [
 
 	^ '"Peripherals"'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> exportedSpreadsheetPrintMediaType [
 
 	^ '"Print Media"'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> exportedSpreadsheetSystemType [
 
 	^ '"Systems"'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> exportedSpreadsheetToyToLifeType [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> exportedSpreadsheetVideoGameType [
 
 	^ self subclassResponsibility 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractGameyeInputDataUtils class >> extractCellsFromLine: aString [
 	
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> gameyeVersion [ 
 
 	self subclassResponsibility
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 AbstractGameyeInputDataUtils class >> getDateFromExportedSpreadsheetFilename: aString [
 
 	| a |
@@ -109,7 +111,7 @@ AbstractGameyeInputDataUtils class >> getDateFromExportedSpreadsheetFilename: aS
 	^ Date newDay: (a at: 2) asInteger month: (a at: 1) asInteger year: (a at: 3) asInteger
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 AbstractGameyeInputDataUtils class >> getSpreadsheetFileReferenceGameyeVersion: aFileReference [
 	"Return a ReadStream of an exported SpreadSheet file with fixing all knowns generation knowns problems"
 
@@ -122,7 +124,10 @@ AbstractGameyeInputDataUtils class >> getSpreadsheetFileReferenceGameyeVersion: 
 	readStream close.
 	columns := (line substrings: ',').
 	
-	"V5 check"
+	"V5.x check"
+	(columns size = GameyeV5dot05InputDataUtils numberOfExportedSpreadsheetColumns and:[
+		columns first = GameyeV5dot05InputDataUtils exportedSpreadsheetColumn01Title]) ifTrue:[ ^ GameyeVersion v5dot05 ].
+		
 	(columns size = GameyeV5InputDataUtils numberOfExportedSpreadsheetColumns and:[
 		columns first = GameyeV5InputDataUtils exportedSpreadsheetColumn01Title]) ifTrue:[ ^ GameyeVersion v5 ].
 	
@@ -133,32 +138,32 @@ AbstractGameyeInputDataUtils class >> getSpreadsheetFileReferenceGameyeVersion: 
 	^ GameyeVersion unknown 
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 AbstractGameyeInputDataUtils class >> getSpreadsheetReadStream: aFileReference [
 	
 	self subclassResponsibility 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> isAbstract [ 
 
 	^ self == AbstractGameyeInputDataUtils
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AbstractGameyeInputDataUtils class >> numberOfExportedSpreadsheetColumns [
 
 	self subclassResponsibility
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 AbstractGameyeInputDataUtils class >> parseExportedSpreadsheetReadStream: aReadStream [
 	"Parse a CSV readstream as an Array"
 	
 	self subclassResponsibility 
 ]
 
-{ #category : #parsing }
+{ #category : 'parsing' }
 AbstractGameyeInputDataUtils class >> parseNeoNumberString: aString [
 
 	aString = '-1.0' ifTrue:[ ^ nil ].
@@ -167,7 +172,7 @@ AbstractGameyeInputDataUtils class >> parseNeoNumberString: aString [
 	^ NeoNumberParser parse: aString ifFail: [nil]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 AbstractGameyeInputDataUtils class >> rebuildCells: aCellsArray [
 	| newCells |
 
@@ -205,12 +210,12 @@ AbstractGameyeInputDataUtils class >> rebuildCells: aCellsArray [
 	^newCells asArray
 ]
 
-{ #category : #'error signalling' }
+{ #category : 'error signalling' }
 AbstractGameyeInputDataUtils class >> signalNotSupportedSpreadsheetFile [
 
 	^ NotSupportedSpreadsheetFileGameyeError signal 
 ]
 
-{ #category : #'see class side' }
+{ #category : 'see class side' }
 AbstractGameyeInputDataUtils >> seeClassSide [
 ]

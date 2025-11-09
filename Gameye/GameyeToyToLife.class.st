@@ -1,16 +1,18 @@
 Class {
-	#name : #GameyeToyToLife,
-	#superclass : #GameyeCollectible,
-	#category : #'Gameye-Model'
+	#name : 'GameyeToyToLife',
+	#superclass : 'GameyeCollectible',
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeToyToLife class >> type [
 
 	^ #ToysToLife
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeToyToLife >> isToyToLife [
 
 	^ true

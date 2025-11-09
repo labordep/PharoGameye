@@ -2,8 +2,8 @@
 GameyeCollection is a collection of GameyeCollectible
 "
 Class {
-	#name : #GameyeCollection,
-	#superclass : #Object,
+	#name : 'GameyeCollection',
+	#superclass : 'Object',
 	#instVars : [
 		'name',
 		'date',
@@ -15,28 +15,30 @@ Class {
 		'printMedias',
 		'unknowns'
 	],
-	#category : #'Gameye-Model'
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 GameyeCollection class >> forSell [ 
 
 	^#forSell
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 GameyeCollection class >> owned [ 
 
 	^#owned
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 GameyeCollection class >> wish [ 
 
 	^#wish
 ]
 
-{ #category : #'collectibles - add-remove' }
+{ #category : 'collectibles - add-remove' }
 GameyeCollection >> addCollectible: aCollectible [
 
 	aCollectible ifNil: [ ^ self ].
@@ -50,49 +52,49 @@ GameyeCollection >> addCollectible: aCollectible [
 	self addUnknown: aCollectible
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollection >> addPeripheral: aCollectible [
 
 	(self peripherals includes: aCollectible) ifTrue: [ ^ true ].
 	self peripherals add: aCollectible
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollection >> addPrintMedia: aCollectible [
 
 	(self printMedias includes: aCollectible) ifTrue: [ ^ true ].
 	self printMedias add: aCollectible
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollection >> addSystem: aCollectible [
 
 	(self systems includes: aCollectible) ifTrue: [ ^ true ].
 	self systems add: aCollectible
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollection >> addToyToLife: aCollectible [
 
 	(self toysToLife includes: aCollectible) ifTrue: [ ^ true ].
 	self toysToLife add: aCollectible
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollection >> addUnknown: aCollectible [
 
 	(self unknowns includes: aCollectible) ifTrue: [ ^ true ].
 	self unknowns add: aCollectible
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollection >> addVideoGame: aCollectible [
 
 	(self videoGames includes: aCollectible) ifTrue: [ ^ true ].
 	self videoGames add: aCollectible
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> collectibles [
 	"Return all collectibles"
 
@@ -107,37 +109,37 @@ GameyeCollection >> collectibles [
 	^collectibles
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> collectiblesForCountry: aString [
 
 	^ self collectibles select:[ :c | c country = aString ]
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> collectiblesForPlatform: aString [
 
 	^ self collectibles select:[ :c | c platform = aString ]
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> collectiblesForTitle: aString [
 
 	^ self collectibles select:[ :c | c title = aString ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> date [
 
 	^ date
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> date: aDate [
 
 	date := aDate
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GameyeCollection >> duplicated: aCollectibleList [
 
 	| identifiers duplicated |
@@ -157,73 +159,73 @@ GameyeCollection >> duplicated: aCollectibleList [
 	^ duplicated
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> duplicatedPeripherals [
 
 	^ self duplicated: self peripheralsCollectibles
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> duplicatedSystems [
 
 	^ self duplicated: self systemsCollectibles
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> duplicatedVideoGames [
 
 	^ self duplicated: self videoGamesCollectibles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> gameyeVersion [
 
 	^ gameyeVersion ifNil: [ gameyeVersion := GameyeVersion unknown ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> gameyeVersion: anObject [
 
 	gameyeVersion := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeCollection >> havePeripherals [
 
 	^ self peripherals notEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeCollection >> havePrintMedias [
 
 	^ self printMedias notEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeCollection >> haveSystems [
 
 	^ self systems notEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeCollection >> haveToyToLife [
 
 	^ self toysToLife notEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeCollection >> haveUnknowns [
 
 	^ self unknowns notEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeCollection >> haveVideoGames [
 
 	^ self videoGames notEmpty
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> includesCollectible: aCollectible [
 
 	aCollectible ifNil:[ ^ false ].
@@ -251,19 +253,19 @@ GameyeCollection >> includesCollectible: aCollectible [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> name: anObject [
 
 	name := anObject
 ]
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 GameyeCollection >> numberOfCollectibles [
 	"Cannot return errors collectibles to detect errors when counting"
 
@@ -275,49 +277,49 @@ GameyeCollection >> numberOfCollectibles [
 	+ self unknowns size
 ]
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 GameyeCollection >> numberOfVideoGames [
 
 	^ self videoGames size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> peripherals [
 
 	^ peripherals ifNil: [ peripherals := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> peripherals: anObject [
 
 	peripherals := anObject
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> peripheralsCollectibles [
 
 	^self peripherals asOrderedCollection
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> peripheralsForCountry: aString [
 
 	^ self peripheralsCollectibles select:[ :c | c country = aString ]
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> peripheralsForPlatform: aString [
 
 	^ self peripheralsCollectibles select:[ :c | c platform = aString ]
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> peripheralsOwnership: aGameyeOwnership [
 
 	^ self peripheralsCollectibles select:[ :c | c ownership = aGameyeOwnership ]
 ]
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 GameyeCollection >> pricePaid [
 	"Return price paid for all collectibles"
 	| price |
@@ -326,25 +328,25 @@ GameyeCollection >> pricePaid [
 	^ price
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> printMedias [
 
 	^ printMedias ifNil: [ printMedias := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> printMedias: anObject [
 
 	printMedias := anObject
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> printMediasCollectibles [
 
 	^self printMedias asOrderedCollection
 ]
 
-{ #category : #'collectibles - add-remove' }
+{ #category : 'collectibles - add-remove' }
 GameyeCollection >> removeCollectible: aCollectible [
 
 	aCollectible ifNil: [ ^ self ].
@@ -369,157 +371,157 @@ GameyeCollection >> removeCollectible: aCollectible [
 	^ self
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> sealedPeripherals [
 
 	^ self peripheralsOwnership: GameyeOwnership sealed
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> sealedSystems [
 
 	^ self systemsOwnership: GameyeOwnership sealed
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> sealedToysToLife [
 
 	^ self toysToLifeOwnership: GameyeOwnership sealed
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> sealedVideoGames [
 
 	^ self videoGamesOwnership: GameyeOwnership sealed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> systems [
 
 	^ systems ifNil: [ systems := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> systems: anObject [
 
 	systems := anObject
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> systemsCollectibles [
 
 	^self systems asOrderedCollection
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> systemsForCountry: aString [
 
 	^ self systemsCollectibles select:[ :c | c country = aString ]
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> systemsForPlatform: aString [
 
 	^ self systemsCollectibles select:[ :c | c platform = aString ]
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> systemsOwnership: aGameyeOwnership [
 
 	^ self systemsCollectibles select:[ :c | c ownership = aGameyeOwnership ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> toysToLife [
 
 	^ toysToLife ifNil: [ toysToLife := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> toysToLife: anObject [
 
 	toysToLife := anObject
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> toysToLifeCollectibles [
 
 	^self toysToLife asOrderedCollection
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> toysToLifeOwnership: aGameyeOwnership [
 
 	^ self toysToLifeCollectibles select:[ :c | c ownership = aGameyeOwnership ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> unknowns [
 
 	^ unknowns ifNil: [ unknowns := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> unknowns: anObject [
 
 	unknowns := anObject
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> unknownsCollectibles [
 
 	^self unknowns asOrderedCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> videoGames [
 
 	^ videoGames ifNil: [ videoGames := OrderedCollection new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeCollection >> videoGames: anObject [
 
 	videoGames := anObject
 ]
 
-{ #category : #'collectibles - get' }
+{ #category : 'collectibles - get' }
 GameyeCollection >> videoGamesCollectibles [
 
 	^self videoGames asOrderedCollection
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> videoGamesForCountry: aSymbol [
 
 	^ self videoGamesCollectibles select:[ :c | c country = aSymbol ]
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> videoGamesForDeveloper: aString [
 
 	^ self videoGamesCollectibles select:[ :c | c developer = aString ]
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> videoGamesForPlatform: aString [
 
 	^ self videoGamesCollectibles select:[ :c | c platform = aString ]
 ]
 
-{ #category : #'collectibles - query' }
+{ #category : 'collectibles - query' }
 GameyeCollection >> videoGamesForPublisher: aString [
 
 	^ self videoGamesCollectibles select:[ :c | c publisher = aString ]
 ]
 
-{ #category : #'collectibles - query - ownership' }
+{ #category : 'collectibles - query - ownership' }
 GameyeCollection >> videoGamesOwnership: aGameyeOwnership [
 
 	^ self videoGamesCollectibles select:[ :c | c ownership = aGameyeOwnership ]
 ]
 
-{ #category : #statistics }
+{ #category : 'statistics' }
 GameyeCollection >> yourPrice [
 	"Return price estimation (your price) of all the collectibles"
 	| price |

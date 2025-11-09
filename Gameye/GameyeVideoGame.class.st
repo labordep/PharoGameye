@@ -1,90 +1,96 @@
 Class {
-	#name : #GameyeVideoGame,
-	#superclass : #GameyeCollectible,
+	#name : 'GameyeVideoGame',
+	#superclass : 'GameyeCollectible',
 	#instVars : [
 		'publisher',
 		'developer',
 		'playedCompletion',
 		'isBeat'
 	],
-	#category : #'Gameye-Model'
+	#category : 'Gameye-Model',
+	#package : 'Gameye',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame class >> type [
 
 	^ #VideoGame
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> developer [
 
 	^ developer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> developer: anObject [
 
 	developer := anObject
 ]
 
-{ #category : #'testing - ownership' }
+{ #category : 'testing - ownership' }
 GameyeVideoGame >> haveBox [
 
 	self isDigital ifTrue: [ ^ false ].
 	^ super haveBox
 ]
 
-{ #category : #'testing - ownership' }
+{ #category : 'testing - ownership' }
 GameyeVideoGame >> haveGame [
 
 	^self isLoose or:[self isLoosePlus or:[self isBoxed or:[self isBoxedPlus or:[self isCIB or:[self isCIBPlus or:[self isDigital or:[self isSealed ]]]]]]]
 ]
 
-{ #category : #'testing - ownership' }
+{ #category : 'testing - ownership' }
 GameyeVideoGame >> haveManual [
 
 	self isDigital ifTrue: [ ^ false ].
 	^ super haveManual
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> isBeat [
 
+	self deprecated: 'removed since 5.05'.
 	^ isBeat ifNil:[ isBeat := false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> isBeat: anObject [
 
+	self deprecated: 'removed since 5.05'.
 	isBeat := anObject
 ]
 
-{ #category : #'testing - ownership' }
+{ #category : 'testing - ownership' }
 GameyeVideoGame >> isDigital [
 
 	^ self ownership = GameyeOwnership digital
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 GameyeVideoGame >> isVideoGame [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> playedCompletion [
 
+	self deprecated: 'removed since 5.05'.
 	^ playedCompletion
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> playedCompletion: anObject [
 
+	self deprecated: 'removed since 5.05'.
 	playedCompletion := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 GameyeVideoGame >> printIdentifierOn: aStream [
 
 	super printIdentifierOn: aStream.
@@ -95,13 +101,13 @@ GameyeVideoGame >> printIdentifierOn: aStream [
 		nextPutAll: (self publisher ifNil:[ '' ])
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> publisher [
 
 	^ publisher
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GameyeVideoGame >> publisher: anObject [
 
 	publisher := anObject
